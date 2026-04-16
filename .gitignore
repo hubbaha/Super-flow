@@ -10,6 +10,9 @@ dist/
 .env.*
 !.env.example
 
+# Local Prisma SQLite dev db (no longer used; kept for reference only)
+backend/prisma/dev.db
+
 *.log
 .DS_Store
 Thumbs.db
