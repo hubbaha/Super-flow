@@ -6,8 +6,6 @@ function getApiBase() {
     return envBase;
   }
 
-  // Default to same-domain Next.js API routes.
-  // Set NEXT_PUBLIC_API_BASE_URL if you host the backend separately.
   return "/api";
 }
 

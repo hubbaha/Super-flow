@@ -1,6 +1,8 @@
 import { CategoryFilterGrid } from "@/components/CategoryFilterGrid";
-import { getCategories } from "@/lib/api";
+import { getCategoriesData } from "@/lib/catalog";
 import { siteAssets } from "@/lib/site-assets";
+
+export const dynamic = "force-dynamic";
 
 type Props = {
   searchParams: Promise<{
@@ -10,7 +12,7 @@ type Props = {
 
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
-  const categories = await getCategories();
+  const categories = await getCategoriesData();
   const initialQuery = params.search ?? "";
   const categoryItems = categories.map((category) => ({
     id: category.id,

@@ -1,7 +1,10 @@
 import { DataTable } from "@/components/DataTable";
 import { InquiryForm } from "@/components/InquiryForm";
 import { SpecTable } from "@/components/SpecTable";
-import { getProduct } from "@/lib/api";
+import { getProductData } from "@/lib/catalog";
+import { notFound } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 export default async function ProductDetailPage({
   params,
@@ -9,7 +12,10 @@ export default async function ProductDetailPage({
   params: Promise<{ category: string; slug: string }>;
 }) {
   const { category, slug } = await params;
-  const product = await getProduct(category, slug);
+  const product = await getProductData(category, slug);
+  if (!product) {
+    notFound();
+  }
 
   return (
     <section className="grid gap-8 lg:grid-cols-[2fr_1fr]">

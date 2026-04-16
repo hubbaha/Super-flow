@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Product } from "@/lib/types";
 
+type ProductCardProduct = Pick<Product, "id" | "name" | "slug" | "description" | "category">;
+
 type Props = {
-  product: Product;
+  product: ProductCardProduct;
 };
 
 export function ProductCard({ product }: Props) {

@@ -1,5 +1,8 @@
 import { ProductCard } from "@/components/ProductCard";
-import { getCategoryProducts } from "@/lib/api";
+import { getCategoryProductsData } from "@/lib/catalog";
+import { notFound } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 export default async function CategoryPage({
   params,
@@ -7,7 +10,10 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const data = await getCategoryProducts(slug);
+  const data = await getCategoryProductsData(slug);
+  if (!data) {
+    notFound();
+  }
 
   return (
     <section className="space-y-8">

@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { HeroSection } from "@/components/HeroSection";
 import { CategoryFilterGrid } from "@/components/CategoryFilterGrid";
-import { getCategories } from "@/lib/api";
+import { getCategoriesData } from "@/lib/catalog";
 import { homeSections, siteAssets } from "@/lib/site-assets";
+import type { Category } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
 
 const categoryImageFallback = "/images/carousel/hero-01.jpg";
 
 export default async function HomePage() {
-  const categories = await getCategories();
+  const categories = await getCategoriesData();
 
   const processSteps = [
     {
@@ -57,7 +60,7 @@ export default async function HomePage() {
     },
   ];
 
-  const categoryItems = categories.map((category) => ({
+  const categoryItems = categories.map((category: Category) => ({
     id: category.id,
     href: `/categories/${category.slug}`,
     title: category.name,
