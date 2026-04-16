@@ -9,8 +9,14 @@ export const siteAssets = {
   ],
   categories: {
     "pvc-pipes": "/images/categories/pvc-pipes.jpg",
-    "pvc-fittings": "/images/categories/pvc-fittings.jpg",
+    "pvc-fittings": "/images/categories/pvc-fitting.jpg",
     valves: "/images/categories/pvc-valves.jpg",
+  },
+  sections: {
+    aboutCompany: "/images/sections/about-company.jpg",
+    industries: "/images/sections/industries.jpg",
+    innovation: "/images/sections/innovation.jpg",
+    trustPartnership: "/images/sections/trust-partnership.jpg",
   },
 } as const;
 

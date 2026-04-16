@@ -30,22 +30,47 @@ export function InquiryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 rounded-lg border border-slate-200 bg-white p-5">
-      <h3 className="text-lg font-semibold text-slate-900">Request A Quote</h3>
-      <input name="name" placeholder="Name" required className="w-full rounded border border-slate-300 px-3 py-2 text-sm" />
-      <input name="email" type="email" placeholder="Email" required className="w-full rounded border border-slate-300 px-3 py-2 text-sm" />
-      <select name="buyerType" required className="w-full rounded border border-slate-300 px-3 py-2 text-sm">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+    >
+      <h3 className="text-xl font-semibold text-slate-900">Request a Quote</h3>
+      <p className="text-sm text-slate-600">Share your requirement and our technical team will contact you.</p>
+      <input
+        name="name"
+        placeholder="Full Name"
+        required
+        className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+      />
+      <input
+        name="email"
+        type="email"
+        placeholder="Business Email"
+        required
+        className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+      />
+      <select
+        name="buyerType"
+        required
+        className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+      >
         <option value="">Select buyer type</option>
         <option value="Distributor">Distributor</option>
         <option value="Contractor">Contractor</option>
         <option value="Manufacturer">Manufacturer</option>
         <option value="Other">Other</option>
       </select>
-      <textarea name="message" placeholder="Message" rows={4} required className="w-full rounded border border-slate-300 px-3 py-2 text-sm" />
+      <textarea
+        name="message"
+        placeholder="Message"
+        rows={4}
+        required
+        className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+      />
       <button
         disabled={loading}
         type="submit"
-        className="rounded bg-orange-600 px-4 py-2 text-sm font-medium text-white hover:bg-orange-500 disabled:opacity-60"
+        className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500 disabled:opacity-60"
       >
         {loading ? "Submitting..." : "Submit Inquiry"}
       </button>

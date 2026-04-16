@@ -1,9 +1,23 @@
 import { Category, Inquiry, Product, Specification, TechnicalTable } from "./types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000/api";
+function getApiBase() {
+  const envBase = process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (envBase) {
+    return envBase;
+  }
+
+  // On local development, keep current DX without requiring env setup.
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:4000/api";
+  }
+
+  // In production (e.g. Vercel), default to same-domain API path.
+  // Set NEXT_PUBLIC_API_BASE_URL to your backend URL if deployed separately.
+  return "/api";
+}
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await fetch(`${getApiBase()}${path}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",
