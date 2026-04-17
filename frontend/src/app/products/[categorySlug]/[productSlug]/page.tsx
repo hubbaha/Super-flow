@@ -9,10 +9,10 @@ export const dynamic = "force-dynamic";
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ category: string; slug: string }>;
+  params: Promise<{ categorySlug: string; productSlug: string }>;
 }) {
-  const { category, slug } = await params;
-  const product = await getProductData(category, slug);
+  const { categorySlug, productSlug } = await params;
+  const product = await getProductData(categorySlug, productSlug);
   if (!product) {
     notFound();
   }

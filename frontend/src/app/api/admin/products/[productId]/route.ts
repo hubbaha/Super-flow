@@ -19,13 +19,13 @@ type UpsertProductInput = {
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ productId: string }> },
 ) {
   const admin = verifyAdminToken(req.headers.get("authorization"));
   if (!admin) return Response.json({ message: "Invalid token" }, { status: 401 });
 
-  const { id: idParam } = await params;
-  const id = Number(idParam);
+  const { productId } = await params;
+  const id = Number(productId);
   if (!Number.isFinite(id) || id <= 0) {
     return Response.json({ message: "Invalid product id" }, { status: 400 });
   }
@@ -70,13 +70,13 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ productId: string }> },
 ) {
   const admin = verifyAdminToken(req.headers.get("authorization"));
   if (!admin) return Response.json({ message: "Invalid token" }, { status: 401 });
 
-  const { id: idParam } = await params;
-  const id = Number(idParam);
+  const { productId } = await params;
+  const id = Number(productId);
   if (!Number.isFinite(id) || id <= 0) {
     return Response.json({ message: "Invalid product id" }, { status: 400 });
   }

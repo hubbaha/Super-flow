@@ -5,13 +5,13 @@ export const runtime = "nodejs";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: Promise<{ category: string; slug: string }> },
+  { params }: { params: Promise<{ categorySlug: string; productSlug: string }> },
 ) {
-  const { category, slug } = await params;
+  const { categorySlug, productSlug } = await params;
   const product = await prisma.product.findFirst({
     where: {
-      slug,
-      category: { slug: category },
+      slug: productSlug,
+      category: { slug: categorySlug },
     },
     include: {
       category: true,
