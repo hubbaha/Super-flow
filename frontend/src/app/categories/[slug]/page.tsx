@@ -189,11 +189,11 @@ export default async function CategoryPage({
                           <img
                             src={product.image}
                             alt={product.name}
-                            className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         </div>
                       ) : (
-                        <div className="flex h-44 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+                        <div className="flex h-90 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
                           <svg
                             className="h-10 w-10 text-slate-300"
                             fill="none"

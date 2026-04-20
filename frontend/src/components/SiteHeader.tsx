@@ -247,33 +247,48 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
         </div>
 
         {/* Mobile nav */}
-        {mobileMenuOpen && (
-          <nav className="border-t border-slate-100 bg-white px-4 py-3 lg:hidden">
-            <div className="flex flex-col gap-1">
-              <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`sf-mobile-link ${pathname === "/" ? "active" : ""}`}>Home</Link>
+{mobileMenuOpen && (
+  <nav className="border-t border-slate-100 bg-white px-4 py-3 lg:hidden">
+    <div className="flex flex-col gap-1">
+      <Link
+        href="/"
+        onClick={() => setMobileMenuOpen(false)}
+        className={`sf-mobile-link ${pathname === "/" ? "active" : ""}`}
+      >
+        Home
+      </Link>
 
-              <div className="rounded-lg border border-slate-100">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between px-3 py-2 text-left text-sm font-medium text-slate-700"
-                  onClick={() => setMobileProductsOpen(v => !v)}
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
-                  Products
-                  <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d={mobileProductsOpen ? "M2 8l4-4 4 4" : "M2 4l4 4 4-4"}/>
-                  </svg>
-                </button>
-                {mobileProductsOpen && (
-                  <div className="border-t border-slate-100 p-2 space-y-1">
-                    {productDropdownItems.map(item => (
-                      <Link key={item.href} href={item.href} onClick={() => { setMobileMenuOpen(false); setMobileProductsOpen(false); }} className="sf-mobile-link">
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+      <div className="rounded-lg border border-slate-100">
+        <button
+          type="button"
+          className="flex w-full items-center justify-between px-3 py-2 text-left text-sm font-medium text-slate-700"
+          onClick={() => setMobileProductsOpen((v) => !v)}
+          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+        >
+          Products
+          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d={mobileProductsOpen ? "M2 8l4-4 4 4" : "M2 4l4 4 4-4"} />
+          </svg>
+        </button>
+
+        {mobileProductsOpen && (
+          <div className="border-t border-slate-100 p-2 space-y-1">
+            {productDropdownItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setMobileProductsOpen(false);
+                }}
+                className="sf-mobile-link block"
+              >
+                {item.label}  
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
 
               <Link href="/e-catalog" onClick={() => setMobileMenuOpen(false)} className={`sf-mobile-link ${pathname.startsWith("/e-catalog") ? "active" : ""}`}>E-catalog</Link>
               <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className={`sf-mobile-link ${pathname.startsWith("/contact-us") ? "active" : ""}`}>Contact Us</Link>

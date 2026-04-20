@@ -105,7 +105,7 @@ export default async function ProductsPage({ searchParams }: Props) {
           </div>
         </div>
 
-        {/* Tag Filter */}
+        {/* Tag Filter
         {allTags.length ? (
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
@@ -126,7 +126,7 @@ export default async function ProductsPage({ searchParams }: Props) {
               ))}
             </div>
           </div>
-        ) : null}
+        ) : null} */}
 
         {/* Results */}
         <div className="space-y-5">
@@ -152,7 +152,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                   ) : (

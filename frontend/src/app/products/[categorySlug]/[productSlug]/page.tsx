@@ -38,7 +38,7 @@ export default async function ProductDetailPage({
                   <img
                     src={referenceProduct.image}
                     alt={referenceProduct.name}
-                    className="h-80 w-full object-cover transition-transform duration-700 hover:scale-105"
+                    className="h-140 w-full object-cover transition-transform duration-700 hover:scale-105"
                   />
                 </div>
               ) : (
