@@ -22,7 +22,7 @@ export function CategoryCard({ href, title, image, count }: Props) {
       </div>
       <div className="space-y-2 p-5">
         <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-        <p className="text-sm text-slate-600">{count ?? 0} products available</p>
+       
       </div>
     </Link>
   );

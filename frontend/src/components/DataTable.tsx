@@ -1,6 +1,14 @@
 import { TechnicalTable } from "@/lib/types";
 
 export function DataTable({ rows }: { rows: TechnicalTable[] }) {
+  if (!rows.length) {
+    return (
+      <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-sm text-slate-600">
+        No size table data available.
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
       <table className="w-full text-left text-sm">

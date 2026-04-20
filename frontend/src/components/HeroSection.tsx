@@ -8,7 +8,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.2),_transparent_45%)]" />
       <div className="relative grid gap-8 md:grid-cols-2 md:items-center">
         <div className="space-y-6">
-          <p className="inline-flex rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-100">
+          <p className="inline-block rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-300">
             Industrial Flow Solutions
           </p>
           <h1 className="text-4xl font-bold tracking-tight md:text-6xl">

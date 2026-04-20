@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { HeroSection } from "@/components/HeroSection";
-import { CategoryFilterGrid } from "@/components/CategoryFilterGrid";
+import { CategoryCard } from "@/components/CategoryCard";
 import { getCategoriesData } from "@/lib/catalog";
 import { homeSections, siteAssets } from "@/lib/site-assets";
 import type { Category } from "@/lib/types";
+import { preferredCategories } from "@/lib/category-config";
 
 export const dynamic = "force-dynamic";
 
@@ -69,6 +70,17 @@ export default async function HomePage() {
       categoryImageFallback,
     count: category._count?.products,
   }));
+  const homeCategoryItems = categoryItems.length
+    ? categoryItems.slice(0, 3)
+    : preferredCategories.slice(0, 3).map((category, index) => ({
+        id: index + 1,
+        href: `/categories/${category.slug}`,
+        title: category.name,
+        image:
+          siteAssets.categories[category.slug as keyof typeof siteAssets.categories] ??
+          categoryImageFallback,
+        count: 0,
+      }));
 
   const stats = [
     { value: "1992", label: "Founded", accent: "#f97316" },
@@ -334,9 +346,25 @@ export default async function HomePage() {
         <section className="sf-reveal space-y-6">
           <div>
             <div className="sf-badge-blue mb-3"><span className="sf-dot sf-dot-blue" />Product Categories</div>
-            <h2 className="sf-serif text-4xl font-bold text-slate-900">Explore Our Industrial Range</h2>
+            <h2 className="sf-serif text-4xl font-bold text-slate-900">Product Range Categories</h2>
           </div>
-          <CategoryFilterGrid items={categoryItems} emptyMessage="No category found. Try another keyword." />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {homeCategoryItems.map((category) => (
+              <CategoryCard
+                key={category.id}
+                href={category.href}
+                title={category.title}
+                image={category.image}
+                count={category.count}
+              />
+            ))}
+          </div>
+          <div>
+            <Link href="/products" className="sf-btn-orange">
+              Explore All Categories
+              <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </Link>
+          </div>
         </section>
 
         {/* Process */}

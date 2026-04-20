@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { siteAssets } from "@/lib/site-assets";
 
-export function SiteFooter() {
+type FooterCategory = {
+  slug: string;
+  name: string;
+};
+
+export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
   return (
     <>
       <style>{`
@@ -103,7 +108,7 @@ export function SiteFooter() {
               <div className="flex items-center gap-3 mb-4">
                 <img src={siteAssets.logo} alt="Super flow logo" className="h-10 w-auto" />
                 <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'white', letterSpacing: '-0.02em' }}>
-                  Super<span style={{ color: '#f97316' }}>flow</span>
+                  Superflow
                 </span>
               </div>
               <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.7, maxWidth: '220px' }}>
@@ -140,14 +145,14 @@ export function SiteFooter() {
             <div>
               <p className="sf-footer-heading">Products</p>
               <div className="flex flex-col gap-3">
-                {[
-                  { href: "/categories/pvc-pipes", label: "PVC Pipes" },
-                  { href: "/categories/pvc-fittings", label: "PVC Fittings" },
-                  { href: "/categories/valves", label: "PVC Valves" },
-                  { href: "/categories/cpvc-pipes", label: "CPVC Pipes" },
-                  { href: "/categories/industrial-valves", label: "Industrial Valves" },
-                ].map(link => (
-                  <Link key={link.href} href={link.href} className="sf-footer-link">{link.label}</Link>
+                {categories.map((category) => (
+                  <Link
+                    key={category.slug}
+                    href={`/categories/${category.slug}`}
+                    className="sf-footer-link"
+                  >
+                    {category.name}
+                  </Link>
                 ))}
               </div>
             </div>

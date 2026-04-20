@@ -5,21 +5,22 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { siteAssets } from "@/lib/site-assets";
 
-const productDropdownItems = [
-  { href: "/categories/pvc-pipes", label: "PVC Pipe" },
-  { href: "/categories/pvc-fittings", label: "PVC Fitting" },
-  { href: "/categories/valves", label: "PVC Valve" },
-  { href: "/categories/cpvc-pipes", label: "CPVC Pipe" },
-  { href: "/categories/industrial-valves", label: "Industrial Valves" },
-] as const;
+type HeaderCategory = {
+  slug: string;
+  name: string;
+};
 
-export function SiteHeader() {
+export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const pathname = usePathname();
   const router = useRouter();
+  const productDropdownItems = categories.map((category) => ({
+    href: `/categories/${category.slug}`,
+    label: category.name,
+  }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -78,7 +79,7 @@ export function SiteHeader() {
           visibility: hidden;
           opacity: 0;
           position: absolute;
-          left: 0; top: calc(100% + 10px);
+          left: 0; top: calc(100% + 4px);
           width: 220px;
           background: white;
           border: 1px solid #e2e8f0;
@@ -196,11 +197,11 @@ export function SiteHeader() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 no-underline">
             <img src={siteAssets.logo} alt="Super flow logo" className="h-16 w-auto" />
-            <span className="sf-logo-text">Super<span>flow</span></span>
+            <span className="sf-logo-text">Superflow</span>
           </Link>
 
-          {/* Mobile menu toggle */}
-          <button className="sf-menu-btn inline-flex md:hidden" onClick={() => setMobileMenuOpen(v => !v)} aria-label="Toggle menu">
+          {/* Mobile/tablet menu toggle */}
+          <button className="sf-menu-btn inline-flex lg:hidden" onClick={() => setMobileMenuOpen(v => !v)} aria-label="Toggle menu">
             <svg viewBox="0 0 18 18" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
               {mobileMenuOpen
                 ? <><path d="M3 3l12 12M15 3L3 15"/></>
@@ -210,7 +211,7 @@ export function SiteHeader() {
           </button>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             <Link href="/" className={`sf-nav-link ${pathname === "/" ? "active" : ""}`}>Home</Link>
 
             <div className="sf-products-wrap relative">
@@ -247,7 +248,7 @@ export function SiteHeader() {
 
         {/* Mobile nav */}
         {mobileMenuOpen && (
-          <nav className="border-t border-slate-100 bg-white px-4 py-3 md:hidden">
+          <nav className="border-t border-slate-100 bg-white px-4 py-3 lg:hidden">
             <div className="flex flex-col gap-1">
               <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`sf-mobile-link ${pathname === "/" ? "active" : ""}`}>Home</Link>
 
