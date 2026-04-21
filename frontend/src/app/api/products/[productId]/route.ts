@@ -6,8 +6,12 @@ import { verifyAdminToken } from "@/lib/adminAuth";
 export const runtime = "nodejs";
 
 type SpecsInput = { key: string; value: string };
-type TablesInput = { size: string; diameter: string; thickness: string; od_mm: string; weight_kg: string };
-
+type TablesInput = {
+  size?: string;
+  od_mm?: string;
+  weight_kg?: string;
+  diameter?: string; // fallback only
+};
 type UpsertProductInput = {
   name: string;
   description: string;
@@ -41,15 +45,19 @@ export async function PUT(
   { params }: { params: Promise<{ productId: string }> },
 ) {
   const admin = verifyAdminToken(req.headers.get("authorization"));
-  if (!admin) return Response.json({ message: "Invalid token" }, { status: 401 });
+  if (!admin) {
+    return Response.json({ message: "Invalid token" }, { status: 401 });
+  }
 
   const { productId } = await params;
   const id = Number(productId);
+
   if (!Number.isFinite(id) || id <= 0) {
     return Response.json({ message: "Invalid product id" }, { status: 400 });
   }
 
   const body = (await req.json().catch(() => null)) as UpsertProductInput | null;
+
   if (
     !body ||
     typeof body.name !== "string" ||
@@ -61,8 +69,14 @@ export async function PUT(
     return Response.json({ message: "Invalid request body" }, { status: 400 });
   }
 
-  await prisma.specification.deleteMany({ where: { productId: id } });
-  await prisma.technicalTable.deleteMany({ where: { productId: id } });
+  // ✅ Normalize + map tables (CORE FIX)
+  const validTables = body.tables
+    .map((t) => ({
+      size: t.size?.trim() || "",
+      od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
+      weight_kg: (t.weight_kg ?? "").toString().trim(),
+    }))
+    .filter((t) => t.size); // remove empty rows
 
   const updated = await prisma.product.update({
     where: { id },
@@ -72,13 +86,20 @@ export async function PUT(
       description: body.description,
       image: body.image ?? null,
       categoryId: Number(body.categoryId),
-      specs: { create: body.specs.map((s) => ({ key: s.key, value: s.value })) },
-      tables: {
-        create: body.tables.map((t) => ({
-          size: t.size,
-          od_mm: t.od_mm ?? t.diameter ?? "",     // ✅ map correctly
-          weight_kg: t.weight_kg ?? "",           // ✅ required field
+
+      // ✅ Replace specs safely
+      specs: {
+        deleteMany: {},
+        create: body.specs.map((s) => ({
+          key: s.key,
+          value: s.value,
         })),
+      },
+
+      // ✅ Replace tables safely
+      tables: {
+        deleteMany: {},
+        create: validTables,
       },
     },
     include: { category: true, specs: true, tables: true },
