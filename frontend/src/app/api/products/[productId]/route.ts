@@ -76,10 +76,8 @@ export async function PUT(
       tables: {
         create: body.tables.map((t) => ({
           size: t.size,
-          diameter: t.diameter,
-          thickness: t.thickness,
-          od_mm: t.od_mm,
-          weight_kg: t.weight_kg,
+          od_mm: t.od_mm ?? t.diameter ?? "",     // ✅ map correctly
+          weight_kg: t.weight_kg ?? "",           // ✅ required field
         })),
       },
     },
