@@ -6,7 +6,7 @@ import { verifyAdminToken } from "@/lib/adminAuth";
 export const runtime = "nodejs";
 
 type SpecsInput = { key: string; value: string };
-type TablesInput = { size: string; diameter: string; thickness: string };
+type TablesInput = { size: string; diameter: string; thickness: string; od_mm: string; weight_kg: string };
 
 type UpsertProductInput = {
   name: string;
@@ -78,6 +78,8 @@ export async function PUT(
           size: t.size,
           diameter: t.diameter,
           thickness: t.thickness,
+          od_mm: t.od_mm,
+          weight_kg: t.weight_kg,
         })),
       },
     },
