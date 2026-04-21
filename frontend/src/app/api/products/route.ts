@@ -6,7 +6,12 @@ import { verifyAdminToken } from "@/lib/adminAuth";
 export const runtime = "nodejs";
 
 type SpecsInput = { key: string; value: string };
-type TablesInput = { size: string; diameter: string; thickness: string };
+type TablesInput = {
+  size?: string;
+  od_mm?: string;
+  weight_kg?: string;
+  diameter?: string; // fallback only
+};
 
 type CreateProductInput = {
   name: string;
@@ -56,9 +61,9 @@ export async function POST(req: NextRequest) {
       specs: { create: body.specs.map((s) => ({ key: s.key, value: s.value })) },
       tables: {
         create: body.tables.map((t) => ({
-          size: t.size,
-          diameter: t.diameter,
-          thickness: t.thickness,
+          size: t.size?.trim() || "",
+          od_mm: t.od_mm ?? t.diameter ?? "",
+          weight_kg: t.weight_kg ?? "",
         })),
       },
     },
