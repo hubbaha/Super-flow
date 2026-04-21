@@ -145,7 +145,6 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
         }
         .sf-search-btn:hover { background: #f97316; }
 
-        /* orange top stripe */
         .sf-header-bar {
           height: 3px;
           background: linear-gradient(90deg, #f97316, #fb923c, #2563eb);
@@ -201,7 +200,11 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
           </Link>
 
           {/* Mobile/tablet menu toggle */}
-          <button className="sf-menu-btn inline-flex lg:hidden" onClick={() => setMobileMenuOpen(v => !v)} aria-label="Toggle menu">
+          <button
+            className="sf-menu-btn inline-flex lg:hidden"
+            onClick={() => setMobileMenuOpen(v => !v)}
+            aria-label="Toggle menu"
+          >
             <svg viewBox="0 0 18 18" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
               {mobileMenuOpen
                 ? <><path d="M3 3l12 12M15 3L3 15"/></>
@@ -247,51 +250,72 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
         </div>
 
         {/* Mobile nav */}
-{mobileMenuOpen && (
-  <nav className="border-t border-slate-100 bg-white px-4 py-3 lg:hidden">
-    <div className="flex flex-col gap-1">
-      <Link
-        href="/"
-        onClick={() => setMobileMenuOpen(false)}
-        className={`sf-mobile-link ${pathname === "/" ? "active" : ""}`}
-      >
-        Home
-      </Link>
-
-      <div className="rounded-lg border border-slate-100">
-        <button
-          type="button"
-          className="flex w-full items-center justify-between px-3 py-2 text-left text-sm font-medium text-slate-700"
-          onClick={() => setMobileProductsOpen((v) => !v)}
-          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-        >
-          Products
-          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d={mobileProductsOpen ? "M2 8l4-4 4 4" : "M2 4l4 4 4-4"} />
-          </svg>
-        </button>
-
-        {mobileProductsOpen && (
-          <div className="border-t border-slate-100 p-2 space-y-1">
-            {productDropdownItems.map((item) => (
+        {mobileMenuOpen && (
+          <nav className="border-t border-slate-100 bg-white px-4 py-3 lg:hidden">
+            <div className="flex flex-col gap-1">
               <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setMobileProductsOpen(false);
-                }}
-                className="sf-mobile-link block"
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`sf-mobile-link ${pathname === "/" ? "active" : ""}`}
               >
-                {item.label}  
+                Home
               </Link>
-            ))}
-          </div>
-        )}
-      </div>
 
-              <Link href="/e-catalog" onClick={() => setMobileMenuOpen(false)} className={`sf-mobile-link ${pathname.startsWith("/e-catalog") ? "active" : ""}`}>E-catalog</Link>
-              <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className={`sf-mobile-link ${pathname.startsWith("/contact-us") ? "active" : ""}`}>Contact Us</Link>
+              {/* Products row: link + chevron separated */}
+              <div className="rounded-lg border border-slate-100">
+                <div className="flex items-center justify-between">
+                  <Link
+                    href="/products"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`sf-mobile-link flex-1 ${isProductsSection ? "active" : ""}`}
+                  >
+                    Products
+                  </Link>
+                  <button
+                    type="button"
+                    className="px-3 py-2 text-slate-500 hover:text-orange-500 transition-colors"
+                    onClick={() => setMobileProductsOpen((v) => !v)}
+                    aria-label="Toggle products menu"
+                  >
+                    <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d={mobileProductsOpen ? "M2 8l4-4 4 4" : "M2 4l4 4 4-4"} />
+                    </svg>
+                  </button>
+                </div>
+
+                {mobileProductsOpen && (
+                  <div className="border-t border-slate-100 p-2 space-y-1">
+                    {productDropdownItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          setMobileProductsOpen(false);
+                        }}
+                        className="sf-mobile-link block"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <Link
+                href="/e-catalog"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`sf-mobile-link ${pathname.startsWith("/e-catalog") ? "active" : ""}`}
+              >
+                E-catalog
+              </Link>
+              <Link
+                href="/contact-us"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`sf-mobile-link ${pathname.startsWith("/contact-us") ? "active" : ""}`}
+              >
+                Contact Us
+              </Link>
 
               <form onSubmit={handleSearchSubmit} className="mt-2 flex gap-2">
                 <input
@@ -302,7 +326,9 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
                   className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-orange-400"
                   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                 />
-                <button type="submit" className="sf-search-btn rounded-lg px-4 py-2 text-sm">Search</button>
+                <button type="submit" className="sf-search-btn rounded-lg px-4 py-2 text-sm">
+                  Search
+                </button>
               </form>
             </div>
           </nav>

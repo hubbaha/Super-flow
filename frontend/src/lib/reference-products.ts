@@ -7,11 +7,8 @@ export type ReferenceSpec = {
   value: string;
 };
 
-export type ReferenceTableRow = {
-  size: string;
-  diameter: string;
-  thickness: string;
-};
+// Flexible — any string keys
+export type ReferenceTableRow = Record<string, string>;
 
 export type ReferenceProduct = {
   categorySlug: string;
@@ -58,17 +55,22 @@ function normalizeTables(input: unknown): ReferenceTableRow[] {
         return null;
       }
       const item = row as Record<string, unknown>;
-      const size = typeof item.size === "string" ? item.size.trim() : "";
-      const diameter = typeof item.diameter === "string" ? item.diameter.trim() : "";
-      const thickness = typeof item.thickness === "string" ? item.thickness.trim() : "";
-      if (!size && !diameter && !thickness) {
+
+      // Convert all string values dynamically — no hardcoded columns
+      const normalized: ReferenceTableRow = {};
+      for (const [key, value] of Object.entries(item)) {
+        if (typeof value === "string" && value.trim()) {
+          normalized[key] = value.trim();
+        } else if (typeof value === "number") {
+          normalized[key] = String(value);
+        }
+      }
+
+      if (Object.keys(normalized).length === 0) {
         return null;
       }
-      return {
-        size: size || "-",
-        diameter: diameter || "-",
-        thickness: thickness || "-",
-      };
+
+      return normalized;
     })
     .filter((row): row is ReferenceTableRow => row !== null);
 }
@@ -88,11 +90,7 @@ function deriveTablesFromSpecs(specs: ReferenceSpec[]): ReferenceTableRow[] {
     return [];
   }
 
-  return sizes.map((size) => ({
-    size,
-    diameter: "-",
-    thickness: "-",
-  }));
+  return sizes.map((size) => ({ size }));
 }
 
 function normalizeProduct(
@@ -133,7 +131,10 @@ function normalizeProduct(
           typeof (spec as ReferenceSpec).value === "string",
       )
     : normalizeSpecs(item.specifications);
-  const tables = normalizeTables(item.tables);
+
+  // Use size_table from JSON first, then fallback to tables, then derive from specs
+  const rawTables = item.size_table ?? item.tables;
+  const tables = normalizeTables(rawTables);
   const normalizedTables = tables.length ? tables : deriveTablesFromSpecs(specs);
 
   return {
@@ -160,10 +161,6 @@ const readReferenceProducts = cache(async (): Promise<ReferenceProduct[]> => {
 
     const parsed = JSON.parse(fileContent) as unknown;
 
-    // Supports:
-    // 1) flat array of products
-    // 2) single category object { slug, products: [] }
-    // 3) array of category objects [{ slug, products: [] }, ...]
     if (Array.isArray(parsed)) {
       const flatProducts = parsed
         .map((item) =>

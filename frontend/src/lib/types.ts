@@ -15,9 +15,8 @@ export type Specification = {
 
 export type TechnicalTable = {
   id?: number;
-  size: string;
-  diameter: string;
-  thickness: string;
+  productId?: number;
+  [key: string]: string | number | undefined;
 };
 
 export type Product = {

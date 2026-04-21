@@ -1,17 +1,20 @@
 import Link from "next/link";
 import { HeroSection } from "@/components/HeroSection";
 import { CategoryCard } from "@/components/CategoryCard";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { getCategoriesData } from "@/lib/catalog";
+import { getReferenceProducts } from "@/lib/reference-products";
 import { homeSections, siteAssets } from "@/lib/site-assets";
 import type { Category } from "@/lib/types";
 import { preferredCategories } from "@/lib/category-config";
 
 export const dynamic = "force-dynamic";
 
-const categoryImageFallback = "/images/carousel/hero-01.jpg";
+const categoryImageFallback = "/images/categories/pvc-valve.jpg";
 
 export default async function HomePage() {
   const categories = await getCategoriesData();
+  const referenceProducts = await getReferenceProducts();
 
   const processSteps = [
     {
@@ -68,8 +71,11 @@ export default async function HomePage() {
     image:
       siteAssets.categories[category.slug as keyof typeof siteAssets.categories] ??
       categoryImageFallback,
-    count: category._count?.products,
+    // ← Count from JSON reference products instead of database
+    count: referenceProducts.filter((p) => p.categorySlug === category.slug).length,
   }));
+
+  // Only show first 3 categories on homepage
   const homeCategoryItems = categoryItems.length
     ? categoryItems.slice(0, 3)
     : preferredCategories.slice(0, 3).map((category, index) => ({
@@ -79,7 +85,7 @@ export default async function HomePage() {
         image:
           siteAssets.categories[category.slug as keyof typeof siteAssets.categories] ??
           categoryImageFallback,
-        count: 0,
+        count: referenceProducts.filter((p) => p.categorySlug === category.slug).length,
       }));
 
   const stats = [
@@ -91,6 +97,8 @@ export default async function HomePage() {
 
   return (
     <>
+      <ScrollReveal />
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap');
 
@@ -116,7 +124,6 @@ export default async function HomePage() {
         .sf-delay-3 { animation-delay: 0.24s; }
         .sf-delay-4 { animation-delay: 0.32s; }
 
-        /* Scroll reveal */
         .sf-reveal {
           opacity: 0;
           transform: translateY(22px);
@@ -124,7 +131,6 @@ export default async function HomePage() {
         }
         .sf-reveal.sf-visible { opacity: 1; transform: translateY(0); }
 
-        /* Badge */
         .sf-badge-orange {
           display: inline-flex; align-items: center; gap: 7px;
           background: #fff7ed; border: 1px solid #fed7aa;
@@ -156,7 +162,6 @@ export default async function HomePage() {
         .sf-dot-orange::after { border: 1.5px solid #f97316; }
         .sf-dot-blue::after   { border: 1.5px solid #2563eb; }
 
-        /* Stat card */
         .sf-stat {
           transition: all 0.25s cubic-bezier(.22,1,.36,1);
           cursor: default;
@@ -178,7 +183,6 @@ export default async function HomePage() {
         }
         .sf-stat:hover .sf-stat-label { color: #64748b !important; }
 
-        /* Card */
         .sf-card {
           transition: transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s ease;
         }
@@ -187,12 +191,10 @@ export default async function HomePage() {
           box-shadow: 0 18px 44px -8px rgba(0,0,0,0.12);
         }
 
-        /* Image zoom */
         .sf-img-wrap { overflow: hidden; border-radius: 10px; }
         .sf-img-wrap img { transition: transform 0.5s cubic-bezier(.22,1,.36,1); }
         .sf-img-wrap:hover img { transform: scale(1.05); }
 
-        /* Process step */
         .sf-process-step {
           transition: all 0.3s cubic-bezier(.22,1,.36,1);
           cursor: default;
@@ -203,9 +205,7 @@ export default async function HomePage() {
           transform: translateY(-5px) scale(1.01);
           border-color: rgba(255,255,255,0.3) !important;
         }
-        .sf-process-step:hover .sf-step-icon {
-          transform: rotate(-8deg) scale(1.15);
-        }
+        .sf-process-step:hover .sf-step-icon { transform: rotate(-8deg) scale(1.15); }
         .sf-step-icon { transition: transform 0.3s ease; }
         .sf-step-number {
           font-family: 'Fraunces', serif;
@@ -215,7 +215,6 @@ export default async function HomePage() {
           color: white; pointer-events: none;
         }
 
-        /* Service card */
         .sf-service-card {
           transition: all 0.3s cubic-bezier(.22,1,.36,1);
           position: relative; overflow: hidden;
@@ -236,7 +235,6 @@ export default async function HomePage() {
         }
         .sf-service-icon { transition: all 0.3s cubic-bezier(.22,1,.36,1); }
 
-        /* alternating orange/blue service bottom bars */
         .sf-service-orange::after { background: linear-gradient(90deg, #f97316, #fb923c); }
         .sf-service-blue::after   { background: linear-gradient(90deg, #2563eb, #60a5fa); }
         .sf-service-orange:hover .sf-service-icon { background: #fff7ed !important; color: #f97316 !important; }
@@ -244,25 +242,16 @@ export default async function HomePage() {
         .sf-service-orange:hover .sf-service-icon { transform: scale(1.15) rotate(8deg); }
         .sf-service-blue:hover   .sf-service-icon { transform: scale(1.15) rotate(-8deg); }
 
-        /* Advantage pill */
-        .sf-advantage {
-          transition: all 0.2s ease;
-          cursor: default;
-        }
+        .sf-advantage { transition: all 0.2s ease; cursor: default; }
         .sf-advantage-orange:hover { background: #fff7ed !important; color: #c2410c !important; border-color: #fed7aa !important; }
         .sf-advantage-blue:hover   { background: #eff6ff !important; color: #1e40af !important; border-color: #bfdbfe !important; }
         .sf-check { transition: all 0.2s ease; }
         .sf-advantage-orange:hover .sf-check { background: #f97316 !important; color: white !important; border-color: transparent !important; }
         .sf-advantage-blue:hover   .sf-check { background: #2563eb !important; color: white !important; border-color: transparent !important; }
 
-        /* Industry tag */
-        .sf-industry {
-          transition: all 0.2s ease;
-          cursor: default;
-        }
+        .sf-industry { transition: all 0.2s ease; cursor: default; }
         .sf-industry:hover { background: #0f172a !important; color: #f97316 !important; }
 
-        /* CTA button */
         .sf-btn-orange {
           position: relative; overflow: hidden;
           display: inline-flex; align-items: center; gap: 8px;
@@ -284,18 +273,15 @@ export default async function HomePage() {
         .sf-btn-orange:hover::after { animation: sf-shimmer 0.55s ease forwards; }
         .sf-btn-orange:hover { background: #ea6c00; transform: translateY(-1px); box-shadow: 0 8px 20px -4px rgba(249,115,22,0.45); }
 
-        /* Accent bar */
         .sf-bar-orange { width: 40px; height: 3px; background: linear-gradient(90deg, #f97316, #fb923c); border-radius: 2px; margin-bottom: 12px; }
         .sf-bar-blue   { width: 40px; height: 3px; background: linear-gradient(90deg, #2563eb, #60a5fa); border-radius: 2px; margin-bottom: 12px; }
 
-        /* Connector */
         .sf-connector {
           position: absolute; top: 38px; right: -16px;
           width: 32px; height: 1px;
           background: rgba(255,255,255,0.15); z-index: 1;
         }
 
-        /* Bottom gradient divider */
         .sf-divider { height: 1px; background: linear-gradient(90deg, #f97316 0%, #2563eb 50%, transparent 100%); margin-top: 20px; border-radius: 1px; }
       `}</style>
 
@@ -342,7 +328,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Categories */}
+        {/* Categories - only 3 shown */}
         <section className="sf-reveal space-y-6">
           <div>
             <div className="sf-badge-blue mb-3"><span className="sf-dot sf-dot-blue" />Product Categories</div>
@@ -502,17 +488,6 @@ export default async function HomePage() {
         </section>
 
       </section>
-
-      <script dangerouslySetInnerHTML={{ __html: `
-        (function() {
-          var els = document.querySelectorAll('.sf-reveal');
-          if (!window.IntersectionObserver) { els.forEach(function(el){el.classList.add('sf-visible');}); return; }
-          var io = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('sf-visible'); io.unobserve(e.target); } });
-          }, { threshold: 0.08 });
-          els.forEach(function(el) { io.observe(el); });
-        })();
-      `}} />
     </>
   );
 }

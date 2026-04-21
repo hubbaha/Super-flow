@@ -10,7 +10,10 @@ export const siteAssets = {
   categories: {
     "pvc-pipes": "/images/categories/pvc-pipes.jpg",
     "pvc-fittings": "/images/categories/pvc-fitting.jpg",
-    valves: "/images/categories/pvc-valves.jpg",
+    "pvc-valve": "/images/categories/pvc-valve.jpg",
+    "pvc-disc-filter": "/images/categories/pvc-disc-filter.jpg",  // ← make sure this key exists and points to the right file
+    "pvc-strainer": "/images/categories/pvc-valve.jpg",
+    "bs-standard-female-threaded-fittings": "/images/categories/pvc-valve.jpg",
   },
   sections: {
     aboutCompany: "/images/sections/about-company.jpg",
