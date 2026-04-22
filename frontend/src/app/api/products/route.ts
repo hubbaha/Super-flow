@@ -60,11 +60,13 @@ export async function POST(req: NextRequest) {
       categoryId: Number(body.categoryId),
       specs: { create: body.specs.map((s) => ({ key: s.key, value: s.value })) },
       tables: {
-        create: body.tables.map((t) => ({
-          size: t.size?.trim() || "",
-          od_mm: t.od_mm ?? t.diameter ?? "",
-          weight_kg: t.weight_kg ?? "",
-        })),
+        create: body.tables
+          .map((t) => ({
+            size: t.size?.trim() || "",
+            od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
+            weight_kg: (t.weight_kg ?? "").toString().trim(),
+          }))
+          .filter((t) => t.size),
       },
     },
     include: { category: true, specs: true, tables: true },
@@ -72,4 +74,3 @@ export async function POST(req: NextRequest) {
 
   return Response.json(product, { status: 201 });
 }
-

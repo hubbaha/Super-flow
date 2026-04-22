@@ -12,6 +12,7 @@ type TablesInput = {
   weight_kg?: string;
   diameter?: string; // fallback only
 };
+
 type UpsertProductInput = {
   name: string;
   description: string;
@@ -69,14 +70,13 @@ export async function PUT(
     return Response.json({ message: "Invalid request body" }, { status: 400 });
   }
 
-  // ✅ Normalize + map tables (CORE FIX)
   const validTables = body.tables
     .map((t) => ({
       size: t.size?.trim() || "",
       od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
       weight_kg: (t.weight_kg ?? "").toString().trim(),
     }))
-    .filter((t) => t.size); // remove empty rows
+    .filter((t) => t.size);
 
   const updated = await prisma.product.update({
     where: { id },
@@ -86,17 +86,10 @@ export async function PUT(
       description: body.description,
       image: body.image ?? null,
       categoryId: Number(body.categoryId),
-
-      // ✅ Replace specs safely
       specs: {
         deleteMany: {},
-        create: body.specs.map((s) => ({
-          key: s.key,
-          value: s.value,
-        })),
+        create: body.specs.map((s) => ({ key: s.key, value: s.value })),
       },
-
-      // ✅ Replace tables safely
       tables: {
         deleteMany: {},
         create: validTables,
@@ -124,4 +117,3 @@ export async function DELETE(
   await prisma.product.delete({ where: { id } });
   return new Response(null, { status: 204 });
 }
-

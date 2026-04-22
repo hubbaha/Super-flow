@@ -18,7 +18,12 @@ export async function GET(req: NextRequest) {
 }
 
 type SpecsInput = { key: string; value: string };
-type TablesInput = { size: string; diameter: string; thickness: string };
+type TablesInput = {
+  size?: string;
+  od_mm?: string;
+  weight_kg?: string;
+  diameter?: string; // fallback only
+};
 
 type CreateProductInput = {
   name: string;
@@ -60,11 +65,13 @@ export async function POST(req: NextRequest) {
         create: body.specs.map((s) => ({ key: s.key, value: s.value })),
       },
       tables: {
-        create: body.tables.map((t) => ({
-          size: t.size,
-          diameter: t.diameter,
-          thickness: t.thickness,
-        })),
+        create: body.tables
+          .map((t) => ({
+            size: t.size?.trim() || "",
+            od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
+            weight_kg: (t.weight_kg ?? "").toString().trim(),
+          }))
+          .filter((t) => t.size),
       },
     },
     include: { specs: true, tables: true, category: true },
@@ -72,4 +79,3 @@ export async function POST(req: NextRequest) {
 
   return Response.json(product, { status: 201 });
 }
-
