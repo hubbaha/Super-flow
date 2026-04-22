@@ -1,4 +1,4 @@
-{
+[{
     "name": "PVC Fittings",
     "slug": "pvc-fittings",
     "products": [
@@ -776,4 +776,112 @@
         ]
       }
     ]
+  },
+  {
+    "name": "BS Standard Female Threaded Fittings",
+    "slug": "bs-standard-female-threaded-fittings",
+    "products": [
+      {
+        "id": "bs-pvc-double-female-socket",
+        "name": "PVC Double Female Socket (BS Standard)",
+        "slug": "bs-pvc-double-female-socket",
+        "image": "/images/products/bs-pvc-double-female-socket.jpg",
+        "category": "BS Standard Female Threaded Fittings",
+        "preview": "BS standard PVC double female socket for joining two male-threaded pipes or fittings.",
+        "description": "BS standard PVC double female socket (female coupling F/F) connects two male BSPT threaded pipes or fittings in a straight run. Manufactured to BS EN 10226-2 / BS-21 standard in white PVC. Suitable for cold water supply, irrigation, and general plumbing applications. Resistant to corrosion and a wide range of chemicals.",
+        "specifications": {
+          "material": "PVC / UPVC",
+          "color": "White",
+          "standard": "BS EN 10226-2 / BS-21",
+          "thread_standard": "BSPT (BS-21)",
+          "size": "20mm - 63mm",
+          "connection": "BSPT Female Thread x BSPT Female Thread",
+          "working_temperature": "Up to 60°C",
+          "application": "Cold water supply, plumbing, irrigation, general piping"
+        },
+        "filterTags": ["BS Standard", "BSPT", "Female Socket", "Coupling"],
+        "size_table": [
+          { "nom_size": "20", "D_mm": "27.5", "d_mm": "20", "L_mm": "16.6", "H_mm": "35.7" },
+          { "nom_size": "25", "D_mm": "33.3", "d_mm": "25", "L_mm": "19.5", "H_mm": "42" },
+          { "nom_size": "32", "D_mm": "40.5", "d_mm": "32", "L_mm": "22.5", "H_mm": "48" },
+          { "nom_size": "50", "D_mm": "58.3", "d_mm": "50.4", "L_mm": "33.5", "H_mm": "70" },
+          { "nom_size": "63", "D_mm": "75", "d_mm": "63", "L_mm": "38.5", "H_mm": "80" }
+        ]
+      },
+      {
+        "id": "bs-pvc-reducing-female-socket",
+        "name": "PVC Reducing Female Threaded Socket TxT (BS Standard)",
+        "slug": "bs-pvc-reducing-female-socket",
+        "image": "/images/products/bs-pvc-reducing-female-socket.jpg",
+        "category": "BS Standard Female Threaded Fittings",
+        "preview": "BS standard PVC reducing female socket to connect two different BSPT thread sizes.",
+        "description": "BS standard PVC reducing female threaded socket (female reducing coupling F/F) connects two male BSPT threaded pipes or fittings of different sizes in a straight run. Manufactured to BS EN 10226-2 / BS-21 standard. Used where a pipe size reduction is required in threaded plumbing, water supply, and irrigation systems.",
+        "specifications": {
+          "material": "PVC / UPVC",
+          "color": "White",
+          "standard": "BS EN 10226-2 / BS-21",
+          "thread_standard": "BSPT (BS-21)",
+          "size": "1-1/2\"",
+          "connection": "BSPT Female Thread (large) x BSPT Female Thread (small)",
+          "working_temperature": "Up to 60°C",
+          "application": "Pipe size reduction, cold water supply, plumbing, irrigation"
+        },
+        "filterTags": ["BS Standard", "BSPT", "Reducing", "Female Socket", "Coupling"],
+        "size_table": [
+          { "nom_size": "1 1/2\"", "D_mm": "48", "d_mm": "43.3", "D1_mm": "53.3", "thread": "RP1 1/2\"", "I_mm": "29", "L1_mm": "23.5", "L_mm": "54" }
+        ]
+      },
+      {
+        "id": "bs-pvc-female-tee",
+        "name": "PVC Three Side Threaded Female Tee (BS Standard)",
+        "slug": "bs-pvc-female-tee",
+        "image": "/images/products/bs-pvc-female-tee.jpg",
+        "category": "BS Standard Female Threaded Fittings",
+        "preview": "BS standard PVC female tee with BSPT female threads on all three outlets.",
+        "description": "BS standard PVC three-side threaded female tee (female tee F/F/F) provides a T-shaped branch connection with BSPT female threads on all three outlets. Manufactured to BS EN 10226-2 / BS-21 standard. Used for branching threaded piping systems in cold water supply, plumbing, and irrigation applications.",
+        "specifications": {
+          "material": "PVC / UPVC",
+          "color": "White",
+          "standard": "BS EN 10226-2 / BS-21",
+          "thread_standard": "BSPT (BS-21)",
+          "size": "1/2\" - 1-1/4\"",
+          "connection": "BSPT Female Thread x BSPT Female Thread x BSPT Female Thread",
+          "working_temperature": "Up to 60°C",
+          "application": "Pipeline branching, cold water supply, irrigation, general plumbing"
+        },
+        "filterTags": ["BS Standard", "BSPT", "Female Tee", "Three Way"],
+        "size_table": [
+          { "nom_size": "1/2\"", "D1_mm": "33.2", "D_mm": "20", "d_mm": "15.9", "I_mm": "13", "G": "1/2\"", "L_mm": "52", "H_mm": "39" },
+          { "nom_size": "3/4\" x 1/2\"", "D1_mm": "33.2", "D_mm": "26.8", "d_mm": "22.2", "I_mm": "18", "G": "1/2\"", "L_mm": "68.5", "H_mm": "31.5" },
+          { "nom_size": "1\" x 1/2\"", "D1_mm": "34.9", "D_mm": "34.5", "d_mm": "28.6", "I_mm": "23", "G": "1/2\"", "L_mm": "80", "H_mm": "35" },
+          { "nom_size": "1-1/4\"", "D1_mm": "59.5", "D_mm": "41.8", "d_mm": "35.2", "I_mm": "28.1", "G": "1 1/4\"", "L_mm": "94.8", "H_mm": "45.9" },
+          { "nom_size": "1-1/4\" x 1/2\"", "D1_mm": "33.2", "D_mm": "41.8", "d_mm": "35.2", "I_mm": "28.1", "G": "1/2\"", "L_mm": "94.8", "H_mm": "40" }
+        ]
+      },
+      {
+        "id": "bs-pvc-double-female-elbow",
+        "name": "PVC Double Threaded Female Elbow 90° (BS Standard)",
+        "slug": "bs-pvc-double-female-elbow",
+        "image": "/images/products/bs-pvc-double-female-elbow.jpg",
+        "category": "BS Standard Female Threaded Fittings",
+        "preview": "BS standard PVC 90° elbow with BSPT female threads on both ends.",
+        "description": "BS standard PVC double threaded female elbow (female elbow F/F) provides a 90° directional change with BSPT female threads on both ends. Manufactured to BS EN 10226-2 / BS-21 standard. Used to connect two male-threaded pipes or fittings at right angles in cold water supply, irrigation, and plumbing systems.",
+        "specifications": {
+          "material": "PVC / UPVC",
+          "color": "White",
+          "standard": "BS EN 10226-2 / BS-21",
+          "thread_standard": "BSPT (BS-21)",
+          "angle": "90°",
+          "size": "32mm x 1\"",
+          "connection": "BSPT Female Thread x BSPT Female Thread",
+          "working_temperature": "Up to 60°C",
+          "application": "Pipe direction changes, cold water supply, irrigation, plumbing"
+        },
+        "filterTags": ["BS Standard", "BSPT", "Female Elbow", "90 Degree"],
+        "size_table": [
+          { "nom_size": "32 x 1\"", "D_mm": "41", "d_mm": "32", "G": "1\"", "L_mm": "22.5" }
+        ]
+      }
+    ]
   }
+]
