@@ -22,7 +22,7 @@ export default async function HomePage() {
       description: "We begin by deeply understanding your project scope, material specs, and industry requirements.",
       icon: (
         <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h7"/>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16"/><path strokeLinecap="round" strokeLinejoin="round" d="M4 12h10"/><path strokeLinecap="round" strokeLinejoin="round" d="M4 18h7"/>
         </svg>
       ),
       number: "01",
