@@ -6,6 +6,7 @@ import { getProductData } from "@/lib/catalog";
 import { getCategoryDisplayName } from "@/lib/category-config";
 import { getReferenceProduct } from "@/lib/reference-products";
 import { notFound } from "next/navigation";
+import { ImageLightbox } from "@/components/ImageLightbox";
 
 export const dynamic = "force-dynamic";
 
@@ -32,24 +33,21 @@ export default async function ProductDetailPage({
         {/* FIX 1: overflow-hidden on grid, min-w-0 on article prevents grid blowout */}
         <div className="grid gap-8 overflow-hidden lg:grid-cols-[2fr_1fr]">
           <article className="min-w-0 space-y-6">
-            {/* Main Product Card */}
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-              {referenceProduct.image ? (
-                <div className="overflow-hidden">
-                  {/* FIX 2: h-140 → h-56 sm:h-72 lg:h-80 (responsive height, h-140 is not valid Tailwind) */}
-                  <img
-                    src={referenceProduct.image}
+          {/* Main Product Card */}
+              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                {referenceProduct.image ? (
+                  <ImageLightbox 
+                    src={referenceProduct.image} 
                     alt={referenceProduct.name}
-                    className="h-56 w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-72 lg:h-80"
+                    className="h-100 w-full object-cover sm:h-100 lg:h-140"
                   />
-                </div>
-              ) : (
-                <div className="flex h-56 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-72 lg:h-80">
-                  <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                  </svg>
-                </div>
-              )}
+                ) : (
+                  <div className="flex h-56 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-72 lg:h-80">
+                    <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                    </svg>
+                  </div>
+                )}
               {/* FIX 3: p-7 → p-4 sm:p-7 so padding isn't too large on small screens */}
               <div className="p-4 sm:p-7">
                 <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-600">
@@ -122,23 +120,21 @@ export default async function ProductDetailPage({
 
       <div className="grid gap-8 overflow-hidden lg:grid-cols-[2fr_1fr]">
         <article className="min-w-0 space-y-6">
-          {/* Main Product Card */}
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            {product.image ? (
-              <div className="overflow-hidden">
-                <img
-                  src={product.image}
+         {/* Main Product Card */}
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              {product.image ? (
+                <ImageLightbox 
+                  src={product.image} 
                   alt={product.name}
-                  className="h-56 w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-72 lg:h-80"
+                  className="h-80 w-full object-cover sm:h-80 lg:h-80"
                 />
-              </div>
-            ) : (
-              <div className="flex h-56 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-72 lg:h-80">
-                <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                </svg>
-              </div>
-            )}
+              ) : (
+                <div className="flex h-80 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-80 lg:h-80">
+                  <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                  </svg>
+                </div>
+  )}
             <div className="p-4 sm:p-7">
               <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-600">
                 {getCategoryDisplayName(product.category.slug)}

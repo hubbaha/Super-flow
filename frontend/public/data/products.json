@@ -1,4 +1,5 @@
-[{
+[
+  {
     "name": "PVC Fittings",
     "slug": "pvc-fittings",
     "products": [
@@ -880,6 +881,492 @@
         "filterTags": ["BS Standard", "BSPT", "Female Elbow", "90 Degree"],
         "size_table": [
           { "nom_size": "32 x 1\"", "D_mm": "41", "d_mm": "32", "G": "1\"", "L_mm": "22.5" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "PVC Valve",
+    "slug": "pvc-valve",
+    "products": [
+      {
+        "id": "pvc-sampling-valve",
+        "name": "PVC Sampling Valve",
+        "slug": "pvc-sampling-valve",
+        "image": "/images/products/pvc-sampling-valve.jpg",
+        "images": [
+          "/images/products/pvc-sampling-valve.jpg",
+          "/images/products/pvc-sampling-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC sampling valve for drawing fluid samples from pipelines without shutting down the system.",
+        "description": "PVC sampling valve is a quarter-turn plug-type valve designed for extracting fluid samples from pipelines or tanks in chemical processing, water treatment, and laboratory applications. It provides a leak-free seal when closed and a controlled sample flow when opened. Manufactured from high-quality UPVC for excellent chemical resistance and long service life.",
+        "specifications": {
+          "material": "PVC / UPVC",
+          "color": "Gray",
+          "standard": "ISO 727",
+          "size": "1/2\" - 2\"",
+          "connection": "Socket (Solvent Weld) or NPT Thread",
+          "seal": "EPDM / FKM (Viton)",
+          "pressure_rating": "PN10 (up to 1.0 MPa)",
+          "working_temperature": "Up to 60°C",
+          "application": "Fluid sampling, chemical plants, water treatment, laboratory lines"
+        },
+        "filterTags": ["PVC", "Sampling Valve", "UPVC", "PN10"],
+        "size_table": [
+          { "size": "1/2\"", "od_mm": "21.3" },
+          { "size": "3/4\"", "od_mm": "26.7" },
+          { "size": "1\"", "od_mm": "33.4" },
+          { "size": "1-1/4\"", "od_mm": "42.2" },
+          { "size": "1-1/2\"", "od_mm": "48.3" },
+          { "size": "2\"", "od_mm": "60.3" }
+        ]
+      },
+      {
+        "id": "pvc-butterfly-valve-astm",
+        "name": "PVC General Handle Butterfly Valve ASTM Standard",
+        "slug": "pvc-butterfly-valve-astm",
+        "image": "/images/products/pvc-butterfly-valve-astm.jpg",
+        "images": [
+          "/images/products/pvc-butterfly-valve-astm.jpg",
+          "/images/products/pvc-butterfly-valve-astm-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "ASTM standard PVC butterfly valve with general lever handle for flow control in large pipe systems.",
+        "description": "PVC general handle butterfly valve (ASTM standard) is a quarter-turn wafer-style valve used to regulate or isolate flow in large-diameter pipe systems. The disc rotates 90° to fully open or close. Manufactured to ASTM standards with a PVC body and disc, EPDM seat, and stainless steel stem. Ideal for water treatment, irrigation, chemical processing, and industrial pipelines.",
+        "specifications": {
+          "material": "PVC body and disc, stainless steel stem",
+          "color": "Gray",
+          "standard": "ASTM",
+          "size": "2\" - 12\" (DN50 - DN300)",
+          "connection": "Wafer (flange-mounted between flanges)",
+          "seat_material": "EPDM / NBR",
+          "actuator": "General lever handle (lockable)",
+          "pressure_rating": "PN10 (150 PSI)",
+          "working_temperature": "Up to 60°C",
+          "application": "Water treatment, chemical lines, irrigation systems, industrial pipelines"
+        },
+        "filterTags": ["PVC", "Butterfly Valve", "ASTM", "Wafer", "Lever Handle"],
+        "size_table": [
+          { "size": "2\"", "dn": "DN50" },
+          { "size": "2-1/2\"", "dn": "DN65" },
+          { "size": "3\"", "dn": "DN80" },
+          { "size": "4\"", "dn": "DN100" },
+          { "size": "5\"", "dn": "DN125" },
+          { "size": "6\"", "dn": "DN150" },
+          { "size": "8\"", "dn": "DN200" },
+          { "size": "10\"", "dn": "DN250" },
+          { "size": "12\"", "dn": "DN300" }
+        ]
+      },
+      {
+        "id": "pvc-compact-ball-valve",
+        "name": "PVC Compact Ball Valve",
+        "slug": "pvc-compact-ball-valve",
+        "image": "/images/products/pvc-compact-ball-valve.jpg",
+        "images": [
+          "/images/products/pvc-compact-ball-valve.jpg",
+          "/images/products/pvc-compact-ball-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC compact ball valve for on/off flow control in tight-space piping applications.",
+        "description": "PVC compact ball valve is a space-saving quarter-turn ball valve with socket or threaded ends. It features a full-bore PVC ball, PTFE seats, and EPDM O-ring seals for reliable shut-off in chemical, water supply, and industrial piping systems. Its compact design makes it ideal for installations with limited space.",
+        "specifications": {
+          "material": "PVC / UPVC body, PVC ball, PTFE seats",
+          "color": "Gray",
+          "standard": "ISO 727 / DIN",
+          "size": "1/4\" - 2\" (DN8 - DN50)",
+          "connection": "Socket (Solvent Weld) or NPT/BSP Thread",
+          "seal": "PTFE seats, EPDM O-rings",
+          "pressure_rating": "PN10 - PN16",
+          "working_temperature": "Up to 60°C",
+          "application": "Chemical processing, water treatment, irrigation, general industrial use"
+        },
+        "filterTags": ["PVC", "Ball Valve", "Compact", "PN10", "PN16"],
+        "size_table": [
+          { "size": "1/4\"", "dn": "DN8" },
+          { "size": "3/8\"", "dn": "DN10" },
+          { "size": "1/2\"", "dn": "DN15" },
+          { "size": "3/4\"", "dn": "DN20" },
+          { "size": "1\"", "dn": "DN25" },
+          { "size": "1-1/4\"", "dn": "DN32" },
+          { "size": "1-1/2\"", "dn": "DN40" },
+          { "size": "2\"", "dn": "DN50" }
+        ]
+      },
+      {
+        "id": "pvc-threaded-ball-valve",
+        "name": "PVC Threaded Ball Valve Standard",
+        "slug": "pvc-threaded-ball-valve",
+        "image": "/images/products/pvc-threaded-ball-valve.jpg",
+        "images": [
+          "/images/products/pvc-threaded-ball-valve.jpg",
+          "/images/products/pvc-threaded-ball-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC ball valve with male or female NPT/BSP threads for easy threaded pipe installation.",
+        "description": "PVC threaded ball valve provides quarter-turn on/off flow control with NPT or BSP threaded ends for direct connection to threaded pipes or fittings. Features a full-bore PVC ball, PTFE seats, and lever handle. Manufactured from UPVC for high chemical resistance. Suitable for water supply, irrigation, and chemical distribution systems.",
+        "specifications": {
+          "material": "PVC / UPVC body and ball, PTFE seats",
+          "color": "Gray",
+          "standard": "ISO 727",
+          "thread_standard": "NPT or BSP",
+          "size": "1/4\" - 4\" (DN8 - DN100)",
+          "connection": "NPT Female Thread x NPT Female Thread (or BSP)",
+          "seal": "PTFE seats, EPDM O-rings",
+          "pressure_rating": "PN10 - PN16",
+          "working_temperature": "Up to 60°C",
+          "application": "Water supply, irrigation, chemical lines, industrial pipelines"
+        },
+        "filterTags": ["PVC", "Ball Valve", "Threaded", "NPT", "BSP"],
+        "size_table": [
+          { "size": "1/4\"", "dn": "DN8" },
+          { "size": "3/8\"", "dn": "DN10" },
+          { "size": "1/2\"", "dn": "DN15" },
+          { "size": "3/4\"", "dn": "DN20" },
+          { "size": "1\"", "dn": "DN25" },
+          { "size": "1-1/4\"", "dn": "DN32" },
+          { "size": "1-1/2\"", "dn": "DN40" },
+          { "size": "2\"", "dn": "DN50" },
+          { "size": "3\"", "dn": "DN80" },
+          { "size": "4\"", "dn": "DN100" }
+        ]
+      },
+      {
+        "id": "pvc-true-union-ball-valve",
+        "name": "PVC True Union Ball Valve",
+        "slug": "pvc-true-union-ball-valve",
+        "image": "/images/products/pvc-true-union-ball-valve.jpg",
+        "images": [
+          "/images/products/pvc-true-union-ball-valve.jpg",
+          "/images/products/pvc-true-union-ball-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC true union ball valve for in-line removal and maintenance without disturbing pipework.",
+        "description": "PVC true union ball valve features a two-piece union body construction that allows the valve to be removed from the pipeline for inspection or replacement without cutting the pipe. It offers a full-bore flow path, PTFE seats, EPDM seals, and a lever handle. Available in socket or threaded end connections. Ideal for systems requiring periodic maintenance.",
+        "specifications": {
+          "material": "PVC / UPVC body and ball, PTFE seats",
+          "color": "Gray",
+          "standard": "ASTM F1970 / ISO 727",
+          "size": "1/2\" - 4\" (DN15 - DN100)",
+          "connection": "Socket (Solvent Weld) or NPT/BSP Thread (union ends)",
+          "seal": "PTFE seats, EPDM O-rings",
+          "pressure_rating": "PN10 - PN16",
+          "working_temperature": "Up to 60°C",
+          "application": "Chemical processing, water treatment, industrial systems requiring in-line serviceability"
+        },
+        "filterTags": ["PVC", "Ball Valve", "True Union", "ASTM", "PN16"],
+        "size_table": [
+          { "size": "1/2\"", "dn": "DN15" },
+          { "size": "3/4\"", "dn": "DN20" },
+          { "size": "1\"", "dn": "DN25" },
+          { "size": "1-1/4\"", "dn": "DN32" },
+          { "size": "1-1/2\"", "dn": "DN40" },
+          { "size": "2\"", "dn": "DN50" },
+          { "size": "3\"", "dn": "DN80" },
+          { "size": "4\"", "dn": "DN100" }
+        ]
+      },
+      {
+        "id": "pvc-foot-valve",
+        "name": "PVC Foot Valve",
+        "slug": "pvc-foot-valve",
+        "image": "/images/products/pvc-foot-valve.jpg",
+        "images": [
+          "/images/products/pvc-foot-valve.jpg",
+          "/images/products/pvc-foot-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC foot valve installed at pump inlet to maintain prime and prevent backflow.",
+        "description": "PVC foot valve is a spring-loaded non-return valve installed at the bottom of a suction pipe to keep the pump primed and prevent backflow when the pump stops. It features a built-in strainer screen to protect the pump from debris. Manufactured from UPVC with EPDM seals for chemical resistance and long service life.",
+        "specifications": {
+          "material": "PVC / UPVC body, stainless steel spring, EPDM disc",
+          "color": "Gray",
+          "standard": "ISO 727",
+          "size": "1/2\" - 6\" (DN15 - DN150)",
+          "connection": "NPT Female Thread or Socket (Solvent Weld)",
+          "seal": "EPDM disc, NBR O-ring",
+          "pressure_rating": "PN10",
+          "working_temperature": "Up to 60°C",
+          "application": "Pump suction lines, wells, sumps, water supply, irrigation systems"
+        },
+        "filterTags": ["PVC", "Foot Valve", "Non-Return", "Strainer", "PN10"],
+        "size_table": [
+          { "size": "1/2\"", "dn": "DN15" },
+          { "size": "3/4\"", "dn": "DN20" },
+          { "size": "1\"", "dn": "DN25" },
+          { "size": "1-1/4\"", "dn": "DN32" },
+          { "size": "1-1/2\"", "dn": "DN40" },
+          { "size": "2\"", "dn": "DN50" },
+          { "size": "3\"", "dn": "DN80" },
+          { "size": "4\"", "dn": "DN100" },
+          { "size": "6\"", "dn": "DN150" }
+        ]
+      },
+      {
+        "id": "pvc-double-union-ball-check-valve",
+        "name": "PVC Double Union Ball Check Valve",
+        "slug": "pvc-double-union-ball-check-valve",
+        "image": "/images/products/pvc-double-union-ball-check-valve.jpg",
+        "images": [
+          "/images/products/pvc-double-union-ball-check-valve.jpg",
+          "/images/products/pvc-double-union-ball-check-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC double union ball check valve to prevent backflow with easy in-line removal.",
+        "description": "PVC double union ball check valve uses a free-floating PVC ball to prevent reverse flow in piping systems. The double union design allows the valve body to be removed from the pipeline without cutting pipe, making it easy to inspect or replace the ball. Suitable for chemical dosing lines, water treatment, and pump discharge applications.",
+        "specifications": {
+          "material": "PVC / UPVC body, PVC ball, EPDM seals",
+          "color": "Gray",
+          "standard": "ISO 727 / ASTM",
+          "size": "1/2\" - 4\" (DN15 - DN100)",
+          "connection": "Socket (Solvent Weld) or NPT/BSP Thread (union ends)",
+          "seal": "EPDM O-rings",
+          "pressure_rating": "PN10",
+          "working_temperature": "Up to 60°C",
+          "application": "Pump discharge lines, chemical dosing, water treatment, backflow prevention"
+        },
+        "filterTags": ["PVC", "Check Valve", "Ball Check", "Double Union", "PN10"],
+        "size_table": [
+          { "size": "1/2\"", "dn": "DN15" },
+          { "size": "3/4\"", "dn": "DN20" },
+          { "size": "1\"", "dn": "DN25" },
+          { "size": "1-1/4\"", "dn": "DN32" },
+          { "size": "1-1/2\"", "dn": "DN40" },
+          { "size": "2\"", "dn": "DN50" },
+          { "size": "3\"", "dn": "DN80" },
+          { "size": "4\"", "dn": "DN100" }
+        ]
+      },
+      {
+        "id": "pvc-swing-check-valve",
+        "name": "PVC Swing Check Valve",
+        "slug": "pvc-swing-check-valve",
+        "image": "/images/products/pvc-swing-check-valve.jpg",
+        "images": [
+          "/images/products/pvc-swing-check-valve.jpg",
+          "/images/products/pvc-swing-check-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC swing check valve allowing flow in one direction with gravity-assisted closure.",
+        "description": "PVC swing check valve uses a hinged disc (clapper) that swings open under forward flow and closes by gravity when flow stops or reverses. It is designed for horizontal or vertical pipeline installation and provides reliable backflow prevention with low pressure drop. Manufactured from UPVC with EPDM seals for chemical and corrosion resistance.",
+        "specifications": {
+          "material": "PVC / UPVC body, PVC disc, stainless steel hinge pin",
+          "color": "Gray",
+          "standard": "ISO 727 / BS 5153",
+          "size": "1/2\" - 6\" (DN15 - DN150)",
+          "connection": "Socket (Solvent Weld) or Flanged",
+          "seal": "EPDM",
+          "pressure_rating": "PN10",
+          "working_temperature": "Up to 60°C",
+          "application": "Water supply, irrigation, pump discharge, chemical pipelines"
+        },
+        "filterTags": ["PVC", "Check Valve", "Swing Check", "PN10"],
+        "size_table": [
+          { "size": "1/2\"", "dn": "DN15" },
+          { "size": "3/4\"", "dn": "DN20" },
+          { "size": "1\"", "dn": "DN25" },
+          { "size": "1-1/2\"", "dn": "DN40" },
+          { "size": "2\"", "dn": "DN50" },
+          { "size": "3\"", "dn": "DN80" },
+          { "size": "4\"", "dn": "DN100" },
+          { "size": "6\"", "dn": "DN150" }
+        ]
+      },
+      {
+        "id": "pvc-wafer-check-valve",
+        "name": "PVC Wafer Check Valve",
+        "slug": "pvc-wafer-check-valve",
+        "image": "/images/products/pvc-wafer-check-valve.jpg",
+        "images": [
+          "/images/products/pvc-wafer-check-valve.jpg",
+          "/images/products/pvc-wafer-check-valve-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "PVC wafer check valve with dual-plate spring-assisted closure for compact in-line backflow prevention.",
+        "description": "PVC wafer check valve is a slim, lightweight dual-plate (dual-disc) check valve designed to fit between pipe flanges. Spring-assisted discs open under forward flow and close instantly when flow stops, minimizing water hammer. Its wafer body design reduces installation space and weight compared to full-body check valves. Suitable for water treatment, industrial, and chemical systems.",
+        "specifications": {
+          "material": "PVC / UPVC body, PVC discs, stainless steel spring and hinge pin",
+          "color": "Gray",
+          "standard": "API 594 / ISO 13709",
+          "size": "2\" - 12\" (DN50 - DN300)",
+          "connection": "Wafer (mounted between flanges, ANSI 150 / PN10 - PN16)",
+          "seal": "EPDM / NBR",
+          "pressure_rating": "PN10 - PN16",
+          "working_temperature": "Up to 60°C",
+          "application": "Water treatment plants, pump stations, industrial and chemical pipelines"
+        },
+        "filterTags": ["PVC", "Check Valve", "Wafer", "Dual Plate", "PN10", "PN16"],
+        "size_table": [
+          { "size": "2\"", "dn": "DN50" },
+          { "size": "3\"", "dn": "DN80" },
+          { "size": "4\"", "dn": "DN100" },
+          { "size": "6\"", "dn": "DN150" },
+          { "size": "8\"", "dn": "DN200" },
+          { "size": "10\"", "dn": "DN250" },
+          { "size": "12\"", "dn": "DN300" }
+        ]
+      },
+      {
+        "id": "pvc-air-relief-valve-1inch",
+        "name": "PVC Air Relief Valve 1 Inch",
+        "slug": "pvc-air-relief-valve-1inch",
+        "image": "/images/products/pvc-air-relief-valve-1inch.jpg",
+        "images": [
+          "/images/products/pvc-air-relief-valve-1inch.jpg",
+          "/images/products/pvc-air-relief-valve-1inch-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "1 inch PVC air relief valve to automatically release trapped air from pressurized pipelines.",
+        "description": "PVC air relief valve (1 inch) automatically vents trapped air from pressurized water pipelines to prevent air locks and maintain efficient flow. The float-operated mechanism opens to release air and closes when water fills the chamber. Manufactured from UPVC with stainless steel float for long service life. Suitable for water supply mains, irrigation systems, and industrial pipelines.",
+        "specifications": {
+          "material": "PVC / UPVC body, stainless steel float",
+          "color": "Gray",
+          "size": "1\" (DN25)",
+          "connection": "NPT Male Thread or Flanged",
+          "seal": "EPDM",
+          "pressure_rating": "PN10 (up to 10 bar)",
+          "working_temperature": "Up to 60°C",
+          "application": "Water mains, irrigation pipelines, pump discharge, industrial water systems"
+        },
+        "filterTags": ["PVC", "Air Relief Valve", "1 Inch", "PN10"],
+        "size_table": [
+          { "size": "1\"", "dn": "DN25", "max_pressure_bar": "10", "connection": "1\" NPT Male" }
+        ]
+      },
+      {
+        "id": "pvc-air-relief-valve-2inch",
+        "name": "PVC Air Relief Valve 2 Inch",
+        "slug": "pvc-air-relief-valve-2inch",
+        "image": "/images/products/pvc-air-relief-valve-2inch.jpg",
+        "images": [
+          "/images/products/pvc-air-relief-valve-2inch.jpg",
+          "/images/products/pvc-air-relief-valve-2inch-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "2 inch PVC air relief valve for high-capacity air venting in large water pipelines.",
+        "description": "PVC air relief valve (2 inch) provides high-capacity automatic air venting for larger-diameter pressurized water pipelines. It uses a float mechanism to release accumulated air pockets and re-seals when the chamber fills with water. Prevents air locks that cause flow loss and increased energy consumption in pumping systems. UPVC construction ensures chemical resistance.",
+        "specifications": {
+          "material": "PVC / UPVC body, stainless steel float",
+          "color": "Gray",
+          "size": "2\" (DN50)",
+          "connection": "NPT Male Thread or Flanged",
+          "seal": "EPDM",
+          "pressure_rating": "PN10 (up to 10 bar)",
+          "working_temperature": "Up to 60°C",
+          "application": "Large water mains, municipal pipelines, pump discharge, irrigation systems"
+        },
+        "filterTags": ["PVC", "Air Relief Valve", "2 Inch", "PN10"],
+        "size_table": [
+          { "size": "2\"", "dn": "DN50", "max_pressure_bar": "10", "connection": "2\" NPT Male" }
+        ]
+      },
+      {
+        "id": "pvc-nrv-6inch",
+        "name": "PVC (NRV) No Return Valve 6 Inch",
+        "slug": "pvc-nrv-6inch",
+        "image": "/images/products/pvc-nrv-6inch.jpg",
+        "images": [
+          "/images/products/pvc-nrv-6inch.jpg",
+          "/images/products/pvc-nrv-6inch-2.jpg"
+        ],
+        "category": "PVC Valve",
+        "preview": "6 inch PVC non-return valve (NRV) for large-bore backflow prevention in water and industrial systems.",
+        "description": "PVC no-return valve (NRV) 6 inch is a large-bore check valve that allows flow in one direction only and prevents reverse flow when the pump stops or pressure drops. Available as a flanged or socket connection swing-type NRV. Manufactured from UPVC for excellent chemical and UV resistance. Suitable for municipal water supply, sewage, pump stations, and large industrial pipelines.",
+        "specifications": {
+          "material": "PVC / UPVC body, PVC or rubber-lined disc",
+          "color": "Gray",
+          "standard": "ISO 727 / BS 5153",
+          "size": "6\" (DN150)",
+          "connection": "Flanged (ANSI 150 / PN10) or Socket (Solvent Weld)",
+          "seal": "EPDM / NBR",
+          "pressure_rating": "PN10",
+          "working_temperature": "Up to 60°C",
+          "application": "Municipal water, pump stations, sewage systems, large industrial pipelines"
+        },
+        "filterTags": ["PVC", "NRV", "No Return Valve", "Check Valve", "6 Inch", "PN10"],
+        "size_table": [
+          { "size": "6\"", "dn": "DN150", "flange_standard": "ANSI 150 / PN10", "pressure_rating_bar": "10" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "PVC Strainer",
+    "slug": "pvc-strainer",
+    "products": [
+      {
+        "id": "pvc-y-strainer",
+        "name": "PVC Y-Strainer",
+        "slug": "pvc-y-strainer",
+        "image": "/images/products/pvc-y-strainer.jpg",
+        "images": [
+          "/images/products/pvc-y-strainer.jpg",
+          "/images/products/pvc-y-strainer-2.jpg"
+        ],
+        "category": "PVC Strainer",
+        "preview": "PVC Y-strainer to filter debris and particulates from piping systems protecting pumps and equipment.",
+        "description": "PVC Y-strainer removes solid particles, debris, and sediment from liquid pipelines to protect downstream equipment such as pumps, meters, valves, and nozzles. The Y-shaped body houses a removable stainless steel mesh screen basket that can be cleaned or replaced without removing the valve body from the pipeline. Manufactured from UPVC with excellent chemical resistance for use in water treatment, chemical dosing, and industrial systems.",
+        "specifications": {
+          "material": "PVC / UPVC body, stainless steel screen (mesh 40 - 80 mesh)",
+          "color": "Gray",
+          "standard": "ISO 727",
+          "size": "1/2\" - 4\" (DN15 - DN100)",
+          "connection": "Socket (Solvent Weld) or NPT/BSP Thread or Flanged",
+          "screen_mesh": "20 mesh, 40 mesh, 80 mesh (customizable)",
+          "pressure_rating": "PN10 - PN16",
+          "working_temperature": "Up to 60°C",
+          "application": "Pump inlet protection, water treatment, irrigation, chemical processing, industrial pipelines"
+        },
+        "filterTags": ["PVC", "Y-Strainer", "Strainer", "Filter", "PN10", "PN16"],
+        "size_table": [
+          { "size": "1/2\"", "dn": "DN15", "screen_area_cm2": "8" },
+          { "size": "3/4\"", "dn": "DN20", "screen_area_cm2": "12" },
+          { "size": "1\"", "dn": "DN25", "screen_area_cm2": "18" },
+          { "size": "1-1/4\"", "dn": "DN32", "screen_area_cm2": "26" },
+          { "size": "1-1/2\"", "dn": "DN40", "screen_area_cm2": "35" },
+          { "size": "2\"", "dn": "DN50", "screen_area_cm2": "55" },
+          { "size": "3\"", "dn": "DN80", "screen_area_cm2": "120" },
+          { "size": "4\"", "dn": "DN100", "screen_area_cm2": "195" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "PVC Disc Filter",
+    "slug": "pvc-disc-filter",
+    "products": [
+      {
+        "id": "pvc-disc-filter",
+        "name": "PVC Disc Filter",
+        "slug": "pvc-disc-filter",
+        "image": "/images/products/pvc-disc-filter.jpg",
+        "images": [
+          "/images/products/pvc-disc-filter.jpg",
+          "/images/products/pvc-disc-filter-2.jpg"
+        ],
+        "category": "PVC Disc Filter",
+        "preview": "PVC disc filter using stacked grooved discs for fine filtration in irrigation and water treatment systems.",
+        "description": "PVC disc filter is a high-efficiency filtration device that uses a stack of grooved PVC or polypropylene discs compressed together to form a three-dimensional filtration matrix. Water passes through the inter-disc channels, and particles larger than the filter rating are captured on the disc surfaces. The disc stack can be flushed clean by backwashing. Available in various micron ratings and suited for drip irrigation, municipal water supply, and industrial water treatment. UPVC housing provides excellent chemical resistance and UV stability.",
+        "specifications": {
+          "material": "PVC / UPVC housing, polypropylene disc stack",
+          "color": "Gray",
+          "size": "3/4\" - 3\" inlet/outlet (DN20 - DN80)",
+          "filtration_rating": "20 micron, 55 micron, 100 micron, 130 micron, 200 micron (color-coded discs)",
+          "connection": "NPT Female Thread or Flanged",
+          "pressure_rating": "PN8 - PN10 (up to 10 bar)",
+          "flow_rate": "Up to 30 m³/h depending on size and rating",
+          "working_temperature": "Up to 50°C",
+          "backwash": "Manual or automatic backwash",
+          "application": "Drip irrigation, micro-irrigation, municipal water filtration, industrial water treatment, cooling towers"
+        },
+        "filterTags": ["PVC", "Disc Filter", "Filtration", "Irrigation", "PN10"],
+        "size_table": [
+          { "size": "3/4\"", "dn": "DN20", "flow_rate_m3h": "4", "micron_options": "20, 55, 100, 130, 200" },
+          { "size": "1\"", "dn": "DN25", "flow_rate_m3h": "7", "micron_options": "20, 55, 100, 130, 200" },
+          { "size": "1-1/2\"", "dn": "DN40", "flow_rate_m3h": "15", "micron_options": "20, 55, 100, 130, 200" },
+          { "size": "2\"", "dn": "DN50", "flow_rate_m3h": "20", "micron_options": "20, 55, 100, 130, 200" },
+          { "size": "3\"", "dn": "DN80", "flow_rate_m3h": "30", "micron_options": "55, 100, 130, 200" }
         ]
       }
     ]

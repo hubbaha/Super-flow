@@ -1,7 +1,10 @@
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { Resend } from "resend"; // ← add this
 
 export const runtime = "nodejs";
+
+const resend = new Resend(process.env.RESEND_API_KEY); // ← add this
 
 type InquiryInput = {
   name: string;
@@ -35,6 +38,20 @@ export async function POST(req: NextRequest) {
     },
   });
 
+  // ← add this block
+  await resend.emails.send({
+    from: "Inquiries <onboarding@resend.dev>",
+    to: "you@yourdomain.com", // ← your email here
+    replyTo: body.email,
+    subject: `New Inquiry from ${body.name}`,
+    html: `
+      <h2>New Inquiry</h2>
+      <p><strong>Name:</strong> ${body.name}</p>
+      <p><strong>Email:</strong> ${body.email}</p>
+      <p><strong>Buyer Type:</strong> ${body.buyerType}</p>
+      <p><strong>Message:</strong><br/>${body.message}</p>
+    `,
+  });
+
   return Response.json(inquiry, { status: 201 });
 }
-
