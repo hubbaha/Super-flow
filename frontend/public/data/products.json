@@ -903,7 +903,7 @@
         "description": "PVC sampling valve is a quarter-turn plug-type valve designed for extracting fluid samples from pipelines or tanks in chemical processing, water treatment, and laboratory applications. It provides a leak-free seal when closed and a controlled sample flow when opened. Manufactured from high-quality UPVC for excellent chemical resistance and long service life.",
         "specifications": {
           "material": "PVC / UPVC",
-          "color": "Gray",
+          "color": "Black",
           "standard": "ISO 727",
           "size": "1/2\" - 2\"",
           "connection": "Socket (Solvent Weld) or NPT Thread",
@@ -1221,7 +1221,7 @@
         "description": "PVC air relief valve (1 inch) automatically vents trapped air from pressurized water pipelines to prevent air locks and maintain efficient flow. The float-operated mechanism opens to release air and closes when water fills the chamber. Manufactured from UPVC with stainless steel float for long service life. Suitable for water supply mains, irrigation systems, and industrial pipelines.",
         "specifications": {
           "material": "PVC / UPVC body, stainless steel float",
-          "color": "Gray",
+          "color": "Blue and black",
           "size": "1\" (DN25)",
           "connection": "NPT Male Thread or Flanged",
           "seal": "EPDM",
@@ -1248,7 +1248,7 @@
         "description": "PVC air relief valve (2 inch) provides high-capacity automatic air venting for larger-diameter pressurized water pipelines. It uses a float mechanism to release accumulated air pockets and re-seals when the chamber fills with water. Prevents air locks that cause flow loss and increased energy consumption in pumping systems. UPVC construction ensures chemical resistance.",
         "specifications": {
           "material": "PVC / UPVC body, stainless steel float",
-          "color": "Gray",
+          "color": "Blue and black",
           "size": "2\" (DN50)",
           "connection": "NPT Male Thread or Flanged",
           "seal": "EPDM",
@@ -1275,7 +1275,7 @@
         "description": "PVC no-return valve (NRV) 6 inch is a large-bore check valve that allows flow in one direction only and prevents reverse flow when the pump stops or pressure drops. Available as a flanged or socket connection swing-type NRV. Manufactured from UPVC for excellent chemical and UV resistance. Suitable for municipal water supply, sewage, pump stations, and large industrial pipelines.",
         "specifications": {
           "material": "PVC / UPVC body, PVC or rubber-lined disc",
-          "color": "Gray",
+          "color": "White",
           "standard": "ISO 727 / BS 5153",
           "size": "6\" (DN150)",
           "connection": "Flanged (ANSI 150 / PN10) or Socket (Solvent Weld)",
@@ -1309,7 +1309,7 @@
         "description": "PVC Y-strainer removes solid particles, debris, and sediment from liquid pipelines to protect downstream equipment such as pumps, meters, valves, and nozzles. The Y-shaped body houses a removable stainless steel mesh screen basket that can be cleaned or replaced without removing the valve body from the pipeline. Manufactured from UPVC with excellent chemical resistance for use in water treatment, chemical dosing, and industrial systems.",
         "specifications": {
           "material": "PVC / UPVC body, stainless steel screen (mesh 40 - 80 mesh)",
-          "color": "Gray",
+          "color": "Dark blue and Black",
           "standard": "ISO 727",
           "size": "1/2\" - 4\" (DN15 - DN100)",
           "connection": "Socket (Solvent Weld) or NPT/BSP Thread or Flanged",
@@ -1350,7 +1350,7 @@
         "description": "PVC disc filter is a high-efficiency filtration device that uses a stack of grooved PVC or polypropylene discs compressed together to form a three-dimensional filtration matrix. Water passes through the inter-disc channels, and particles larger than the filter rating are captured on the disc surfaces. The disc stack can be flushed clean by backwashing. Available in various micron ratings and suited for drip irrigation, municipal water supply, and industrial water treatment. UPVC housing provides excellent chemical resistance and UV stability.",
         "specifications": {
           "material": "PVC / UPVC housing, polypropylene disc stack",
-          "color": "Gray",
+          "color": "Black",
           "size": "3/4\" - 3\" inlet/outlet (DN20 - DN80)",
           "filtration_rating": "20 micron, 55 micron, 100 micron, 130 micron, 200 micron (color-coded discs)",
           "connection": "NPT Female Thread or Flanged",
