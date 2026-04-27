@@ -106,6 +106,8 @@ export default async function ProductsPage({ searchParams }: Props) {
     // ── CATEGORY GRID (no search) ────────────────────────────────
     const categoriesInData = Array.from(
       new Set(referenceProducts.map((product) => product.categorySlug)),
+    ).filter(
+      (slug) => slug !== "pvc-disc-filter" && slug !== "pvc-strainer", // ✅ hide old slugs
     );
     const preferredCategorySlugs = preferredCategories.map((c) => c.slug);
     const extraCategorySlugs = categoriesInData.filter(
@@ -141,9 +143,12 @@ export default async function ProductsPage({ searchParams }: Props) {
           {allCategories.length ? (
             <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {allCategories.map((categorySlug) => {
-                const productCount = referenceProducts.filter(
-                  (p) => p.categorySlug === categorySlug,
-                ).length;
+                const productCount = referenceProducts.filter((p) => {
+                  if (categorySlug === "pvc-disc-filters-and-strainers") {
+                    return p.categorySlug === "pvc-disc-filter" || p.categorySlug === "pvc-strainer";
+                  }
+                  return p.categorySlug === categorySlug;
+                }).length;
                 const image =
                   siteAssets.categories[categorySlug as keyof typeof siteAssets.categories] ??
                   "/images/categories/pvc-valve.jpg";

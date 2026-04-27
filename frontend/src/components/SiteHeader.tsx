@@ -195,8 +195,8 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 no-underline">
-            <img src={siteAssets.logo} alt="Super flow logo" className="h-16 w-auto" />
-            <span className="sf-logo-text">Superflow</span>
+            <img src={siteAssets.logo} alt="Super flow logo" className="h-18 w-auto " />
+            <span className="sf-logo-text" style={{ color: "#201e1f" }}>Superflow PVC</span>
           </Link>
 
           {/* Mobile/tablet menu toggle */}

@@ -11,9 +11,8 @@ export const siteAssets = {
     "pvc-pipes": "/images/categories/pvc-pipes.jpg",
     "pvc-fittings": "/images/categories/pvc-fitting.jpg",
     "pvc-valve": "/images/categories/pvc-valve.jpg",
-    "pvc-disc-filter": "/images/categories/pvc-disc-filter.jpg",  // ← make sure this key exists and points to the right file
-    "pvc-strainer": "/images/categories/pvc-valve.jpg",
-    "bs-standard-female-threaded-fittings": "/images/categories/pvc-valve.jpg",
+    "pvc-disc-filters-and-strainers": "/images/categories/pvc-disc-filters-and-strainers.jpg", // ✅ new slug
+    "bs-standard-female-threaded-fittings": "/images/categories/bs-standard-female-threaded-fittings.jpg",
   },
   sections: {
     aboutCompany: "/images/sections/about-company.jpg",

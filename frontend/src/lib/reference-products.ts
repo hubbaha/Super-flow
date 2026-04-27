@@ -15,6 +15,7 @@ export type ReferenceProduct = {
   name: string;
   slug: string;
   image?: string;
+  images?: string[];
   preview?: string;
   filterTags?: string[];
   descriptionHtml: string;
@@ -113,6 +114,13 @@ function normalizeProduct(
   }
 
   const image = typeof item.image === "string" ? item.image : undefined;
+
+// ✅ ADD THIS right after
+const images = Array.isArray(item.images)
+  ? item.images.filter((img): img is string => typeof img === "string" && img.trim() !== "")
+  : image
+  ? [image]
+  : [];
   const preview =
     typeof item.preview === "string"
       ? item.preview
@@ -142,6 +150,7 @@ function normalizeProduct(
     name,
     slug,
     image,
+    images, 
     preview,
     filterTags,
     descriptionHtml: descriptionHtml || `<p>${description}</p>`,
@@ -221,16 +230,33 @@ const readReferenceProducts = cache(async (): Promise<ReferenceProduct[]> => {
 
 export async function getReferenceProductsByCategory(categorySlug: string) {
   const products = await readReferenceProducts();
+
+  // Merged category: fetch products from both old slugs
+  if (categorySlug === "pvc-disc-filters-and-strainers") {
+    return products.filter(
+      (product) =>
+        product.categorySlug === "pvc-disc-filter" ||
+        product.categorySlug === "pvc-strainer",
+    );
+  }
+
   return products.filter((product) => product.categorySlug === categorySlug);
 }
-
 export async function getReferenceProducts() {
   return readReferenceProducts();
 }
 
 export async function getReferenceProduct(categorySlug: string, productSlug: string) {
   const products = await readReferenceProducts();
+
+  // ✅ If visiting via merged slug, search both old slugs
+  const slugsToSearch =
+    categorySlug === "pvc-disc-filters-and-strainers"
+      ? ["pvc-disc-filter", "pvc-strainer"]
+      : [categorySlug];
+
   return products.find(
-    (product) => product.categorySlug === categorySlug && product.slug === productSlug,
+    (product) =>
+      slugsToSearch.includes(product.categorySlug) && product.slug === productSlug,
   );
 }
