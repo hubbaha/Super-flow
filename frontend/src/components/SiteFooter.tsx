@@ -111,8 +111,8 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
             {/* Brand col */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-3 mb-4">
-                <img src={siteAssets.logo} alt="Super flow logo" className="h-14 w-auto" />
-                <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'white', letterSpacing: '-0.02em' }}>
+                <img src={siteAssets.logo} alt="Super flow logo" className="h-16 w-auto" />
+                <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'white', letterSpacing: '-0.02em' , marginLeft:-16 }}>
                   Superflow PVC
                 </span>
               </div>

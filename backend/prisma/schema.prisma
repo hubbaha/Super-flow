@@ -37,8 +37,8 @@ model Specification {
 model TechnicalTable {
   id        Int     @id @default(autoincrement())
   size      String
-  diameter  String
-  thickness String
+  od_mm     String
+  weight_kg String
   productId Int
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }

@@ -522,7 +522,7 @@
         "description": "PVC water nozzle is used to control the flow and direction of water discharge in irrigation, cooling, and industrial spray applications. Made from high-quality PVC with good chemical resistance and UV stability. Available in various orifice sizes and thread connections.",
         "specifications": {
           "material": "PVC",
-          "color": "Gray / White",
+          "color": "Gray ",
           "size": "1/4\" - 2\"",
           "connection": "NPT Male or Female Thread",
           "application": "Irrigation, spray systems, cooling towers, industrial washing"
@@ -698,7 +698,7 @@
         "description": "PVC pipe clip (pipe clamp / saddle clamp) is used to support, guide, and secure PVC pipes to walls, ceilings, or structural supports. Available in single and double clip styles with pre-drilled mounting holes. Resistant to corrosion and UV degradation.",
         "specifications": {
           "material": "PVC",
-          "color": "Gray / White",
+          "color": "Gray ",
           "size": "Fits pipe OD 20mm - 160mm",
           "mounting": "Single screw or double screw",
           "application": "Pipe support and fixing on walls, ceilings, and structures in plumbing and industrial installations"
@@ -789,10 +789,10 @@
         "image": "/images/products/bs-pvc-double-female-socket.jpg",
         "category": "BS Standard Female Threaded Fittings",
         "preview": "BS standard PVC double female socket for joining two male-threaded pipes or fittings.",
-        "description": "BS standard PVC double female socket (female coupling F/F) connects two male BSPT threaded pipes or fittings in a straight run. Manufactured to BS EN 10226-2 / BS-21 standard in white PVC. Suitable for cold water supply, irrigation, and general plumbing applications. Resistant to corrosion and a wide range of chemicals.",
+        "description": "BS standard PVC double female socket (female coupling F/F) connects two male BSPT threaded pipes or fittings in a straight run. Manufactured to BS EN 10226-2 / BS-21 standard in Gray PVC. Suitable for cold water supply, irrigation, and general plumbing applications. Resistant to corrosion and a wide range of chemicals.",
         "specifications": {
           "material": "PVC / UPVC",
-          "color": "White",
+          "color": "Gray",
           "standard": "BS EN 10226-2 / BS-21",
           "thread_standard": "BSPT (BS-21)",
           "size": "20mm - 63mm",
@@ -819,7 +819,7 @@
         "description": "BS standard PVC reducing female threaded socket (female reducing coupling F/F) connects two male BSPT threaded pipes or fittings of different sizes in a straight run. Manufactured to BS EN 10226-2 / BS-21 standard. Used where a pipe size reduction is required in threaded plumbing, water supply, and irrigation systems.",
         "specifications": {
           "material": "PVC / UPVC",
-          "color": "White",
+          "color": "Gray",
           "standard": "BS EN 10226-2 / BS-21",
           "thread_standard": "BSPT (BS-21)",
           "size": "1-1/2\"",
@@ -842,7 +842,7 @@
         "description": "BS standard PVC three-side threaded female tee (female tee F/F/F) provides a T-shaped branch connection with BSPT female threads on all three outlets. Manufactured to BS EN 10226-2 / BS-21 standard. Used for branching threaded piping systems in cold water supply, plumbing, and irrigation applications.",
         "specifications": {
           "material": "PVC / UPVC",
-          "color": "White",
+          "color": "Gray",
           "standard": "BS EN 10226-2 / BS-21",
           "thread_standard": "BSPT (BS-21)",
           "size": "1/2\" - 1-1/4\"",
@@ -869,7 +869,7 @@
         "description": "BS standard PVC double threaded female elbow (female elbow F/F) provides a 90° directional change with BSPT female threads on both ends. Manufactured to BS EN 10226-2 / BS-21 standard. Used to connect two male-threaded pipes or fittings at right angles in cold water supply, irrigation, and plumbing systems.",
         "specifications": {
           "material": "PVC / UPVC",
-          "color": "White",
+          "color": "Gray",
           "standard": "BS EN 10226-2 / BS-21",
           "thread_standard": "BSPT (BS-21)",
           "angle": "90°",
@@ -1275,7 +1275,7 @@
         "description": "PVC no-return valve (NRV) 6 inch is a large-bore check valve that allows flow in one direction only and prevents reverse flow when the pump stops or pressure drops. Available as a flanged or socket connection swing-type NRV. Manufactured from UPVC for excellent chemical and UV resistance. Suitable for municipal water supply, sewage, pump stations, and large industrial pipelines.",
         "specifications": {
           "material": "PVC / UPVC body, PVC or rubber-lined disc",
-          "color": "White",
+          "color": "Gray",
           "standard": "ISO 727 / BS 5153",
           "size": "6\" (DN150)",
           "connection": "Flanged (ANSI 150 / PN10) or Socket (Solvent Weld)",
