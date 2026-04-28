@@ -121,18 +121,26 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
               </p>
               {/* Socials */}
               <div className="mt-5 flex gap-2">
-                <a href="#" className="sf-social-btn">
+                <a href="https://www.linkedin.com/in/pvc-city-546b8836b?utm_source=share_via&utm_content=profile&utm_medium=member_ios"  target="_blank"
+                rel="noopener noreferrer"
+                  className="sf-social-btn">
                   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
                     <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
                     <circle cx="4" cy="4" r="2" />
                   </svg>
                 </a>
-                <a href="#" className="sf-social-btn">
+                <a 
+                  href="https://wa.me/923314766611" 
+                  className="sf-social-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    <path d="M20.52 3.48A11.82 11.82 0 0 0 12.01 0C5.37 0 .01 5.36.01 12c0 2.11.55 4.17 1.6 6L0 24l6.18-1.62A11.94 11.94 0 0 0 12.01 24c6.63 0 12-5.36 12-12 0-3.2-1.25-6.2-3.49-8.52zM12 21.82c-1.82 0-3.6-.49-5.16-1.42l-.37-.22-3.67.96.98-3.58-.24-.37A9.78 9.78 0 0 1 2.18 12c0-5.41 4.4-9.82 9.82-9.82 2.62 0 5.08 1.02 6.93 2.87A9.75 9.75 0 0 1 21.82 12c0 5.41-4.4 9.82-9.82 9.82zm5.4-7.36c-.3-.15-1.78-.88-2.06-.98-.27-.1-.47-.15-.66.15-.2.3-.76.98-.93 1.18-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.9-2.2-.23-.55-.47-.48-.66-.49h-.56c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.52 0 1.48 1.08 2.91 1.23 3.11.15.2 2.13 3.25 5.16 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.78-.73 2.03-1.44.25-.71.25-1.32.17-1.44-.07-.12-.27-.2-.57-.35z"/>
                   </svg>
                 </a>
-                <a href="#" className="sf-social-btn">
+                <a href="https://www.facebook.com/pvccity" className="sf-social-btn" target="_blank"
+                rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
                     <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
                   </svg>
@@ -265,16 +273,12 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
         </div>{/* end max-w-7xl */}
 
         {/* ── Bottom bar ── */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '16px 24px' }}>
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 md:flex-row">
-            <p style={{ fontSize: '0.75rem', color: '#475569' }}>
+        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.06)', padding: '16px 24px' }}>
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3">
+            <p style={{ fontSize: '1rem', color: '#475569' }}>
               © {new Date().getFullYear()} Superflow. All rights reserved.
             </p>
-            <div className="flex gap-5">
-              <a href="#" className="sf-footer-bottom-link">Privacy Policy</a>
-              <a href="#" className="sf-footer-bottom-link">Terms of Use</a>
-              <a href="#" className="sf-footer-bottom-link">Sitemap</a>
-            </div>
+            
           </div>
         </div>
 
