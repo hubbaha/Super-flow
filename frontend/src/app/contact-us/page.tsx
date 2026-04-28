@@ -39,7 +39,7 @@ export default function ContactUsPage() {
                   </svg>
                 ),
                 label: "Phone",
-                value: "+1 (204) 000-0000",
+                value: "+92 331 4766611",
               },
               {
                 icon: (
@@ -49,7 +49,7 @@ export default function ContactUsPage() {
                   </svg>
                 ),
                 label: "Address",
-                value: "3340 St Marys Rd, Manitoba",
+                value: "12-Al-Qurtaba Fiber Glass Market, 5/A Main Ferozepur Road, Near Qurtaba Chawk, Lahore, Pakistan, 54000",
               },
             ].map(({ icon, label, value }) => (
               <div key={label} className="flex items-start gap-3">

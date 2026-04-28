@@ -231,7 +231,7 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
               </div>
             </div>
 
-            <Link href="/e-catalog" className={`sf-nav-link ${pathname.startsWith("/e-catalog") ? "active" : ""}`}>E-catalog</Link>
+            {/* <Link href="/e-catalog" className={`sf-nav-link ${pathname.startsWith("/e-catalog") ? "active" : ""}`}>E-catalog</Link> */}
             <Link href="/contact-us" className={`sf-nav-link ${pathname.startsWith("/contact-us") ? "active" : ""}`}>Contact Us</Link>
 
             <form onSubmit={handleSearchSubmit} className="ml-3">
@@ -302,13 +302,13 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
                 )}
               </div>
 
-              <Link
+              {/* <Link
                 href="/e-catalog"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`sf-mobile-link ${pathname.startsWith("/e-catalog") ? "active" : ""}`}
               >
                 E-catalog
-              </Link>
+              </Link> */}
               <Link
                 href="/contact-us"
                 onClick={() => setMobileMenuOpen(false)}

@@ -147,7 +147,7 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
                 {[
                   { href: "/", label: "Home" },
                   { href: "/products", label: "Products" },
-                  { href: "/e-catalog", label: "E-catalog" },
+                  // { href: "/e-catalog", label: "E-catalog" },
                   { href: "/contact-us", label: "Contact Us" },
                 ].map(link => (
                   <Link key={link.href} href={link.href} className="sf-footer-link">{link.label}</Link>
@@ -182,7 +182,8 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
                       <circle cx="12" cy="10" r="3" />
                     </svg>
                   </span>
-                  <span>Firozpur Road, Lahore, Pakistan</span>
+                  <span>12-Al-Qurtaba Fiber Glass Market, 5/A Main Ferozepur Road, Near Qurtaba Chawk, Lahore, Pakistan, 54000
+                </span>
                 </div>
                 <div className="sf-contact-item">
                   <span className="sf-contact-icon">
@@ -199,7 +200,7 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
                       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.21 1.18 2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
                     </svg>
                   </span>
-                  <span>+1 (204) 000-0000</span>
+                  <span>+92 331 4766611</span>
                 </div>
               </div>
             </div>

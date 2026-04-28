@@ -95,12 +95,12 @@
       },
       {
         "id": "sch80-pvc-equal-reducing-tee",
-        "name": "ASTM D 2467 SCH 80 PVC Equal Reducing Tee",
+        "name": "ASTM D 2467 SCH 80 PVC Reducing Tee",
         "slug": "sch80-pvc-equal-reducing-tee",
         "image": "/images/products/sch80-pvc-equal-reducing-tee.jpg",
         "category": "PVC Fittings",
         "preview": "SCH 80 PVC reducing tee to connect three pipes of equal or different sizes.",
-        "description": "SCH 80 PVC reducing tee allows branching of a pipeline with a smaller outlet branch. Manufactured to ASTM D 2467 standard, it offers excellent pressure resistance and chemical compatibility. Available in both equal and reducing configurations for flexible piping layout design.",
+        "description": "SCH 80 PVC reducing tee allows branching of a pipeline with a smaller outlet branch. Manufactured to ASTM D 2467 standard, it offers excellent pressure resistance and chemical compatibility. Available in reducing configurations for flexible piping layout design.",
         "specifications": {
           "material": "PVC / UPVC",
           "color": "Gray",
@@ -894,10 +894,6 @@
         "name": "PVC Sampling Valve",
         "slug": "pvc-sampling-valve",
         "image": "/images/products/pvc-sampling-valve.jpg",
-        "images": [
-          "/images/products/pvc-sampling-valve.jpg",
-          "/images/products/pvc-sampling-valve-2.jpg"
-        ],
         "category": "PVC Valve",
         "preview": "PVC sampling valve for drawing fluid samples from pipelines without shutting down the system.",
         "description": "PVC sampling valve is a quarter-turn plug-type valve designed for extracting fluid samples from pipelines or tanks in chemical processing, water treatment, and laboratory applications. It provides a leak-free seal when closed and a controlled sample flow when opened. Manufactured from high-quality UPVC for excellent chemical resistance and long service life.",
@@ -927,10 +923,7 @@
         "name": "PVC General Handle Butterfly Valve ASTM Standard",
         "slug": "pvc-butterfly-valve-astm",
         "image": "/images/products/pvc-butterfly-valve-astm.jpg",
-        "images": [
-          "/images/products/pvc-butterfly-valve-astm.jpg",
-          "/images/products/pvc-butterfly-valve-astm-2.jpg"
-        ],
+        
         "category": "PVC Valve",
         "preview": "ASTM standard PVC butterfly valve with general lever handle for flow control in large pipe systems.",
         "description": "PVC general handle butterfly valve (ASTM standard) is a quarter-turn wafer-style valve used to regulate or isolate flow in large-diameter pipe systems. The disc rotates 90° to fully open or close. Manufactured to ASTM standards with a PVC body and disc, EPDM seat, and stainless steel stem. Ideal for water treatment, irrigation, chemical processing, and industrial pipelines.",
@@ -964,10 +957,7 @@
         "name": "PVC Compact Ball Valve",
         "slug": "pvc-compact-ball-valve",
         "image": "/images/products/pvc-compact-ball-valve.jpg",
-        "images": [
-          "/images/products/pvc-compact-ball-valve.jpg",
-          "/images/products/pvc-compact-ball-valve-2.jpg"
-        ],
+     
         "category": "PVC Valve",
         "preview": "PVC compact ball valve for on/off flow control in tight-space piping applications.",
         "description": "PVC compact ball valve is a space-saving quarter-turn ball valve with socket or threaded ends. It features a full-bore PVC ball, PTFE seats, and EPDM O-ring seals for reliable shut-off in chemical, water supply, and industrial piping systems. Its compact design makes it ideal for installations with limited space.",
@@ -999,10 +989,7 @@
         "name": "PVC Threaded Ball Valve Standard",
         "slug": "pvc-threaded-ball-valve",
         "image": "/images/products/pvc-threaded-ball-valve.jpg",
-        "images": [
-          "/images/products/pvc-threaded-ball-valve.jpg",
-          "/images/products/pvc-threaded-ball-valve-2.jpg"
-        ],
+       
         "category": "PVC Valve",
         "preview": "PVC ball valve with male or female NPT/BSP threads for easy threaded pipe installation.",
         "description": "PVC threaded ball valve provides quarter-turn on/off flow control with NPT or BSP threaded ends for direct connection to threaded pipes or fittings. Features a full-bore PVC ball, PTFE seats, and lever handle. Manufactured from UPVC for high chemical resistance. Suitable for water supply, irrigation, and chemical distribution systems.",
@@ -1037,10 +1024,7 @@
         "name": "PVC True Union Ball Valve",
         "slug": "pvc-true-union-ball-valve",
         "image": "/images/products/pvc-true-union-ball-valve.jpg",
-        "images": [
-          "/images/products/pvc-true-union-ball-valve.jpg",
-          "/images/products/pvc-true-union-ball-valve-2.jpg"
-        ],
+      
         "category": "PVC Valve",
         "preview": "PVC true union ball valve for in-line removal and maintenance without disturbing pipework.",
         "description": "PVC true union ball valve features a two-piece union body construction that allows the valve to be removed from the pipeline for inspection or replacement without cutting the pipe. It offers a full-bore flow path, PTFE seats, EPDM seals, and a lever handle. Available in socket or threaded end connections. Ideal for systems requiring periodic maintenance.",
@@ -1072,10 +1056,7 @@
         "name": "PVC Foot Valve",
         "slug": "pvc-foot-valve",
         "image": "/images/products/pvc-foot-valve.jpg",
-        "images": [
-          "/images/products/pvc-foot-valve.jpg",
-          "/images/products/pvc-foot-valve-2.jpg"
-        ],
+      
         "category": "PVC Valve",
         "preview": "PVC foot valve installed at pump inlet to maintain prime and prevent backflow.",
         "description": "PVC foot valve is a spring-loaded non-return valve installed at the bottom of a suction pipe to keep the pump primed and prevent backflow when the pump stops. It features a built-in strainer screen to protect the pump from debris. Manufactured from UPVC with EPDM seals for chemical resistance and long service life.",
@@ -1108,10 +1089,7 @@
         "name": "PVC Double Union Ball Check Valve",
         "slug": "pvc-double-union-ball-check-valve",
         "image": "/images/products/pvc-double-union-ball-check-valve.jpg",
-        "images": [
-          "/images/products/pvc-double-union-ball-check-valve.jpg",
-          "/images/products/pvc-double-union-ball-check-valve-2.jpg"
-        ],
+     
         "category": "PVC Valve",
         "preview": "PVC double union ball check valve to prevent backflow with easy in-line removal.",
         "description": "PVC double union ball check valve uses a free-floating PVC ball to prevent reverse flow in piping systems. The double union design allows the valve body to be removed from the pipeline without cutting pipe, making it easy to inspect or replace the ball. Suitable for chemical dosing lines, water treatment, and pump discharge applications.",
@@ -1143,10 +1121,7 @@
         "name": "PVC Swing Check Valve",
         "slug": "pvc-swing-check-valve",
         "image": "/images/products/pvc-swing-check-valve.jpg",
-        "images": [
-          "/images/products/pvc-swing-check-valve.jpg",
-          "/images/products/pvc-swing-check-valve-2.jpg"
-        ],
+       
         "category": "PVC Valve",
         "preview": "PVC swing check valve allowing flow in one direction with gravity-assisted closure.",
         "description": "PVC swing check valve uses a hinged disc (clapper) that swings open under forward flow and closes by gravity when flow stops or reverses. It is designed for horizontal or vertical pipeline installation and provides reliable backflow prevention with low pressure drop. Manufactured from UPVC with EPDM seals for chemical and corrosion resistance.",
@@ -1178,10 +1153,7 @@
         "name": "PVC Wafer Check Valve",
         "slug": "pvc-wafer-check-valve",
         "image": "/images/products/pvc-wafer-check-valve.jpg",
-        "images": [
-          "/images/products/pvc-wafer-check-valve.jpg",
-          "/images/products/pvc-wafer-check-valve-2.jpg"
-        ],
+      
         "category": "PVC Valve",
         "preview": "PVC wafer check valve with dual-plate spring-assisted closure for compact in-line backflow prevention.",
         "description": "PVC wafer check valve is a slim, lightweight dual-plate (dual-disc) check valve designed to fit between pipe flanges. Spring-assisted discs open under forward flow and close instantly when flow stops, minimizing water hammer. Its wafer body design reduces installation space and weight compared to full-body check valves. Suitable for water treatment, industrial, and chemical systems.",
@@ -1212,10 +1184,7 @@
         "name": "PVC Air Relief Valve 1 Inch",
         "slug": "pvc-air-relief-valve-1inch",
         "image": "/images/products/pvc-air-relief-valve-1inch.jpg",
-        "images": [
-          "/images/products/pvc-air-relief-valve-1inch.jpg",
-          "/images/products/pvc-air-relief-valve-1inch-2.jpg"
-        ],
+    
         "category": "PVC Valve",
         "preview": "1 inch PVC air relief valve to automatically release trapped air from pressurized pipelines.",
         "description": "PVC air relief valve (1 inch) automatically vents trapped air from pressurized water pipelines to prevent air locks and maintain efficient flow. The float-operated mechanism opens to release air and closes when water fills the chamber. Manufactured from UPVC with stainless steel float for long service life. Suitable for water supply mains, irrigation systems, and industrial pipelines.",
@@ -1239,10 +1208,7 @@
         "name": "PVC Air Relief Valve 2 Inch",
         "slug": "pvc-air-relief-valve-2inch",
         "image": "/images/products/pvc-air-relief-valve-2inch.jpg",
-        "images": [
-          "/images/products/pvc-air-relief-valve-2inch.jpg",
-          "/images/products/pvc-air-relief-valve-2inch-2.jpg"
-        ],
+      
         "category": "PVC Valve",
         "preview": "2 inch PVC air relief valve for high-capacity air venting in large water pipelines.",
         "description": "PVC air relief valve (2 inch) provides high-capacity automatic air venting for larger-diameter pressurized water pipelines. It uses a float mechanism to release accumulated air pockets and re-seals when the chamber fills with water. Prevents air locks that cause flow loss and increased energy consumption in pumping systems. UPVC construction ensures chemical resistance.",
@@ -1266,10 +1232,7 @@
         "name": "PVC (NRV) No Return Valve 6 Inch",
         "slug": "pvc-nrv-6inch",
         "image": "/images/products/pvc-nrv-6inch.jpg",
-        "images": [
-          "/images/products/pvc-nrv-6inch.jpg",
-          "/images/products/pvc-nrv-6inch-2.jpg"
-        ],
+       
         "category": "PVC Valve",
         "preview": "6 inch PVC non-return valve (NRV) for large-bore backflow prevention in water and industrial systems.",
         "description": "PVC no-return valve (NRV) 6 inch is a large-bore check valve that allows flow in one direction only and prevents reverse flow when the pump stops or pressure drops. Available as a flanged or socket connection swing-type NRV. Manufactured from UPVC for excellent chemical and UV resistance. Suitable for municipal water supply, sewage, pump stations, and large industrial pipelines.",
@@ -1364,6 +1327,266 @@
           { "size": "1-1/2\"", "dn": "DN40", "flow_rate_m3h": "15", "micron_options": "20, 55, 100, 130, 200" },
           { "size": "2\"", "dn": "DN50", "flow_rate_m3h": "20", "micron_options": "20, 55, 100, 130, 200" },
           { "size": "3\"", "dn": "DN80", "flow_rate_m3h": "30", "micron_options": "55, 100, 130, 200" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "PVC Pipes",
+    "slug": "pvc-pipes",
+    "products": [
+      {
+        "id": "sch80-pvc-pipe",
+        "name": "PVC Pipe SCH 80",
+        "slug": "sch80-pvc-pipe",
+        "image": "/images/products/sch80-pvc-pipe.jpg",
+        "category": "PVC Pipes",
+        "preview": "SCH 80 gray PVC pipe manufactured to ASTM D1785 standard for high-pressure industrial and chemical piping systems.",
+        "description": "SCH 80 PVC pipe is manufactured to ASTM D1785 standard using Polyvinyl Chloride (PVC/UPVC) material. Featuring thicker walls than SCH 40, it is designed for high-pressure applications in industrial, chemical processing, and water treatment systems. Available in sizes from 1/2\" to 16\" with socket, rubber ring, or plain end connections. Certified by SGS, NSF, ISO, and COC with a 50-year warranty. Offers 30% higher flow compared to same-size steel pipe, excellent chemical and aging resistance, and smooth internal surface for minimal flow resistance.",
+        "specifications": {
+          "material": "PVC / UPVC (Polyvinyl Chloride)",
+          "color": "Gray (white or customized available)",
+          "standard": "ASTM D1785, SCH 80",
+          "size": "1/2\" - 16\"",
+          "connection": "Socket, Rubber Ring, Plain End",
+          "pressure_rating": "SCH 80 (varies by size and wall thickness)",
+          "working_temperature": "Up to 60°C",
+          "vicat_softening_temp": "≥80°C",
+          "density": "1330–1460 kg/m³",
+          "warranty": "50 years",
+          "certifications": "SGS, NSF, ISO, COC",
+          "application": "Industrial piping, chemical processing, water treatment, irrigation systems"
+        },
+        "filterTags": [
+          "SCH 80",
+          "ASTM D1785",
+          "PVC Pipe",
+          "High Pressure"
+        ],
+        "size_table": [
+          {
+            "size": "1/2\"",
+            "od_mm": "21.34",
+            "wall_thickness_mm": "3.73",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "3/4\"",
+            "od_mm": "26.67",
+            "wall_thickness_mm": "3.91",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "1\"",
+            "od_mm": "33.40",
+            "wall_thickness_mm": "4.55",
+            "tolerance_mm": "0~+0.53"
+          },
+          {
+            "size": "1-1/4\"",
+            "od_mm": "42.16",
+            "wall_thickness_mm": "4.85",
+            "tolerance_mm": "0~+0.58"
+          },
+          {
+            "size": "1-1/2\"",
+            "od_mm": "48.26",
+            "wall_thickness_mm": "5.08",
+            "tolerance_mm": "0~+0.61"
+          },
+          {
+            "size": "2\"",
+            "od_mm": "60.32",
+            "wall_thickness_mm": "5.54",
+            "tolerance_mm": "0~+0.66"
+          },
+          {
+            "size": "2-1/2\"",
+            "od_mm": "73.02",
+            "wall_thickness_mm": "7.01",
+            "tolerance_mm": "0~+0.84"
+          },
+          {
+            "size": "3\"",
+            "od_mm": "88.90",
+            "wall_thickness_mm": "7.62",
+            "tolerance_mm": "0~+0.91"
+          },
+          {
+            "size": "4\"",
+            "od_mm": "114.30",
+            "wall_thickness_mm": "8.56",
+            "tolerance_mm": "0~+1.02"
+          },
+          {
+            "size": "5\"",
+            "od_mm": "141.30",
+            "wall_thickness_mm": "9.52",
+            "tolerance_mm": "0~+1.14"
+          },
+          {
+            "size": "6\"",
+            "od_mm": "168.28",
+            "wall_thickness_mm": "10.97",
+            "tolerance_mm": "0~+1.32"
+          },
+          {
+            "size": "8\"",
+            "od_mm": "219.08",
+            "wall_thickness_mm": "12.70",
+            "tolerance_mm": "0~+1.52"
+          },
+          {
+            "size": "10\"",
+            "od_mm": "273.05",
+            "wall_thickness_mm": "15.06",
+            "tolerance_mm": "0~+1.80"
+          },
+          {
+            "size": "12\"",
+            "od_mm": "323.85",
+            "wall_thickness_mm": "17.45",
+            "tolerance_mm": "0~+2.08"
+          },
+          {
+            "size": "14\"",
+            "od_mm": "355.60",
+            "wall_thickness_mm": "19.05",
+            "tolerance_mm": "0~+2.29"
+          },
+          {
+            "size": "16\"",
+            "od_mm": "406.40",
+            "wall_thickness_mm": "21.41",
+            "tolerance_mm": "0~+2.57"
+          }
+        ]
+      },
+      {
+        "id": "sch40-pvc-pipe",
+        "name": "PVC Pipe SCH 40",
+        "slug": "sch40-pvc-pipe",
+        "image": "/images/products/sch40-pvc-pipe.jpg",
+        "category": "PVC Pipes",
+        "preview": "SCH 40 PVC pipe to ASTM D1785 standard for water supply, irrigation, and general industrial applications.",
+        "description": "SCH 40 PVC pipe is manufactured to ASTM D1785 standard using PVC/UPVC material. It is the most widely used schedule for general-purpose water supply, irrigation, drainage, and light industrial piping. Available in sizes from 1/2\" to 24\" with socket connections. Lighter than SCH 80 with a thinner wall, it offers excellent chemical resistance, smooth internal and external surfaces, simple installation, and low weight for easy handling. Certified by SGS, NSF, ISO, and COC with a 50-year warranty.",
+        "specifications": {
+          "material": "PVC / UPVC (Polyvinyl Chloride)",
+          "color": "Gray (white or customized available)",
+          "standard": "ASTM D1785, SCH 40",
+          "size": "1/2\" - 24\"",
+          "connection": "Socket",
+          "pressure_rating": "SCH 40 (varies by size and wall thickness)",
+          "working_temperature": "Up to 60°C",
+          "vicat_softening_temp": "≥80°C",
+          "density": "1330–1460 kg/m³",
+          "warranty": "50 years",
+          "certifications": "SGS, NSF, ISO, COC",
+          "application": "Water supply, irrigation, drainage, general industrial and agricultural piping"
+        },
+        "filterTags": [
+          "SCH 40",
+          "ASTM D1785",
+          "PVC Pipe",
+          "Water Supply"
+        ],
+        "size_table": [
+          {
+            "size": "1/2\"",
+            "od_mm": "21.34",
+            "wall_thickness_mm": "2.77",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "3/4\"",
+            "od_mm": "26.67",
+            "wall_thickness_mm": "2.87",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "1\"",
+            "od_mm": "33.40",
+            "wall_thickness_mm": "3.38",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "1-1/4\"",
+            "od_mm": "42.16",
+            "wall_thickness_mm": "3.56",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "1-1/2\"",
+            "od_mm": "48.26",
+            "wall_thickness_mm": "3.68",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "2\"",
+            "od_mm": "60.32",
+            "wall_thickness_mm": "3.91",
+            "tolerance_mm": "0~+0.51"
+          },
+          {
+            "size": "2-1/2\"",
+            "od_mm": "73.02",
+            "wall_thickness_mm": "5.16",
+            "tolerance_mm": "0~+0.61"
+          },
+          {
+            "size": "3\"",
+            "od_mm": "88.90",
+            "wall_thickness_mm": "5.49",
+            "tolerance_mm": "0~+0.66"
+          },
+          {
+            "size": "4\"",
+            "od_mm": "114.30",
+            "wall_thickness_mm": "6.02",
+            "tolerance_mm": "0~+0.71"
+          },
+          {
+            "size": "5\"",
+            "od_mm": "141.30",
+            "wall_thickness_mm": "6.55",
+            "tolerance_mm": "0~+0.79"
+          },
+          {
+            "size": "6\"",
+            "od_mm": "168.28",
+            "wall_thickness_mm": "7.11",
+            "tolerance_mm": "0~+0.79"
+          },
+          {
+            "size": "8\"",
+            "od_mm": "219.08",
+            "wall_thickness_mm": "8.18",
+            "tolerance_mm": "0~+0.86"
+          },
+          {
+            "size": "10\"",
+            "od_mm": "273.05",
+            "wall_thickness_mm": "9.27",
+            "tolerance_mm": "0~+1.12"
+          },
+          {
+            "size": "12\"",
+            "od_mm": "323.85",
+            "wall_thickness_mm": "10.31",
+            "tolerance_mm": "0~+1.24"
+          },
+          {
+            "size": "14\"",
+            "od_mm": "355.60",
+            "wall_thickness_mm": "11.10",
+            "tolerance_mm": "0~+1.35"
+          },
+          {
+            "size": "16\"",
+            "od_mm": "406.40",
+            "wall_thickness_mm": "12.70",
+            "tolerance_mm": "0~+1.52"
+          }
         ]
       }
     ]

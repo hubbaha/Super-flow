@@ -303,7 +303,7 @@ export default async function HomePage() {
           ))}
         </div>
 
-        {/* Distribution */}
+        {/* Distribution
         <section className="sf-reveal grid gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:grid-cols-2">
           <div className="space-y-4 p-8 md:p-10">
             <div className="sf-badge-orange"><span className="sf-dot sf-dot-orange" />Worldwide Distribution</div>
@@ -326,7 +326,7 @@ export default async function HomePage() {
               <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </Link>
           </div>
-        </section>
+        </section> */}
 
         {/* Categories - only 3 shown */}
         <section className="sf-reveal space-y-6">
