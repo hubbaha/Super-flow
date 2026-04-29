@@ -78,10 +78,28 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
           transition: color 0.2s;
         }
         .sf-footer-bottom-link:hover { color: #f97316; }
+        .sf-social-btn1 {
+              width: 44px;
+              height: 44px;
+              border-radius: 8px;
+              border: 1px solid rgba(249,115,22,0.3);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #f97316;
+              transition: border-color 0.2s, color 0.2s, background 0.2s;
+              cursor: pointer;
+              text-decoration: none;
+            }
+            .sf-social-btn1:hover { 
+              border-color: rgba(255,255,255,0.1); 
+              color: #64748b; 
+              background: rgba(100,116,139,0.08); 
+            }
 
         .sf-social-btn {
-          width: 34px;
-          height: 34px;
+          width: 44px;
+          height: 44px;
           border-radius: 8px;
           border: 1px solid rgba(255,255,255,0.1);
           display: flex;
@@ -275,7 +293,7 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
         {/* ── Bottom bar ── */}
         <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.06)', padding: '16px 24px' }}>
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3">
-            <p style={{ fontSize: '1rem', color: '#475569' }}>
+            <p style={{ fontSize: '0.90rem', color: '#475569' }}>
               © {new Date().getFullYear()} Superflow. All rights reserved.
             </p>
             

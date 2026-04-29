@@ -61,7 +61,7 @@ export default async function ProductsPage({ searchParams }: Props) {
               {results.map((product) => (
                 <Link
                 key={product.slug}
-                  href={`/categories/${product.categorySlug}/${product.slug}`}
+                  href={`/products/${product.categorySlug}/${product.slug}`}
                   className="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-md transition-shadow no-underline"
                 >
                   {product.image ? (
