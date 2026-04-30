@@ -233,6 +233,9 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
 
             {/* <Link href="/e-catalog" className={`sf-nav-link ${pathname.startsWith("/e-catalog") ? "active" : ""}`}>E-catalog</Link> */}
             <Link href="/contact-us" className={`sf-nav-link ${pathname.startsWith("/contact-us") ? "active" : ""}`}>Contact Us</Link>
+            <Link href="/admin/login" className={`sf-nav-link ${pathname.startsWith("/admin") ? "active" : ""}`}>
+              Admin
+            </Link>
 
             <form onSubmit={handleSearchSubmit} className="ml-3">
               <div className="sf-search-wrap">
@@ -316,6 +319,13 @@ export function SiteHeader({ categories }: { categories: HeaderCategory[] }) {
               >
                 Contact Us
               </Link>
+              <Link
+                  href="/admin/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`sf-mobile-link ${pathname.startsWith("/admin") ? "active" : ""}`}
+                >
+                  Admin
+                </Link>
 
               <form onSubmit={handleSearchSubmit} className="mt-2 flex gap-2">
                 <input

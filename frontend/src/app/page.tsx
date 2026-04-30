@@ -64,30 +64,53 @@ export default async function HomePage() {
     },
   ];
 
-  const categoryItems = categories.map((category: Category) => ({
-    id: category.id,
-    href: `/categories/${category.slug}`,
-    title: category.name,
-    image:
-      siteAssets.categories[category.slug as keyof typeof siteAssets.categories] ??
-      categoryImageFallback,
-    // ← Count from JSON reference products instead of database
-    count: referenceProducts.filter((p) => p.categorySlug === category.slug).length,
-  }));
+ // ✅ Build categoryItems (ADD slug here)
+const categoryItems = categories.map((category: Category) => ({
+  id: category.id,
+  slug: category.slug, // ✅ FIX 1: add slug
+  href: `/categories/${category.slug}`,
+  title: category.name, // you already use title, not name
+  image:
+    siteAssets.categories[
+      category.slug as keyof typeof siteAssets.categories
+    ] ?? categoryImageFallback,
+  count: referenceProducts.filter(
+    (p) => p.categorySlug === category.slug
+  ).length,
+}));
 
-  // Only show first 3 categories on homepage
-  const homeCategoryItems = categoryItems.length
-    ? categoryItems.slice(0, 3)
-    : preferredCategories.slice(0, 3).map((category, index) => ({
-        id: index + 1,
-        href: `/categories/${category.slug}`,
-        title: category.name,
-        image:
-          siteAssets.categories[category.slug as keyof typeof siteAssets.categories] ??
-          categoryImageFallback,
-        count: referenceProducts.filter((p) => p.categorySlug === category.slug).length,
-      }));
+// ✅ Preferred categories (fixed order)
+const preferredSlugs = ["pvc-fittings", "pvc-valve", "pvc-pipes"];
 
+// ✅ Homepage categories (ONLY these 3)
+const homeCategoryItems = categoryItems.length
+  ? preferredSlugs
+      .map((slug) => categoryItems.find((c) => c.slug === slug))
+      .filter(
+        (cat): cat is NonNullable<typeof cat> => Boolean(cat) // ✅ fixes null error
+      )
+  : preferredSlugs
+      .map((slug, index) => {
+        const category = preferredCategories.find((c) => c.slug === slug);
+        if (!category) return null;
+
+        return {
+          id: index + 1,
+          slug: category.slug, // ✅ keep consistent
+          href: `/categories/${category.slug}`,
+          title: category.name,
+          image:
+            siteAssets.categories[
+              category.slug as keyof typeof siteAssets.categories
+            ] ?? categoryImageFallback,
+          count: referenceProducts.filter(
+            (p) => p.categorySlug === category.slug
+          ).length,
+        };
+      })
+      .filter(
+        (cat): cat is NonNullable<typeof cat> => Boolean(cat)
+      );
   const stats = [
     { value: "1992", label: "Founded", accent: "#f97316" },
     { value: "30+", label: "Years Experience", accent: "#2563eb" },

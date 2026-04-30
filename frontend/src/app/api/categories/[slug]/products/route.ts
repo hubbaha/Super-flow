@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: Promise<{ slug: string }> },
+  { params }: { params: { slug: string } },
 ) {
   const { slug } = await params;
   const category = await prisma.category.findUnique({
@@ -18,10 +18,13 @@ export async function GET(
 
   const products = await prisma.product.findMany({
     where: { categoryId: category.id },
-    include: { category: true },
+    include: {
+      category: true,
+      specs: true,
+      tables: true,
+    },
     orderBy: { name: "asc" },
   });
-
   return Response.json({ category, products });
 }
 
