@@ -28,7 +28,8 @@ export default async function CategoryPage({
 
   const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10));
   const isPreferredCategory = preferredCategories.some((c) => c.slug === slug);
-  const referenceProducts = await getReferenceProductsByCategory(slug);
+  const data = await getCategoryProductsData(slug);
+  const referenceProducts = data ? [] : await getReferenceProductsByCategory(slug);
 
   /* ─── Helper: build href preserving existing params ─── */
   const buildHref = (updates: { page?: number }) => {
@@ -193,9 +194,6 @@ export default async function CategoryPage({
       </section>
     );
   }
-
-  /* ─── Catalog-data branch ─── */
-  const data = await getCategoryProductsData(slug);
 
   if (!data) {
     const categories = await getCategoriesData();

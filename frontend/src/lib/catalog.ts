@@ -1,12 +1,15 @@
 import { prisma } from "@/lib/prisma";
+import { preferredCategories } from "@/lib/category-config";
 
 export async function getCategoriesData() {
   try {
     return await prisma.category.findMany({
+      where: {
+        slug: { in: preferredCategories.map((category) => category.slug) },
+      },
       include: {
         _count: { select: { products: true } },
       },
-      orderBy: { name: "asc" },
     });
   } catch {
     return [];

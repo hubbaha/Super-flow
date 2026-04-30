@@ -16,9 +16,12 @@ export default async function ProductDetailPage({
   params: Promise<{ categorySlug: string; productSlug: string }>;
 }) {
   const { categorySlug, productSlug } = await params;
-  const referenceProduct = await getReferenceProduct(categorySlug, productSlug);
+  const product = await getProductData(categorySlug, productSlug);
 
-  if (referenceProduct) {
+  if (!product) {
+    const referenceProduct = await getReferenceProduct(categorySlug, productSlug);
+    if (!referenceProduct) notFound();
+
     // Resolve the display category slug — always show merged page in breadcrumb
     const displayCategorySlug =
       referenceProduct.categorySlug === "pvc-disc-filter" ||
@@ -71,7 +74,7 @@ export default async function ProductDetailPage({
                   className="h-100 w-full object-cover sm:h-100 lg:h-140"
                 />
               ) : (
-                <div className="flex h-56 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-72 lg:h-80">
+                <div className="flex h-70 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-72 lg:h-80">
                   <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                   </svg>
@@ -118,9 +121,6 @@ export default async function ProductDetailPage({
       </section>
     );
   }
-
-  const product = await getProductData(categorySlug, productSlug);
-  if (!product) notFound();
 
   return (
     <section className="w-full min-w-0 space-y-6 overflow-hidden px-4 sm:px-6 lg:px-0">

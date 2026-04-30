@@ -26,6 +26,7 @@ export default function AdminDashboard() {
   const [filterCat, setFilterCat] = useState<number | "">("");
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [syncing, setSyncing] = useState(false);
   const [formError, setFormError] = useState("");
 
   // Extra spec/table rows state
@@ -55,10 +56,11 @@ export default function AdminDashboard() {
     event.preventDefault();
     const token = localStorage.getItem("adminToken");
     if (!token) return;
+    const form = event.currentTarget;
 
     setSubmitting(true);
     setFormError("");
-    const fd = new FormData(event.currentTarget);
+    const fd = new FormData(form);
 
     try {
       await createAdminProduct(token, {
@@ -74,12 +76,12 @@ export default function AdminDashboard() {
 
       const refreshed = await getAdminProducts(token);
       setProducts(refreshed);
-      event.currentTarget.reset();
+      form.reset();
       setSpecs([{ key: "Standard", value: "" }]);
       setTables([{ size: "", od_mm: "", weight_kg: "" }]);
       setShowForm(false);
-    } catch {
-      setFormError("Failed to create product. Please try again.");
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "Failed to create product. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -89,8 +91,31 @@ export default function AdminDashboard() {
     if (!confirm("Delete this product? This cannot be undone.")) return;
     const token = localStorage.getItem("adminToken");
     if (!token) return;
-    await deleteAdminProduct(token, id);
-    setProducts((prev) => prev.filter((p) => p.id !== id));
+    try {
+      await deleteAdminProduct(token, id);
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "Failed to delete product.");
+    }
+  }
+
+  async function onSyncProducts() {
+    const token = localStorage.getItem("adminToken");
+    if (!token) return;
+    setSyncing(true);
+    setFormError("");
+    try {
+      const [p, c] = await Promise.all([
+        getAdminProducts(token, { syncFromJson: true }),
+        getCategories(),
+      ]);
+      setProducts(p);
+      setCategories(c);
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "Failed to sync products.");
+    } finally {
+      setSyncing(false);
+    }
   }
 
   const filteredProducts = products.filter((p) => {
@@ -192,6 +217,13 @@ export default function AdminDashboard() {
                 className="bg-slate-900 hover:bg-slate-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition whitespace-nowrap"
               >
                 {showForm ? "Cancel" : "+ Add Product"}
+              </button>
+              <button
+                onClick={onSyncProducts}
+                disabled={syncing}
+                className="bg-blue-600 hover:bg-blue-500 disabled:opacity-60 text-white text-sm font-semibold px-5 py-2 rounded-lg transition whitespace-nowrap"
+              >
+                {syncing ? "Syncing..." : "Sync JSON Products"}
               </button>
             </div>
 

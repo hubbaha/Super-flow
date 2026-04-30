@@ -17,9 +17,11 @@ type Props = {
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
   const normalizedQuery = params.search?.trim().toLowerCase() ?? "";
+  const categories = await getCategoriesData();
   const referenceProducts = await getReferenceProducts();
 
-  if (referenceProducts.length) {
+  // Prefer database so admin add/delete is reflected immediately on site.
+  if (!categories.length && referenceProducts.length) {
     // ── SEARCH RESULTS ──────────────────────────────────────────
     if (normalizedQuery) {
       const results = referenceProducts.filter(
@@ -174,7 +176,6 @@ export default async function ProductsPage({ searchParams }: Props) {
   }
 
   // ── FALLBACK: database-driven ────────────────────────────────
-  const categories = await getCategoriesData();
   const categoryItems = categories.map((category) => ({
     id: category.id,
     href: `/categories/${category.slug}`,

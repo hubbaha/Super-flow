@@ -74,9 +74,7 @@ const categoryItems = categories.map((category: Category) => ({
     siteAssets.categories[
       category.slug as keyof typeof siteAssets.categories
     ] ?? categoryImageFallback,
-  count: referenceProducts.filter(
-    (p) => p.categorySlug === category.slug
-  ).length,
+  count: category._count?.products ?? 0,
 }));
 
 // ✅ Preferred categories (fixed order)

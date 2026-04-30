@@ -1472,7 +1472,7 @@
         "description": "SCH 40 PVC pipe is manufactured to ASTM D1785 standard using PVC/UPVC material. It is the most widely used schedule for general-purpose water supply, irrigation, drainage, and light industrial piping. Available in sizes from 1/2\" to 24\" with socket connections. Lighter than SCH 80 with a thinner wall, it offers excellent chemical resistance, smooth internal and external surfaces, simple installation, and low weight for easy handling. Certified by SGS, NSF, ISO, and COC with a 50-year warranty.",
         "specifications": {
           "material": "PVC / UPVC (Polyvinyl Chloride)",
-          "color": "Gray (white or customized available)",
+          "color": "Gray ",
           "standard": "ASTM D1785, SCH 40",
           "size": "1/2\" - 24\"",
           "connection": "Socket",

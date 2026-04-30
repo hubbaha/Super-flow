@@ -19,11 +19,24 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     cache: "no-store",
   });
 
+  const contentType = response.headers.get("content-type") ?? "";
+  const isJson = contentType.includes("application/json");
+
   if (!response.ok) {
-    throw new Error(`API request failed: ${response.status}`);
+    const errorBody = isJson ? await response.json().catch(() => null) : null;
+    const message =
+      errorBody && typeof errorBody.message === "string"
+        ? errorBody.message
+        : `API request failed: ${response.status}`;
+    throw new Error(message);
   }
 
-  return response.json() as Promise<T>;
+  // Some successful endpoints (e.g. DELETE 204) return no body.
+  if (response.status === 204 || response.status === 205 || !isJson) {
+    return undefined as T;
+  }
+
+  return (await response.json()) as T;
 }
 
 export async function getCategories() {
@@ -59,8 +72,9 @@ export async function adminLogin(email: string, password: string) {
   });
 }
 
-export async function getAdminProducts(token: string) {
-  return request<Product[]>("/admin/products", {
+export async function getAdminProducts(token: string, options?: { syncFromJson?: boolean }) {
+  const query = options?.syncFromJson ? "?sync=1" : "";
+  return request<Product[]>(`/admin/products${query}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 }

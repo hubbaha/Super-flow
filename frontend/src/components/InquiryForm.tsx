@@ -6,6 +6,7 @@ import { createInquiry } from "@/lib/api";
 export function InquiryForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
+  const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/[^\d]/g, "");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,13 +21,34 @@ export function InquiryForm() {
         message: String(formData.get("message")),
         buyerType: String(formData.get("buyerType")),
       });
+
+      if (whatsappNumber) {
+        const text = [
+          "New Inquiry",
+          `Name: ${String(formData.get("name"))}`,
+          `Email: ${String(formData.get("email"))}`,
+          `Buyer Type: ${String(formData.get("buyerType"))}`,
+          `Message: ${String(formData.get("message"))}`,
+        ].join("\n");
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      }
+
       event.currentTarget.reset();
       setMessage({
-        text: "Inquiry submitted successfully. Our team will contact you shortly.",
+        text: whatsappNumber
+          ? "Inquiry submitted and WhatsApp chat opened."
+          : "Inquiry submitted successfully. Our team will contact you shortly.",
         type: "success",
       });
-    } catch {
-      setMessage({ text: "Unable to submit inquiry right now. Please try again.", type: "error" });
+    } catch (error) {
+      setMessage({
+        text:
+          error instanceof Error
+            ? error.message
+            : "Unable to submit inquiry right now. Please try again.",
+        type: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -56,7 +78,7 @@ export function InquiryForm() {
           <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             Full Name
           </label>
-          <input name="name" placeholder="John Smith" required className={inputClass} />
+          <input name="name" placeholder="Enter your name" required className={inputClass} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -65,7 +87,7 @@ export function InquiryForm() {
           <input
             name="email"
             type="email"
-            placeholder="john@company.com"
+            placeholder="Enter your email"
             required
             className={inputClass}
           />

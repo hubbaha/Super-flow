@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { preferredCategories } from "@/lib/category-config";
 
 export const runtime = "nodejs";
 
@@ -8,9 +9,15 @@ export async function GET(_req: NextRequest) {
     include: {
       _count: { select: { products: true } },
     },
-    orderBy: { name: "asc" },
+    where: {
+      slug: { in: preferredCategories.map((category) => category.slug) },
+    },
   });
 
-  return Response.json(categories);
+  const ordered = preferredCategories
+    .map((preferred) => categories.find((category) => category.slug === preferred.slug))
+    .filter((category): category is (typeof categories)[number] => Boolean(category));
+
+  return Response.json(ordered);
 }
 
