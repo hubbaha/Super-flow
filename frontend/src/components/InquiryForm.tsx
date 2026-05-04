@@ -12,12 +12,12 @@ export function InquiryForm() {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-  
+
     const name = String(formData.get("name"));
     const email = String(formData.get("email"));
     const message = String(formData.get("message"));
     const buyerType = String(formData.get("buyerType"));
-  
+
     // Build WhatsApp URL BEFORE any async call
     let whatsappUrl: string | null = null;
     if (whatsappNumber) {
@@ -30,29 +30,30 @@ export function InquiryForm() {
       ].join("\n");
       whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
     }
-  
+
     try {
       setLoading(true);
       setMessage(null);
-  
+
       await createInquiry({ name, email, message, buyerType });
-  
+
       form.reset();
-  
-      // Open WhatsApp AFTER successful inquiry save
+
+      // Open WhatsApp — mobile opens app, desktop opens new tab
       if (whatsappUrl) {
-        const a = document.createElement("a");
-        a.href = whatsappUrl;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          setTimeout(() => {
+            window.location.href = whatsappUrl!;
+          }, 500);
+        } else {
+          window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+        }
       }
-  
+
       setMessage({
         text: whatsappUrl
-          ? "Inquiry submitted and WhatsApp chat opened."
+          ? "Inquiry submitted! Opening WhatsApp…"
           : "Inquiry submitted successfully. Our team will contact you shortly.",
         type: "success",
       });
