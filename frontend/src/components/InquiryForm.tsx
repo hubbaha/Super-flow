@@ -12,32 +12,40 @@ export function InquiryForm() {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-
+  
+    const name = String(formData.get("name"));
+    const email = String(formData.get("email"));
+    const message = String(formData.get("message"));
+    const buyerType = String(formData.get("buyerType"));
+  
+    // Build WhatsApp URL BEFORE any async call
+    let whatsappUrl: string | null = null;
+    if (whatsappNumber) {
+      const text = [
+        "New Inquiry",
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Buyer Type: ${buyerType}`,
+        `Message: ${message}`,
+      ].join("\n");
+      whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+    }
+  
     try {
       setLoading(true);
       setMessage(null);
-      await createInquiry({
-        name: String(formData.get("name")),
-        email: String(formData.get("email")),
-        message: String(formData.get("message")),
-        buyerType: String(formData.get("buyerType")),
-      });
-
-      if (whatsappNumber) {
-        const text = [
-          "New Inquiry",
-          `Name: ${String(formData.get("name"))}`,
-          `Email: ${String(formData.get("email"))}`,
-          `Buyer Type: ${String(formData.get("buyerType"))}`,
-          `Message: ${String(formData.get("message"))}`,
-        ].join("\n");
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+  
+      await createInquiry({ name, email, message, buyerType });
+  
+      form.reset();
+  
+      // Open WhatsApp AFTER successful inquiry save
+      if (whatsappUrl) {
         window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       }
-
-      form.reset();
+  
       setMessage({
-        text: whatsappNumber
+        text: whatsappUrl
           ? "Inquiry submitted and WhatsApp chat opened."
           : "Inquiry submitted successfully. Our team will contact you shortly.",
         type: "success",

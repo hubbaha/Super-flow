@@ -30,7 +30,7 @@ export default function ContactUsPage() {
                   </svg>
                 ),
                 label: "Email",
-                value: "info@superflow.com",
+                value: "pvccity@outlook.com",
               },
               {
                 icon: (
