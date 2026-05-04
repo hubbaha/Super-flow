@@ -714,6 +714,10 @@ const data = [
         name: "PVC Disc Filter",
         slug: "pvc-disc-filter",
         image: "/images/products/pvc-disc-filter.jpg",
+        images: [
+          "/images/products/pvc-disc-filter.jpg",
+          "/images/products/pvc-disc-filter-2.jpg"
+        ],
         preview: "PVC disc filter using stacked grooved discs for fine filtration in irrigation and water treatment systems.",
         description: "PVC disc filter is a high-efficiency filtration device that uses a stack of grooved PVC or polypropylene discs compressed together to form a three-dimensional filtration matrix.",
         specs: [

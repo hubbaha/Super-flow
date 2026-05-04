@@ -139,19 +139,30 @@ export default async function ProductDetailPage({
       <div className="grid gap-8 overflow-hidden lg:grid-cols-[2fr_1fr]">
         <article className="min-w-0 space-y-6">
          {/* Main Product Card */}
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-              {product.image ? (
-                <ImageLightbox 
-                  src={product.image} 
-                  alt={product.name}
-                  className="h-96 w-full object-cover sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]"
-                />
-              ) : (
-                <div className="flex h-96 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]">
-                  <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                  </svg>
-                </div>
+         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+  {product.images && product.images.length > 0 ? (
+    <div className={`grid gap-2 ${product.images.length >= 2 ? "grid-cols-2" : "grid-cols-1"}`}>
+      {product.images.map((img, index) => (
+        <ImageLightbox
+          key={index}
+          src={img}
+          alt={`${product.name} ${index + 1}`}
+          className="h-96 w-full object-cover sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]"
+        />
+      ))}
+    </div>
+  ) : product.image ? (
+    <ImageLightbox
+      src={product.image}
+      alt={product.name}
+      className="h-96 w-full object-cover sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]"
+    />
+  ) : (
+    <div className="flex h-96 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]">
+      <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+      </svg>
+    </div>
   )}
             <div className="p-4 sm:p-7">
               <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-600">

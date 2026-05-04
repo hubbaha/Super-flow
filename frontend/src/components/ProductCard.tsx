@@ -22,7 +22,7 @@ export function ProductCard({ product }: Props) {
           <img
             src={imageSrc}
             alt={product.name}
-            className="h-70 w-full object-cover transition duration-500 group-hover:scale-105"
+            className="h-82 w-full object-cover transition duration-500 group-hover:scale-105"
           />
         </div>
       ) : (

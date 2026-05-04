@@ -20,6 +20,7 @@ model Product {
   slug        String           @unique
   description String
   image       String?
+  images      String[]         
   categoryId  Int
   category    Category         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   specs       Specification[]

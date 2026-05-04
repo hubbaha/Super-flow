@@ -25,6 +25,7 @@ export type Product = {
   slug: string;
   description: string;
   image?: string | null;
+  images?: string[] | null;
   categoryId: number;
   category: Category;
   specs: Specification[];
