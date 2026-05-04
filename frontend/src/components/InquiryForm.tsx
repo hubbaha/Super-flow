@@ -41,7 +41,13 @@ export function InquiryForm() {
   
       // Open WhatsApp AFTER successful inquiry save
       if (whatsappUrl) {
-        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+        const a = document.createElement("a");
+        a.href = whatsappUrl;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       }
   
       setMessage({
