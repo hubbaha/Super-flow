@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { LazyImage } from "@/components/LazyImage";
 type Props = {
   href: string;
   title: string;
@@ -14,11 +14,11 @@ export function CategoryCard({ href, title, image, count }: Props) {
       className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="overflow-hidden">
-        <img
+        <LazyImage
           src={image}
           alt={title}
           className="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
+        /> 
       </div>
       <div className="flex items-center justify-between p-5">
         <h3 className="text-lg font-semibold text-slate-900 group-hover:text-blue-700 transition">

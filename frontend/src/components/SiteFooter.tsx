@@ -135,7 +135,7 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
                 </span>
               </div>
               <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.7, maxWidth: '220px' }}>
-                Industrial PVC and CPVC piping systems for water, utilities, and process industries since 1992.
+                Industrial PVC and UPVC piping systems for water, utilities, and process industries since 1992.
               </p>
               {/* Socials */}
               <div className="mt-5 flex gap-2">
@@ -218,7 +218,7 @@ export function SiteFooter({ categories }: { categories: FooterCategory[] }) {
                       <polyline points="22,6 12,13 2,6" />
                     </svg>
                   </span>
-                  <span>pvccity@outlook.com</span>
+                  <span>superflowpvc@gmail.com</span>
                 </div>
                 <div className="sf-contact-item">
                   <span className="sf-contact-icon">

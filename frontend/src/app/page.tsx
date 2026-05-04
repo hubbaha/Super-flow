@@ -7,6 +7,7 @@ import { getReferenceProducts } from "@/lib/reference-products";
 import { homeSections, siteAssets } from "@/lib/site-assets";
 import type { Category } from "@/lib/types";
 import { preferredCategories } from "@/lib/category-config";
+import { LazyImage } from "@/components/LazyImage";
 
 export const dynamic = "force-dynamic";
 
@@ -412,7 +413,7 @@ const homeCategoryItems = categoryItems.length
         <section className="sf-reveal grid gap-6 md:grid-cols-2">
           <div className="sf-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
             <div className="sf-img-wrap mb-5">
-              <img src={siteAssets.sections.aboutCompany} alt="Industrial operations" className="h-44 w-full object-cover" />
+              <LazyImage src={siteAssets.sections.aboutCompany} alt="Industrial operations" className="h-44 w-full object-cover" />
             </div>
             <div className="sf-badge-orange mb-3"><span className="sf-dot sf-dot-orange" />Know Who We Are</div>
             <h2 className="sf-serif mt-2 text-3xl font-bold text-slate-900 leading-tight">Built for Industrial Reliability Since 1992</h2>
@@ -423,7 +424,7 @@ const homeCategoryItems = categoryItems.length
           </div>
           <div className="sf-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
             <div className="sf-img-wrap mb-5">
-              <img src={siteAssets.sections.industries} alt="Industry sectors" className="h-44 w-full object-cover" />
+              <LazyImage src={siteAssets.sections.industries} alt="Industry sectors" className="h-44 w-full object-cover" />
             </div>
             <div className="sf-badge-blue mb-3"><span className="sf-dot sf-dot-blue" />Service Is Our Purpose</div>
             <h2 className="sf-serif mt-2 text-3xl font-bold text-slate-900 leading-tight">Where Our Products Perform</h2>
@@ -488,7 +489,7 @@ const homeCategoryItems = categoryItems.length
         <section className="sf-reveal grid gap-6 md:grid-cols-2">
           <article className="sf-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm" style={{ borderTop: '3px solid #f97316' }}>
             <div className="sf-img-wrap mb-5">
-              <img src={siteAssets.sections.innovation} alt="Innovation" className="h-44 w-full object-cover" />
+              <LazyImage src={siteAssets.sections.innovation} alt="Innovation" className="h-44 w-full object-cover" />
             </div>
             <h3 className="sf-serif text-2xl font-bold text-slate-900">Our Continuous Innovation Journey</h3>
             <p className="mt-3 text-sm text-slate-600 leading-relaxed">
@@ -498,7 +499,7 @@ const homeCategoryItems = categoryItems.length
           </article>
           <article className="sf-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm" style={{ borderTop: '3px solid #2563eb' }}>
             <div className="sf-img-wrap mb-5">
-              <img src={siteAssets.sections.trustPartnership} alt="Commitment" className="h-44 w-full object-cover" />
+              <LazyImage src={siteAssets.sections.trustPartnership} alt="Commitment" className="h-44 w-full object-cover" />
             </div>
             <h3 className="sf-serif text-2xl font-bold text-slate-900">Commitment to Honesty and Independence</h3>
             <p className="mt-3 text-sm text-slate-600 leading-relaxed">

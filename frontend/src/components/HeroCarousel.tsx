@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import { LazyImage } from "@/components/LazyImage";
 type Props = {
   images: readonly string[];
 };
@@ -18,7 +18,7 @@ export function HeroCarousel({ images }: Props) {
 
   return (
     <div className="relative h-64 w-full overflow-hidden rounded-xl md:h-80">
-      <img src={images[index]} alt={`Slide ${index + 1}`} className="h-full w-full object-cover" />
+      <LazyImage src={images[index]} alt={`Slide ${index + 1}`} className="h-full w-full object-cover" />
       <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
         {images.map((_, i) => (
           <button

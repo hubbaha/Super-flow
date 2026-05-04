@@ -108,7 +108,13 @@ export default async function ProductDetailPage({
               <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
                 <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">Product Size Table</h2>
                 <div className="overflow-x-auto">
-                  <DataTable rows={referenceProduct.tables} />
+                  <DataTable rows={referenceProduct.tables.map((table) => ({
+                    id: 0,
+                    productId: 0,
+                    size: table.size ?? "",
+                    od_mm: table.od_mm ?? "",
+                    weight_kg: table.weight_kg ?? "",
+                  }))} />
                 </div>
               </div>
             ) : null}
