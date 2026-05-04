@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCategoriesData } from "@/lib/catalog";
+import { getCategoriesData, getProductsData } from "@/lib/catalog";
 import { getCategoryDisplayName, preferredCategories } from "@/lib/category-config";
 import { getReferenceProducts } from "@/lib/reference-products";
 import { siteAssets } from "@/lib/site-assets";
@@ -14,11 +14,98 @@ type Props = {
   }>;
 };
 
+function stripHtml(value: string) {
+  return value.replace(/<[^>]*>/g, "").trim();
+}
+
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
-  const normalizedQuery = params.search?.trim().toLowerCase() ?? "";
+  const searchRaw = params.search?.trim() ?? "";
+  const normalizedQuery = searchRaw.toLowerCase();
   const categories = await getCategoriesData();
   const referenceProducts = await getReferenceProducts();
+
+  /* Global catalog search when categories are stored in the database (live site). */
+  if (categories.length && searchRaw) {
+    const dbResults = await getProductsData(searchRaw);
+
+    return (
+      <section className="space-y-8">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 py-10 shadow-xl">
+          <div className="relative">
+            <span className="inline-block rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-300">
+              Search Results
+            </span>
+            <h1 className="mt-3 text-4xl font-bold tracking-tight text-white">
+              &ldquo;{searchRaw}&rdquo;
+            </h1>
+            <p className="mt-2 text-sm text-slate-400">
+              {dbResults.length} {dbResults.length === 1 ? "product" : "products"} found
+            </p>
+          </div>
+        </div>
+
+        <Link
+          href="/products"
+          className="inline-flex items-center gap-1 text-sm font-medium text-slate-500 transition-colors hover:text-orange-500"
+        >
+          ← Back to all products
+        </Link>
+
+        {dbResults.length ? (
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {dbResults.map((product) => {
+              const imageSrc = product.image?.trim() || `/images/products/${product.slug}.jpg`;
+              const excerpt = stripHtml(product.description);
+              return (
+                <Link
+                  key={product.id}
+                  href={`/products/${product.category.slug}/${product.slug}`}
+                  className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm no-underline transition-shadow hover:shadow-md"
+                >
+                  {imageSrc ? (
+                    <img
+                      src={imageSrc}
+                      alt={product.name}
+                      className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="flex h-48 w-full items-center justify-center bg-slate-100">
+                      <svg className="h-10 w-10 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                  <div className="p-5">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-500">
+                      {getCategoryDisplayName(product.category.slug)}
+                    </span>
+                    <h3 className="mt-1 line-clamp-2 text-sm font-semibold text-slate-900 transition-colors group-hover:text-orange-500">
+                      {product.name}
+                    </h3>
+                    {excerpt ? (
+                      <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-slate-500">{excerpt}</p>
+                    ) : null}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-16 text-center">
+            <p className="text-sm font-medium text-slate-500">No products matched your search.</p>
+            <Link href="/products" className="mt-3 text-sm text-orange-500 hover:underline">
+              Browse all products
+            </Link>
+          </div>
+        )}
+      </section>
+    );
+  }
 
   // Prefer database so admin add/delete is reflected immediately on site.
   if (!categories.length && referenceProducts.length) {
@@ -27,7 +114,8 @@ export default async function ProductsPage({ searchParams }: Props) {
       const results = referenceProducts.filter(
         (p) =>
           p.name.toLowerCase().includes(normalizedQuery) ||
-        p.categorySlug?.toLowerCase().includes(normalizedQuery) ||
+          p.categorySlug?.toLowerCase().includes(normalizedQuery) ||
+          stripHtml(p.descriptionHtml).toLowerCase().includes(normalizedQuery) ||
           (p.filterTags ?? []).some((tag: string) =>
             tag.toLowerCase().includes(normalizedQuery)
           )

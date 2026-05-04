@@ -54,6 +54,7 @@ export async function getProductsData(search?: string) {
               { name: { contains: normalizedSearch, mode: "insensitive" } },
               { description: { contains: normalizedSearch, mode: "insensitive" } },
               { category: { name: { contains: normalizedSearch, mode: "insensitive" } } },
+              { category: { slug: { contains: normalizedSearch, mode: "insensitive" } } },
             ],
           }
         : undefined,

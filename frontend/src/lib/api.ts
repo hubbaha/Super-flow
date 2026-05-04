@@ -85,6 +85,30 @@ export async function getAdminInquiries(token: string) {
   });
 }
 
+export async function uploadAdminProductImage(token: string, file: File) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${getApiBase()}/admin/upload`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+    cache: "no-store",
+  });
+
+  const contentType = response.headers.get("content-type") ?? "";
+  const isJson = contentType.includes("application/json");
+  const body = isJson ? await response.json().catch(() => null) : null;
+
+  if (!response.ok) {
+    const message =
+      body && typeof body.message === "string" ? body.message : `Upload failed: ${response.status}`;
+    throw new Error(message);
+  }
+
+  return body as { url: string };
+}
+
 export async function createAdminProduct(
   token: string,
   payload: {

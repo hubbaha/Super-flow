@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Admin-uploaded catalog images (tracked folder, not binary blobs)
+/public/uploads/products/*
+!/public/uploads/products/.gitkeep

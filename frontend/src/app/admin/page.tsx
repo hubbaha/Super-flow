@@ -8,6 +8,7 @@ import {
   getAdminInquiries,
   getAdminProducts,
   getCategories,
+  uploadAdminProductImage,
 } from "@/lib/api";
 import { Category, Inquiry, Product } from "@/lib/types";
 
@@ -28,6 +29,8 @@ export default function AdminDashboard() {
   const [submitting, setSubmitting] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [formError, setFormError] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [imageUploading, setImageUploading] = useState(false);
 
   // Extra spec/table rows state
   const [specs, setSpecs] = useState([{ key: "Standard", value: "" }]);
@@ -66,7 +69,7 @@ export default function AdminDashboard() {
       await createAdminProduct(token, {
         name: String(fd.get("name")),
         description: String(fd.get("description")),
-        image: String(fd.get("image")) || undefined,
+        image: imagePath.trim() || undefined,
         categoryId: Number(fd.get("categoryId")),
         specs: specs.filter((s) => s.key && s.value),
         tables: tables
@@ -77,6 +80,7 @@ export default function AdminDashboard() {
       const refreshed = await getAdminProducts(token);
       setProducts(refreshed);
       form.reset();
+      setImagePath("");
       setSpecs([{ key: "Standard", value: "" }]);
       setTables([{ size: "", od_mm: "", weight_kg: "" }]);
       setShowForm(false);
@@ -213,7 +217,13 @@ export default function AdminDashboard() {
                 </select>
               </div>
               <button
-                onClick={() => { setShowForm((v) => !v); setFormError(""); }}
+                onClick={() => {
+                  setShowForm((v) => {
+                    if (v) setImagePath("");
+                    return !v;
+                  });
+                  setFormError("");
+                }}
                 className="bg-slate-900 hover:bg-slate-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition whitespace-nowrap"
               >
                 {showForm ? "Cancel" : "+ Add Product"}
@@ -261,13 +271,51 @@ export default function AdminDashboard() {
                         ))}
                       </select>
                     </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-xs font-medium text-slate-600 mb-1">Image Path</label>
+                    <div className="md:col-span-2 space-y-2">
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Product image</label>
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                        <input
+                          type="file"
+                          accept="image/jpeg,image/png,image/webp,image/gif"
+                          disabled={imageUploading}
+                          className="text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-700 hover:file:bg-slate-200"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            e.target.value = "";
+                            if (!file) return;
+                            const t = localStorage.getItem("adminToken");
+                            if (!t) return;
+                            setImageUploading(true);
+                            setFormError("");
+                            try {
+                              const { url } = await uploadAdminProductImage(t, file);
+                              setImagePath(url);
+                            } catch (err) {
+                              setFormError(err instanceof Error ? err.message : "Image upload failed.");
+                            } finally {
+                              setImageUploading(false);
+                            }
+                          }}
+                        />
+                        {imageUploading ? (
+                          <span className="text-xs text-slate-500">Uploading…</span>
+                        ) : null}
+                      </div>
+                      <p className="text-xs text-slate-500">Upload a file (max 4 MB), or paste a path below.</p>
                       <input
-                        name="image"
-                        placeholder="/images/products/my-product.jpg"
+                        type="text"
+                        value={imagePath}
+                        onChange={(e) => setImagePath(e.target.value)}
+                        placeholder="/images/products/my-product.jpg or uploaded URL"
                         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
+                      {imagePath ? (
+                        <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-2">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={imagePath} alt="" className="h-14 w-14 rounded object-cover" />
+                          <span className="truncate text-xs text-slate-600">{imagePath}</span>
+                        </div>
+                      ) : null}
                     </div>
                     <div className="md:col-span-2">
                       <label className="block text-xs font-medium text-slate-600 mb-1">Description *</label>
@@ -381,7 +429,10 @@ export default function AdminDashboard() {
                   <div className="flex justify-end gap-3 pt-2">
                     <button
                       type="button"
-                      onClick={() => setShowForm(false)}
+                      onClick={() => {
+                        setShowForm(false);
+                        setImagePath("");
+                      }}
                       className="px-5 py-2 text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition"
                     >
                       Cancel

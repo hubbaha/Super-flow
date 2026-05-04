@@ -62,7 +62,7 @@ export default async function ProductDetailPage({
                       src={src}
                       alt={`${referenceProduct.name} ${idx + 1}`}
                       className={`w-full object-cover ${
-                        images.length === 2 ? "h-72 sm:h-80 lg:h-96" : "h-56 sm:h-64"
+                        images.length === 2 ? "h-80 sm:h-96 lg:h-[28rem]" : "h-64 sm:h-72 lg:h-80"
                       }`}
                     />
                   ))}
@@ -71,10 +71,10 @@ export default async function ProductDetailPage({
                 <ImageLightbox
                   src={images[0]}
                   alt={referenceProduct.name}
-                  className="h-100 w-full object-cover sm:h-100 lg:h-140"
+                  className="h-96 w-full object-cover sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]"
                 />
               ) : (
-                <div className="flex h-70 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-72 lg:h-80">
+                <div className="flex h-72 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-80 lg:h-96">
                   <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                   </svg>
@@ -144,10 +144,10 @@ export default async function ProductDetailPage({
                 <ImageLightbox 
                   src={product.image} 
                   alt={product.name}
-                  className="h-80 w-full object-cover sm:h-80 lg:h-80"
+                  className="h-96 w-full object-cover sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]"
                 />
               ) : (
-                <div className="flex h-80 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-80 lg:h-80">
+                <div className="flex h-96 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 sm:h-[26rem] lg:min-h-[32rem] lg:h-[36rem]">
                   <svg className="h-14 w-14 text-slate-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M13.5 12a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                   </svg>

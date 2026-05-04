@@ -10,7 +10,8 @@ export function InquiryForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
     try {
       setLoading(true);
@@ -34,7 +35,7 @@ export function InquiryForm() {
         window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setMessage({
         text: whatsappNumber
           ? "Inquiry submitted and WhatsApp chat opened."

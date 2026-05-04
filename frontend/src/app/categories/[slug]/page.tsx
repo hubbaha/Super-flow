@@ -112,7 +112,7 @@ export default async function CategoryPage({
                       <h3 className="line-clamp-2 break-words text-base font-semibold text-slate-900 transition group-hover:text-blue-700">
                         {product.name}
                       </h3>
-                      <p className="mt-2 line-clamp-2 flex-1 break-words text-sm leading-6 text-slate-500">
+                      <p className="mt-2 line-clamp-3 flex-1 break-words text-sm leading-6 text-slate-500">
                         {product.preview ?? "View technical details and full specifications."}
                       </p>
                       <div className="mt-4 border-t border-slate-100 pt-4">
