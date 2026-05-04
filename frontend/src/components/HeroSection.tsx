@@ -12,7 +12,7 @@ export function HeroSection() {
             Industrial Flow Solutions
           </p>
           <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-            Reliable PVC and CPVC Systems for Modern Industry
+            Reliable PVC and UPVC Systems for Modern Industry
           </h1>
           <p className="max-w-2xl text-base text-slate-200 md:text-lg">
             Engineered piping products for utility networks, processing plants, and critical infrastructure.
