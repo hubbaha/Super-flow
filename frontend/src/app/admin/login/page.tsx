@@ -17,7 +17,7 @@ export default function AdminLoginPage() {
       const password = String(form.get("password"));
       const data = await adminLogin(email, password);
       localStorage.setItem("adminToken", data.token);
-      router.push("/admin");
+      router.push("/admin/dashboard");
     } catch {
       setError("Invalid credentials.");
     }

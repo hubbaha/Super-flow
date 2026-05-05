@@ -1,5 +1,7 @@
 import type { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
+import { NextResponse } from "next/server";
+import { ADMIN_TOKEN_COOKIE } from "@/lib/auth-constants";
 
 export const runtime = "nodejs";
 
@@ -20,6 +22,16 @@ export async function POST(req: NextRequest) {
   }
 
   const token = jwt.sign({ email: body.email }, JWT_SECRET, { expiresIn: "1d" });
-  return Response.json({ token }, { status: 200 });
+  const response = NextResponse.json({ token }, { status: 200 });
+  response.cookies.set({
+    name: ADMIN_TOKEN_COOKIE,
+    value: token,
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 60 * 60 * 24,
+  });
+  return response;
 }
 

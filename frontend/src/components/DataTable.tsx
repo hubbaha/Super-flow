@@ -1,5 +1,3 @@
-import { TechnicalTable } from "@/lib/types";
-
 const COLUMN_LABELS: Record<string, string> = {
   size: "Size",
   diameter: "Diameter",
@@ -10,9 +8,16 @@ const COLUMN_LABELS: Record<string, string> = {
   length: "Length",
   id_mm: "ID (mm)",
 };
+type DataRow = Record<string, string | number | null | undefined>;
+type TableEntity = { data: DataRow | null };
+type Props = { rows: TableEntity[] | DataRow[] };
 
-export function DataTable({ rows }: { rows: TechnicalTable[] }) {
-  if (!rows.length) {
+export function DataTable({ rows }: Props) {
+  const normalizedRows = rows
+    .map((row) => ("data" in row ? row.data : row))
+    .filter((row): row is DataRow => Boolean(row) && typeof row === "object");
+
+  if (normalizedRows.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-sm text-slate-600">
         No size table data available.
@@ -20,11 +25,9 @@ export function DataTable({ rows }: { rows: TechnicalTable[] }) {
     );
   }
 
-  // Auto-detect columns, excluding internal fields
-  const columns = Object.keys(rows[0]).filter(
+  const columns = Object.keys(normalizedRows[0]).filter(
     (key) => key !== "id" && key !== "productId"
   );
-
   return (
     <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
       <table className="w-full text-left text-sm">
@@ -38,7 +41,7 @@ export function DataTable({ rows }: { rows: TechnicalTable[] }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
+          {normalizedRows.map((row, index) => (
             <tr
               key={index}
               className={`border-b border-slate-100 transition hover:bg-slate-50 ${
@@ -54,7 +57,7 @@ export function DataTable({ rows }: { rows: TechnicalTable[] }) {
                       : "text-slate-600"
                   }`}
                 >
-                  {row[col] ?? "—"}
+                  {row[col] == null || row[col] === "" ? "—" : String(row[col])}
                 </td>
               ))}
             </tr>

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getCategoriesData } from "@/lib/catalog";
 import { preferredCategories } from "@/lib/category-config";
+import WhatsappButton from "@/components/WhatsappButton";
 
 const fallbackNavCategories = [...preferredCategories];
 
@@ -20,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Super flow | Industrial Piping Solutions",
-  description: "Industrial PVC/CPVC product catalog and inquiry website",
+  description: "Industrial PVC/UPVC product catalog and inquiry website",
 };
 
 export default async function RootLayout({
@@ -56,6 +57,7 @@ export default async function RootLayout({
         <SiteHeader categories={navCategories} />
         <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 md:px-6 md:py-10">{children}</main>
         <SiteFooter categories={navCategories} />
+        <WhatsappButton />
       </body>
     </html>
   );

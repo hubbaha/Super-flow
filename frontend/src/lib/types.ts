@@ -14,9 +14,9 @@ export type Specification = {
 };
 
 export type TechnicalTable = {
-  id?: number;
-  productId?: number;
-  [key: string]: string | number | undefined;
+  id: number;
+  productId: number;
+  data: Record<string, string> | null;
 };
 
 export type Product = {

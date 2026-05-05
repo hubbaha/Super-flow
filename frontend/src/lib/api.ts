@@ -1,4 +1,4 @@
-import { Category, Inquiry, Product, Specification, TechnicalTable } from "./types";
+import { Category, Inquiry, Product, Specification } from "./types";
 
 function getApiBase() {
   const envBase = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -16,6 +16,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
       "Content-Type": "application/json",
       ...(options?.headers ?? {}),
     },
+    credentials: "include",
     cache: "no-store",
   });
 
@@ -72,26 +73,37 @@ export async function adminLogin(email: string, password: string) {
   });
 }
 
-export async function getAdminProducts(token: string, options?: { syncFromJson?: boolean }) {
+function getAuthHeaders(token?: string) {
+  return token ? { Authorization: `Bearer ${token}` } : undefined;
+}
+
+export async function adminLogout() {
+  return request<{ success: boolean }>("/auth/logout", {
+    method: "POST",
+  });
+}
+
+export async function getAdminProducts(token?: string, options?: { syncFromJson?: boolean }) {
   const query = options?.syncFromJson ? "?sync=1" : "";
   return request<Product[]>(`/admin/products${query}`, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: getAuthHeaders(token),
   });
 }
 
-export async function getAdminInquiries(token: string) {
+export async function getAdminInquiries(token?: string) {
   return request<Inquiry[]>("/admin/inquiries", {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: getAuthHeaders(token),
   });
 }
 
-export async function uploadAdminProductImage(token: string, file: File) {
+export async function uploadAdminProductImage(token: string | undefined, file: File) {
   const formData = new FormData();
   formData.append("file", file);
 
   const response = await fetch(`${getApiBase()}/admin/upload`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: getAuthHeaders(token),
+    credentials: "include",
     body: formData,
     cache: "no-store",
   });
@@ -110,26 +122,26 @@ export async function uploadAdminProductImage(token: string, file: File) {
 }
 
 export async function createAdminProduct(
-  token: string,
+  token: string | undefined,
   payload: {
     name: string;
     description: string;
     image?: string;
     categoryId: number;
     specs: Specification[];
-    tables: TechnicalTable[];
+    tables: Array<{ size?: string; od_mm?: string; weight_kg?: string }>;
   },
 ) {
   return request<Product>("/admin/products", {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: getAuthHeaders(token),
     body: JSON.stringify(payload),
   });
 }
 
-export async function deleteAdminProduct(token: string, id: number) {
+export async function deleteAdminProduct(token: string | undefined, id: number) {
   return request(`/admin/products/${id}`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: getAuthHeaders(token),
   });
 }

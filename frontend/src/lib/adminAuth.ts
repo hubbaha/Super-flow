@@ -1,4 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
+import type { NextRequest } from "next/server";
+import { ADMIN_TOKEN_COOKIE } from "@/lib/auth-constants";
 
 type AdminToken = JwtPayload & { email?: string };
 
@@ -10,8 +12,7 @@ function parseBearerToken(authHeader: string | null | undefined) {
   return authHeader.slice(7);
 }
 
-export function verifyAdminToken(authHeader: string | null | undefined): AdminToken | null {
-  const token = parseBearerToken(authHeader);
+export function verifyAdminToken(token: string | null | undefined): AdminToken | null {
   if (!token) return null;
 
   try {
@@ -20,5 +21,15 @@ export function verifyAdminToken(authHeader: string | null | undefined): AdminTo
   } catch {
     return null;
   }
+}
+
+export function getAdminTokenFromRequest(req: NextRequest) {
+  const authHeaderToken = parseBearerToken(req.headers.get("authorization"));
+  if (authHeaderToken) return authHeaderToken;
+  return req.cookies.get(ADMIN_TOKEN_COOKIE)?.value ?? null;
+}
+
+export function verifyAdminRequest(req: NextRequest): AdminToken | null {
+  return verifyAdminToken(getAdminTokenFromRequest(req));
 }
 

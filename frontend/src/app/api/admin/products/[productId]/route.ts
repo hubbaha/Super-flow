@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { slugify } from "@/lib/slugify";
-import { verifyAdminToken } from "@/lib/adminAuth";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 export const runtime = "nodejs";
 
@@ -26,7 +26,7 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ productId: string }> },
 ) {
-  const admin = verifyAdminToken(req.headers.get("authorization"));
+  const admin = verifyAdminRequest(req);
   if (!admin) return Response.json({ message: "Invalid token" }, { status: 401 });
 
   const { productId } = await params;
@@ -65,6 +65,11 @@ export async function PUT(
             size: t.size?.trim() || "",
             od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
             weight_kg: (t.weight_kg ?? "").toString().trim(),
+            data: {
+              size: t.size?.trim() || "",
+              od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
+              weight_kg: (t.weight_kg ?? "").toString().trim(),
+            },
           }))
           .filter((t) => t.size),
       },
@@ -79,7 +84,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ productId: string }> },
 ) {
-  const admin = verifyAdminToken(req.headers.get("authorization"));
+  const admin = verifyAdminRequest(req);
   if (!admin) return Response.json({ message: "Invalid token" }, { status: 401 });
 
   const { productId } = await params;

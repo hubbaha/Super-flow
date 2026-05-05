@@ -10,6 +10,27 @@ import { ImageLightbox } from "@/components/ImageLightbox";
 
 export const dynamic = "force-dynamic";
 
+function normalizeTableRow(
+  table: {
+    size?: string | null;
+    od_mm?: string | null;
+    weight_kg?: string | null;
+    data?: unknown;
+  },
+) {
+  if (table.data && typeof table.data === "object" && !Array.isArray(table.data)) {
+    return { data: table.data as Record<string, string | number | null> };
+  }
+
+  return {
+    data: {
+      size: table.size ?? "",
+      od_mm: table.od_mm ?? "",
+      weight_kg: table.weight_kg ?? "",
+    },
+  };
+}
+
 export default async function ProductDetailPage({
   params,
 }: {
@@ -108,13 +129,7 @@ export default async function ProductDetailPage({
               <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
                 <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">Product Size Table</h2>
                 <div className="overflow-x-auto">
-                  <DataTable rows={referenceProduct.tables.map((table) => ({
-                    id: 0,
-                    productId: 0,
-                    size: table.size ?? "",
-                    od_mm: table.od_mm ?? "",
-                    weight_kg: table.weight_kg ?? "",
-                  }))} />
+                  <DataTable rows={referenceProduct.tables} />
                 </div>
               </div>
             ) : null}
@@ -197,7 +212,9 @@ export default async function ProductDetailPage({
               Product Size Table
             </h2>
             <div className="overflow-x-auto">
-              <DataTable rows={product.tables} />
+              <DataTable
+                rows={product.tables.map((table) => normalizeTableRow(table))}
+              />
             </div>
           </div>
         </article>

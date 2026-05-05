@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { randomUUID } from "crypto";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
-import { verifyAdminToken } from "@/lib/adminAuth";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 export const runtime = "nodejs";
 
@@ -17,7 +17,7 @@ const MIME_EXT: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
-  const admin = verifyAdminToken(req.headers.get("authorization"));
+  const admin = verifyAdminRequest(req);
   if (!admin) return Response.json({ message: "Invalid token" }, { status: 401 });
 
   let formData: FormData;

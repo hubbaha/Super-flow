@@ -221,7 +221,7 @@ export default async function CategoryPage({
             <p className="text-sm font-medium text-slate-500">No products published in this category yet.</p>
             <p className="mt-1 text-xs text-slate-400">
               Add items in <code className="rounded bg-slate-200 px-1 py-0.5 font-mono text-slate-600">public/data/products.json</code> with{" "}
-              <code className="rounded bg-slate-200 px-1 py-0.5 font-mono text-slate-600">categorySlug: "{slug}"</code>.
+              <code className="rounded bg-slate-200 px-1 py-0.5 font-mono text-slate-600">categorySlug: &quot;{slug}&quot;</code>.
             </p>
           </div>
         </section>

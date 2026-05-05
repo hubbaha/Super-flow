@@ -13,14 +13,14 @@ model Category {
   slug     String    @unique
   products Product[]
 }
-
 model Product {
   id          Int              @id @default(autoincrement())
   name        String
   slug        String           @unique
+  preview     String?          
   description String
   image       String?
-  images      String[]         
+  images      String[]
   categoryId  Int
   category    Category         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   specs       Specification[]
@@ -37,9 +37,10 @@ model Specification {
 
 model TechnicalTable {
   id        Int     @id @default(autoincrement())
-  size      String
-  od_mm     String
-  weight_kg String
+  size      String?
+  od_mm     String?
+  weight_kg String?
+  data      Json?
   productId Int
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
