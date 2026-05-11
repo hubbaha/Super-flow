@@ -21,6 +21,10 @@ model Product {
   description String
   image       String?
   images      String[]
+  /// Heading shown above the technical / size table on the product page (optional).
+  technicalTableTitle           String?
+  /// Optional JSON map of data column key → display label for table headers.
+  technicalTableColumnLabels    Json?
   categoryId  Int
   category    Category         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   specs       Specification[]

@@ -26,6 +26,10 @@ export type Product = {
   description: string;
   image?: string | null;
   images?: string[] | null;
+  /** Custom heading above the technical table on the product page. */
+  technicalTableTitle?: string | null;
+  /** Map of row data keys to table header labels. */
+  technicalTableColumnLabels?: Record<string, string> | null;
   categoryId: number;
   category: Category;
   specs: Specification[];

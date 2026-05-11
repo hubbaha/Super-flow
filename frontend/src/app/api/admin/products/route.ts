@@ -1,9 +1,10 @@
 import type { NextRequest } from "next/server";
-import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { prismaErrorCode } from "@/lib/prisma-error-code";
 import { slugify } from "@/lib/slugify";
 import { verifyAdminRequest } from "@/lib/adminAuth";
 import { getReferenceProducts } from "@/lib/reference-products";
+import { adminTableInputToCreateRows, type AdminTableInputRow } from "@/lib/admin-product-tables";
 
 export const runtime = "nodejs";
 
@@ -86,17 +87,19 @@ async function syncProductsFromJsonCatalog() {
         },
         tables: {
           create: (refProduct.tables ?? [])
-            .map((t) => ({
-              size: (t.size ?? "").toString().trim(),
-              od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
-              weight_kg: (t.weight_kg ?? "").toString().trim(),
-              data: {
-                size: (t.size ?? "").toString().trim(),
-                od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
-                weight_kg: (t.weight_kg ?? "").toString().trim(),
-              },
-            }))
-            .filter((t) => t.size),
+            .map((t) => {
+              const data: Record<string, string> = {};
+              for (const [k, v] of Object.entries(t)) {
+                if (typeof v === "string" && v.trim()) data[k] = v.trim();
+              }
+              return {
+                size: data.size ?? "",
+                od_mm: data.od_mm ?? data.diameter ?? "",
+                weight_kg: data.weight_kg ?? "",
+                data,
+              };
+            })
+            .filter((row) => row.size),
         },
       },
     });
@@ -124,12 +127,6 @@ export async function GET(req: NextRequest) {
 }
 
 type SpecsInput = { key: string; value: string };
-type TablesInput = {
-  size?: string;
-  od_mm?: string;
-  weight_kg?: string;
-  diameter?: string; // fallback only
-};
 
 type CreateProductInput = {
   name: string;
@@ -137,8 +134,38 @@ type CreateProductInput = {
   image?: string | null;
   categoryId: number;
   specs?: SpecsInput[];
-  tables?: TablesInput[];
+  tables?: AdminTableInputRow[];
+  technicalTableTitle?: string | null;
+  technicalTableColumnLabels?: Record<string, string> | null;
 };
+
+function parseCategoryId(raw: unknown): number | null {
+  const n = typeof raw === "number" ? raw : Number(raw);
+  if (!Number.isFinite(n) || n < 1) return null;
+  return Math.floor(n);
+}
+
+function normalizeSpecsForCreate(body: CreateProductInput) {
+  if (!Array.isArray(body.specs)) return [];
+  return body.specs
+    .filter(
+      (s): s is SpecsInput =>
+        Boolean(s) && typeof s.key === "string" && typeof s.value === "string",
+    )
+    .map((s) => ({ key: s.key.trim(), value: s.value.trim() }))
+    .filter((s) => s.key && s.value);
+}
+
+function parseColumnLabels(raw: unknown): Record<string, string> | null | undefined {
+  if (raw === undefined) return undefined;
+  if (raw === null) return null;
+  if (typeof raw !== "object" || Array.isArray(raw)) return undefined;
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
+    if (typeof v === "string" && v.trim()) out[k] = v.trim();
+  }
+  return out;
+}
 
 export async function POST(req: NextRequest) {
   const admin = verifyAdminRequest(req);
@@ -149,58 +176,67 @@ export async function POST(req: NextRequest) {
     !body ||
     typeof body.name !== "string" ||
     typeof body.description !== "string" ||
-    typeof body.categoryId !== "number" ||
+    body.categoryId === undefined ||
+    body.categoryId === null ||
     !Array.isArray(body.specs) ||
     !Array.isArray(body.tables)
   ) {
     return Response.json({ message: "Invalid request body" }, { status: 400 });
   }
 
+  const categoryId = parseCategoryId(body.categoryId);
+  if (categoryId === null) {
+    return Response.json({ message: "Invalid category selected." }, { status: 400 });
+  }
+
   if (!body.name.trim() || !body.description.trim()) {
     return Response.json({ message: "Missing required fields" }, { status: 400 });
   }
 
+  const specs = normalizeSpecsForCreate(body);
+  const tableRows = adminTableInputToCreateRows(body.tables);
+  const columnLabels = parseColumnLabels(body.technicalTableColumnLabels);
+  const tableTitle =
+    typeof body.technicalTableTitle === "string" ? body.technicalTableTitle.trim() : "";
+
   try {
     const product = await prisma.product.create({
       data: {
-        name: body.name,
-        slug: slugify(body.name),
-        description: body.description,
+        name: body.name.trim(),
+        slug: slugify(body.name.trim()),
+        description: body.description.trim(),
         image: body.image ?? null,
-        categoryId: Number(body.categoryId),
+        categoryId,
+        technicalTableTitle: tableTitle.length ? tableTitle : null,
+        ...(columnLabels && Object.keys(columnLabels).length
+          ? { technicalTableColumnLabels: columnLabels }
+          : {}),
         specs: {
-          create: body.specs.map((s) => ({ key: s.key, value: s.value })),
+          create: specs.map((s) => ({ key: s.key, value: s.value })),
         },
         tables: {
-          create: body.tables
-            .map((t) => ({
-              size: t.size?.trim() || "",
-              od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
-              weight_kg: (t.weight_kg ?? "").toString().trim(),
-              data: {
-                size: t.size?.trim() || "",
-                od_mm: (t.od_mm ?? t.diameter ?? "").toString().trim(),
-                weight_kg: (t.weight_kg ?? "").toString().trim(),
-              },
-            }))
-            .filter((t) => t.size),
+          create: tableRows.map((t) => ({
+            size: t.size || null,
+            od_mm: t.od_mm || null,
+            weight_kg: t.weight_kg || null,
+            data: t.data,
+          })),
         },
-      },
+      } as Parameters<typeof prisma.product.create>[0]["data"],
       include: { specs: true, tables: true, category: true },
     });
 
     return Response.json(product, { status: 201 });
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        return Response.json(
-          { message: "A product with this name already exists." },
-          { status: 409 },
-        );
-      }
-      if (error.code === "P2003") {
-        return Response.json({ message: "Invalid category selected." }, { status: 400 });
-      }
+  } catch (error: unknown) {
+    const code = prismaErrorCode(error);
+    if (code === "P2002") {
+      return Response.json(
+        { message: "A product with this name already exists." },
+        { status: 409 },
+      );
+    }
+    if (code === "P2003") {
+      return Response.json({ message: "Invalid category selected." }, { status: 400 });
     }
     console.error("Failed to create product", error);
     return Response.json({ message: "Failed to create product" }, { status: 500 });

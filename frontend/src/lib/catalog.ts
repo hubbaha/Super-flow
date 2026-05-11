@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { preferredCategories } from "@/lib/category-config";
+import type { Product } from "@/lib/types";
 
 export async function getCategoriesData() {
   try {
@@ -66,9 +67,12 @@ export async function getProductsData(search?: string) {
   }
 }
 
-export async function getProductData(categorySlug: string, productSlug: string) {
+export async function getProductData(
+  categorySlug: string,
+  productSlug: string,
+): Promise<Product | null> {
   try {
-    return await prisma.product.findFirst({
+    const row = await prisma.product.findFirst({
       where: {
         slug: productSlug,
         category: { slug: categorySlug },
@@ -79,6 +83,7 @@ export async function getProductData(categorySlug: string, productSlug: string) 
         tables: true,
       },
     });
+    return row as Product | null;
   } catch {
     return null;
   }

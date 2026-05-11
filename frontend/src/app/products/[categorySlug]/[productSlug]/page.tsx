@@ -197,26 +197,37 @@ export default async function ProductDetailPage({
           </div>
 
           {/* Specs */}
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
-              Specifications
-            </h2>
-            <div className="overflow-x-auto">
-              <SpecTable specs={product.specs} />
+          {product.specs?.length ? (
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
+                Specifications
+              </h2>
+              <div className="overflow-x-auto">
+                <SpecTable specs={product.specs} />
+              </div>
             </div>
-          </div>
+          ) : null}
 
           {/* Technical Data */}
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
-              Product Size Table
-            </h2>
-            <div className="overflow-x-auto">
-              <DataTable
-                rows={product.tables.map((table) => normalizeTableRow(table))}
-              />
+          {product.tables?.length ? (
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
+                {product.technicalTableTitle?.trim() || "Product Size Table"}
+              </h2>
+              <div className="overflow-x-auto">
+                <DataTable
+                  rows={product.tables.map((table) => normalizeTableRow(table))}
+                  columnLabels={
+                    product.technicalTableColumnLabels &&
+                    typeof product.technicalTableColumnLabels === "object" &&
+                    !Array.isArray(product.technicalTableColumnLabels)
+                      ? (product.technicalTableColumnLabels as Record<string, string>)
+                      : null
+                  }
+                />
+              </div>
             </div>
-          </div>
+          ) : null}
         </article>
 
         <aside className="min-w-0 lg:sticky lg:top-6 lg:self-start">

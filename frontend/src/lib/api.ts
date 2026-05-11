@@ -129,7 +129,12 @@ export async function createAdminProduct(
     image?: string;
     categoryId: number;
     specs: Specification[];
-    tables: Array<{ size?: string; od_mm?: string; weight_kg?: string }>;
+    tables: Array<
+      | { size?: string; od_mm?: string; weight_kg?: string; diameter?: string }
+      | { data: Record<string, string> }
+    >;
+    technicalTableTitle?: string | null;
+    technicalTableColumnLabels?: Record<string, string> | null;
   },
 ) {
   return request<Product>("/admin/products", {
@@ -143,5 +148,29 @@ export async function deleteAdminProduct(token: string | undefined, id: number) 
   return request(`/admin/products/${id}`, {
     method: "DELETE",
     headers: getAuthHeaders(token),
+  });
+}
+
+export async function updateAdminProduct(
+  token: string | undefined,
+  id: number,
+  payload: {
+    name: string;
+    description: string;
+    image?: string;
+    categoryId: number;
+    specs: Specification[];
+    tables: Array<
+      | { size?: string; od_mm?: string; weight_kg?: string; diameter?: string }
+      | { data: Record<string, string> }
+    >;
+    technicalTableTitle?: string | null;
+    technicalTableColumnLabels?: Record<string, string> | null;
+  },
+) {
+  return request<Product>(`/admin/products/${id}`, {
+    method: "PUT",
+    headers: getAuthHeaders(token),
+    body: JSON.stringify(payload),
   });
 }

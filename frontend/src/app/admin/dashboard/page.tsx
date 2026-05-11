@@ -9,9 +9,11 @@ import {
   getAdminInquiries,
   getAdminProducts,
   getCategories,
+  updateAdminProduct,
   uploadAdminProductImage,
 } from "@/lib/api";
 import { Category, Inquiry, Product } from "@/lib/types";
+import { getTechnicalTableColumnLabel, orderTechnicalTableColumnKeys } from "@/lib/table-display";
 
 type Tab = "products" | "inquiries";
 
@@ -27,6 +29,11 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState("");
   const [filterCat, setFilterCat] = useState<number | "">("");
   const [showForm, setShowForm] = useState(false);
+  const [editingProductId, setEditingProductId] = useState<number | null>(null);
+  const [formSeed, setFormSeed] = useState(0);
+  const [formName, setFormName] = useState("");
+  const [formDescription, setFormDescription] = useState("");
+  const [formCategoryId, setFormCategoryId] = useState<number | "">("");
   const [submitting, setSubmitting] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [formError, setFormError] = useState("");
@@ -44,7 +51,123 @@ export default function AdminDashboard() {
 
   // Extra spec/table rows state
   const [specs, setSpecs] = useState([{ key: "Standard", value: "" }]);
-  const [tables, setTables] = useState([{ size: "", od_mm: "", weight_kg: "" }]);
+  const [tableSectionTitle, setTableSectionTitle] = useState("");
+  const [tableColumnOrder, setTableColumnOrder] = useState<string[]>(["size", "od_mm", "weight_kg"]);
+  const [tableColumnLabels, setTableColumnLabels] = useState<Record<string, string>>(() => ({
+    size: getTechnicalTableColumnLabel("size", null),
+    od_mm: getTechnicalTableColumnLabel("od_mm", null),
+    weight_kg: getTechnicalTableColumnLabel("weight_kg", null),
+  }));
+  const [tableRows, setTableRows] = useState<Record<string, string>[]>([
+    { size: "", od_mm: "", weight_kg: "" },
+  ]);
+
+  function resetForm() {
+    setEditingProductId(null);
+    setFormName("");
+    setFormDescription("");
+    setFormCategoryId("");
+    setImagePath("");
+    setSpecs([{ key: "Standard", value: "" }]);
+    setTableSectionTitle("");
+    setTableColumnOrder(["size", "od_mm", "weight_kg"]);
+    setTableColumnLabels({
+      size: getTechnicalTableColumnLabel("size", null),
+      od_mm: getTechnicalTableColumnLabel("od_mm", null),
+      weight_kg: getTechnicalTableColumnLabel("weight_kg", null),
+    });
+    setTableRows([{ size: "", od_mm: "", weight_kg: "" }]);
+    setFormError("");
+    setFormSeed((s) => s + 1);
+  }
+
+  function startCreate() {
+    if (showForm) {
+      setShowForm(false);
+      resetForm();
+      return;
+    }
+    resetForm();
+    setShowForm(true);
+  }
+
+  function startEdit(product: Product) {
+    setEditingProductId(product.id);
+    setFormName(product.name);
+    setFormDescription(product.description);
+    setFormCategoryId(product.categoryId);
+    setImagePath(product.image ?? "");
+    setSpecs(
+      product.specs.length
+        ? product.specs.map((s) => ({ key: s.key, value: s.value }))
+        : [{ key: "Standard", value: "" }],
+    );
+    const savedLabels =
+      product.technicalTableColumnLabels &&
+      typeof product.technicalTableColumnLabels === "object" &&
+      !Array.isArray(product.technicalTableColumnLabels)
+        ? (product.technicalTableColumnLabels as Record<string, unknown>)
+        : {};
+
+    const rowsFromDb: Record<string, string>[] = product.tables.map((table) => {
+      const tableData =
+        table.data && typeof table.data === "object" && !Array.isArray(table.data)
+          ? (table.data as Record<string, unknown>)
+          : {};
+      const legacy = table as unknown as {
+        size?: string | null;
+        od_mm?: string | null;
+        weight_kg?: string | null;
+      };
+      const merged: Record<string, unknown> = { ...tableData };
+      if (legacy.size != null && merged.size === undefined) merged.size = legacy.size;
+      if (legacy.od_mm != null && merged.od_mm === undefined) merged.od_mm = legacy.od_mm;
+      if (legacy.weight_kg != null && merged.weight_kg === undefined) {
+        merged.weight_kg = legacy.weight_kg;
+      }
+      return Object.fromEntries(
+        Object.entries(merged)
+          .filter(([k]) => k !== "id" && k !== "productId")
+          .map(([k, v]) => [k, v == null ? "" : String(v)]),
+      ) as Record<string, string>;
+    });
+
+    const nonEmptyRows = rowsFromDb.filter((row) =>
+      Object.values(row).some((v) => String(v).trim()),
+    );
+
+    const keySet = new Set<string>();
+    nonEmptyRows.forEach((row) => Object.keys(row).forEach((k) => keySet.add(k)));
+    const order =
+      keySet.size > 0
+        ? orderTechnicalTableColumnKeys(keySet)
+        : (["size", "od_mm", "weight_kg"] as string[]);
+
+    const labels: Record<string, string> = {};
+    for (const key of order) {
+      const raw = savedLabels[key];
+      labels[key] =
+        typeof raw === "string" && raw.trim()
+          ? raw.trim()
+          : getTechnicalTableColumnLabel(key, null);
+    }
+
+    setTableSectionTitle(product.technicalTableTitle?.trim() ?? "");
+    setTableColumnOrder(order);
+    setTableColumnLabels(labels);
+    setTableRows(
+      nonEmptyRows.length
+        ? nonEmptyRows.map((row) => {
+            const filled: Record<string, string> = {};
+            for (const k of order) filled[k] = row[k] ?? "";
+            return filled;
+          })
+        : [Object.fromEntries(order.map((k) => [k, ""]))],
+    );
+    setFormError("");
+    setFormSeed((s) => s + 1);
+    setShowForm(true);
+  }
 
   useEffect(() => {
     const t = localStorage.getItem("adminToken") ?? undefined;
@@ -77,36 +200,65 @@ export default function AdminDashboard() {
     router.push("/admin/login");
   }
 
-  async function onCreate(event: FormEvent<HTMLFormElement>) {
+  async function onSubmitProduct(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const token = localStorage.getItem("adminToken") ?? undefined;
-    const form = event.currentTarget;
 
     setSubmitting(true);
     setFormError("");
-    const fd = new FormData(form);
 
     try {
-      await createAdminProduct(token, {
-        name: String(fd.get("name")),
-        description: String(fd.get("description")),
-        image: imagePath.trim() || undefined,
-        categoryId: Number(fd.get("categoryId")),
+      const categoryId = Number(formCategoryId);
+      const tablesPayload = tableRows
+        .map((row) => {
+          const data: Record<string, string> = {};
+          for (const key of tableColumnOrder) {
+            data[key] = String(row[key] ?? "").trim();
+          }
+          return { data };
+        })
+        .filter((row) => Object.values(row.data).some((cell) => cell.length > 0));
+
+      const columnLabelPayload = tableColumnOrder.reduce<Record<string, string>>((acc, key) => {
+        const label = (tableColumnLabels[key] ?? getTechnicalTableColumnLabel(key, null)).trim();
+        acc[key] = label || getTechnicalTableColumnLabel(key, null);
+        return acc;
+      }, {});
+
+      const payload = {
+        name: formName.trim(),
+        description: formDescription.trim(),
+        ...(imagePath.trim() ? { image: imagePath.trim() } : {}),
+        categoryId,
         specs: specs.filter((s) => s.key && s.value),
-        tables: tables
-          .filter((t) => t.size)
-          .map((t) => ({ size: t.size, od_mm: t.od_mm, weight_kg: t.weight_kg })),
-      });
+        tables: tablesPayload,
+        technicalTableTitle: tableSectionTitle.trim() ? tableSectionTitle.trim() : null,
+        technicalTableColumnLabels: columnLabelPayload,
+      };
+
+      if (!payload.name || !payload.description || !Number.isFinite(categoryId) || categoryId < 1) {
+        setFormError("Name, description, and category are required.");
+        return;
+      }
+
+      if (editingProductId) {
+        await updateAdminProduct(token, editingProductId, payload);
+      } else {
+        await createAdminProduct(token, payload);
+      }
 
       const refreshed = await getAdminProducts(token);
       setProducts(refreshed);
-      form.reset();
-      setImagePath("");
-      setSpecs([{ key: "Standard", value: "" }]);
-      setTables([{ size: "", od_mm: "", weight_kg: "" }]);
+      resetForm();
       setShowForm(false);
     } catch (error) {
-      setFormError(error instanceof Error ? error.message : "Failed to create product. Please try again.");
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : editingProductId
+            ? "Failed to update product. Please try again."
+            : "Failed to create product. Please try again.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -241,13 +393,7 @@ export default function AdminDashboard() {
                 </select>
               </div>
               <button
-                onClick={() => {
-                  setShowForm((v) => {
-                    if (v) setImagePath("");
-                    return !v;
-                  });
-                  setFormError("");
-                }}
+                onClick={startCreate}
                 className="bg-slate-900 hover:bg-slate-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition whitespace-nowrap"
               >
                 {showForm ? "Cancel" : "+ Add Product"}
@@ -264,13 +410,15 @@ export default function AdminDashboard() {
             {/* Add Product Form */}
             {showForm && (
               <div className="bg-white rounded-xl shadow-sm p-6">
-                <h2 className="text-base font-semibold text-slate-800 mb-4">New Product</h2>
+                <h2 className="text-base font-semibold text-slate-800 mb-4">
+                  {editingProductId ? "Edit Product" : "New Product"}
+                </h2>
                 {formError && (
                   <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg mb-4">
                     {formError}
                   </div>
                 )}
-                <form onSubmit={onCreate} className="space-y-5">
+                <form key={formSeed} onSubmit={onSubmitProduct} className="space-y-5">
                   {/* Basic */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -278,6 +426,8 @@ export default function AdminDashboard() {
                       <input
                         name="name"
                         required
+                        value={formName}
+                        onChange={(e) => setFormName(e.target.value)}
                         placeholder="e.g. SCH 80 PVC Ball Valve 2 Inch"
                         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
@@ -287,6 +437,8 @@ export default function AdminDashboard() {
                       <select
                         name="categoryId"
                         required
+                        value={formCategoryId}
+                        onChange={(e) => setFormCategoryId(e.target.value === "" ? "" : Number(e.target.value))}
                         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         <option value="">Select category…</option>
@@ -345,6 +497,8 @@ export default function AdminDashboard() {
                       <textarea
                         name="description"
                         required
+                        value={formDescription}
+                        onChange={(e) => setFormDescription(e.target.value)}
                         rows={3}
                         placeholder="Full product description…"
                         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -395,58 +549,157 @@ export default function AdminDashboard() {
                     </div>
                   </div>
 
-                  {/* Size Table */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-medium text-slate-600">Size Table</label>
-                      <button
-                        type="button"
-                        onClick={() => setTables((t) => [...t, { size: "", od_mm: "", weight_kg: "" }])}
-                        className="text-xs text-blue-600 hover:text-blue-800 font-medium"
-                      >
-                        + Add Row
-                      </button>
+                  {/* Size / technical table */}
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">
+                        Table section heading (product page)
+                      </label>
+                      <input
+                        type="text"
+                        value={tableSectionTitle}
+                        onChange={(e) => setTableSectionTitle(e.target.value)}
+                        placeholder="e.g. Product Size Table"
+                        className="w-full max-w-md rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <p className="text-xs text-slate-500 mt-1">
+                        Leave blank to use the default Product Size Table heading on the site.
+                      </p>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 text-xs font-medium text-slate-500 px-1 mb-1">
-                      <span>Size</span><span>OD (mm)</span><span>Weight (kg)</span>
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <label className="text-xs font-medium text-slate-600">Table columns &amp; rows</label>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            let n = tableColumnOrder.filter((k) => k.startsWith("field_")).length + 1;
+                            let newKey = `field_${n}`;
+                            while (tableColumnOrder.includes(newKey)) {
+                              n += 1;
+                              newKey = `field_${n}`;
+                            }
+                            setTableColumnOrder((o) => [...o, newKey]);
+                            setTableColumnLabels((prev) => ({
+                              ...prev,
+                              [newKey]: getTechnicalTableColumnLabel(newKey, null),
+                            }));
+                            setTableRows((rows) =>
+                              rows.map((r) => ({ ...r, [newKey]: "" })),
+                            );
+                          }}
+                          className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                        >
+                          + Add column
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setTableRows((rows) => [
+                              ...rows,
+                              Object.fromEntries(
+                                tableColumnOrder.map((k) => [k, ""]),
+                              ) as Record<string, string>,
+                            ])
+                          }
+                          className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                        >
+                          + Add row
+                        </button>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      {tables.map((t, i) => (
-                        <div key={i} className="flex gap-2 items-center">
-                          <input
-                            value={t.size}
-                            onChange={(e) => {
-                              const n = [...tables]; n[i].size = e.target.value; setTables(n);
-                            }}
-                            placeholder='1/2"'
-                            className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                          <input
-                            value={t.od_mm}
-                            onChange={(e) => {
-                              const n = [...tables]; n[i].od_mm = e.target.value; setTables(n);
-                            }}
-                            placeholder="21.3"
-                            className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                          <input
-                            value={t.weight_kg}
-                            onChange={(e) => {
-                              const n = [...tables]; n[i].weight_kg = e.target.value; setTables(n);
-                            }}
-                            placeholder="0.08"
-                            className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setTables(tables.filter((_, idx) => idx !== i))}
-                            className="text-slate-400 hover:text-red-500 text-lg leading-none px-1"
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ))}
+                    <div className="overflow-x-auto rounded-lg border border-slate-200">
+                      <table className="w-full text-sm min-w-[320px]">
+                        <thead>
+                          <tr className="bg-slate-50 border-b border-slate-200">
+                            {tableColumnOrder.map((colKey) => (
+                              <th key={colKey} className="px-2 py-2 text-left align-bottom font-medium text-slate-600">
+                                <div className="space-y-1 min-w-[7rem]">
+                                  <input
+                                    value={tableColumnLabels[colKey] ?? ""}
+                                    onChange={(e) =>
+                                      setTableColumnLabels((prev) => ({
+                                        ...prev,
+                                        [colKey]: e.target.value,
+                                      }))
+                                    }
+                                    placeholder={getTechnicalTableColumnLabel(colKey, null)}
+                                    className="w-full rounded border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                  />
+                                  <div className="text-[10px] text-slate-400 font-normal truncate" title={colKey}>
+                                    key: {colKey}
+                                  </div>
+                                  {tableColumnOrder.length > 1 ? (
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        if (tableColumnOrder.length <= 1) return;
+                                        setTableColumnOrder((o) => o.filter((k) => k !== colKey));
+                                        setTableColumnLabels((prev) => {
+                                          const { [colKey]: _, ...rest } = prev;
+                                          return rest;
+                                        });
+                                        setTableRows((rows) =>
+                                          rows.map((r) => {
+                                            const { [colKey]: _, ...rest } = r;
+                                            return rest;
+                                          }),
+                                        );
+                                      }}
+                                      className="text-[10px] text-red-500 hover:text-red-700"
+                                    >
+                                      Remove column
+                                    </button>
+                                  ) : null}
+                                </div>
+                              </th>
+                            ))}
+                            <th className="w-10 px-1" aria-label="Row actions" />
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {tableRows.map((row, i) => (
+                            <tr key={i} className="border-b border-slate-100 last:border-0">
+                              {tableColumnOrder.map((colKey) => (
+                                <td key={colKey} className="px-2 py-1.5">
+                                  <input
+                                    value={row[colKey] ?? ""}
+                                    onChange={(e) => {
+                                      const v = e.target.value;
+                                      setTableRows((rows) => {
+                                        const next = [...rows];
+                                        next[i] = { ...next[i], [colKey]: v };
+                                        return next;
+                                      });
+                                    }}
+                                    className="w-full rounded border border-slate-300 px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                  />
+                                </td>
+                              ))}
+                              <td className="px-1 text-center">
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setTableRows((rows) =>
+                                      rows.length <= 1
+                                        ? rows
+                                        : rows.filter((_, idx) => idx !== i),
+                                    )
+                                  }
+                                  className="text-slate-400 hover:text-red-500 text-lg leading-none"
+                                  aria-label="Remove row"
+                                >
+                                  ×
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
+                    <p className="text-xs text-slate-500">
+                      Column keys come from your data (e.g. size, od_mm). Add a column for extra fields such as
+                      pressure or length. At least one cell in a row must be filled for that row to be saved.
+                    </p>
                   </div>
 
                   <div className="flex justify-end gap-3 pt-2">
@@ -454,7 +707,7 @@ export default function AdminDashboard() {
                       type="button"
                       onClick={() => {
                         setShowForm(false);
-                        setImagePath("");
+                        resetForm();
                       }}
                       className="px-5 py-2 text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition"
                     >
@@ -465,7 +718,13 @@ export default function AdminDashboard() {
                       disabled={submitting}
                       className="px-6 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-700 disabled:opacity-50 rounded-lg transition"
                     >
-                      {submitting ? "Creating…" : "Create Product"}
+                      {submitting
+                        ? editingProductId
+                          ? "Saving…"
+                          : "Creating…"
+                        : editingProductId
+                          ? "Save Changes"
+                          : "Create Product"}
                     </button>
                   </div>
                 </form>
@@ -504,6 +763,12 @@ export default function AdminDashboard() {
                           {p.specs.length} spec{p.specs.length !== 1 ? "s" : ""} · {p.tables.length} size{p.tables.length !== 1 ? "s" : ""}
                         </td>
                         <td className="px-6 py-4 text-right">
+                          <button
+                            onClick={() => startEdit(p)}
+                            className="mr-4 text-blue-600 hover:text-blue-800 font-medium text-sm"
+                          >
+                            Edit
+                          </button>
                           <button
                             onClick={() => onDelete(p.id)}
                             className="text-red-500 hover:text-red-700 font-medium text-sm"
